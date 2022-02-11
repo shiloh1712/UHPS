@@ -10,17 +10,36 @@ Salem, Bader:
 
 
 Work to do:
+- github workflow clear
+- how often meeting
+- internal deadlines?
 - Document what the team discusses; make visuals/presentation
-- Present the project (split)
-- Design UI: what frontend website should look like including these pages
+- Design UI (group consensus): what frontend website should look like including these pages
   + Home 
-  + New package
-  + 
+  + New package initialization form
+  + tracking history details (table, if employee: + (checkin button, checkout form link))
+  + sign in form
+  + user/employee register form
+  +
 - Implement UI: write HTML/CSS
-- Research frameworkless:
+- Frontend:
+  + process URL
+  + send requests (POST, GET)
+  +
+- Backend:
+  + POST
+  + GET
+  + access DB
+  +  
+- Research frameworkless: https://frameworkless.js.org/course/1 
   + Frontend
   + backend
+  + 
 - Design db:
-  + Entities
+  + ER diagram
+    * Entities
     * Attributes
- 
+    * Relationships
+
+
+- Present the project (split)
