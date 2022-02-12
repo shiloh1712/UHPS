@@ -20,8 +20,17 @@ Morrison Fowlks
     I am mostly familiar with Python, C++, and Ruby; also loving data science as a whole. 
 
 Andy Nguyen
-1. I looked at what ideas were presemted already and i agree with what we have so far.
-Some things I could add onto what we have already is having the packages be assigned to customers, tracking times, having an order #, and maybe an order history for customers to see.
-Something else to consider is returns or cancelled or lost packages.
+    1. I looked at what ideas were presemted already and i agree with what we have so far.
+    Some things I could add onto what we have already is having the packages be assigned to customers, tracking times, having an order #, and maybe an order history for customers to see.
+    Something else to consider is returns or cancelled or lost packages.
 
-2. I am willing to do anything as well as I do not have much experience in databases. I know c++ and python.
+    2. I am willing to do anything as well as I do not have much experience in databases. I know c++ and python.
+
+
+Son
+    - Initialize pkg: 
+        + ask customer's info, if email not already in db, create an entry; if already in db, get customer ID and store in sender field
+        + request delivery info
+        + fields auto complete by sys: employee id, time sent, tracking #, status
+    -  search tracking number:
+        + if employee: 
