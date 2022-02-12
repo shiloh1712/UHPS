@@ -1,19 +1,32 @@
 La, Son : 
+Design UI
+watch https://frameworkless.js.org/course/1
 
 Fowlks, Morris:
+Design UI
+- Implement UI: write HTML/CSS
+
 
 Nguyen, Andy:
+Design UI
+watch https://frameworkless.js.org/course/1
+
 
 Opie, Josh:
+draw er diagram from 
+Design UI
+watch https://frameworkless.js.org/course/1
+
 
 Salem, Bader:
+Design UI
+- Implement UI: write HTML/CSS
 
 
 Work to do:
-- github workflow clear
-- how often meeting
-- internal deadlines?
-- Document what the team discusses; make visuals/presentation
+- how often meeting: Fridays >2pm 
+- internal deadlines? 
+//- Document what the team discusses; make visuals/presentation
 - Design UI (group consensus): what frontend website should look like including these pages
   + Home 
   + New package initialization form
@@ -29,13 +42,13 @@ Work to do:
 - Backend:
   + POST
   + GET
-  + access DB
+  + access DB: make queries
   +  
 - Research frameworkless: https://frameworkless.js.org/course/1 
   + Frontend
   + backend
   + 
-- Design db:
+- Design db: everyone
   + ER diagram
     * Entities
     * Attributes
