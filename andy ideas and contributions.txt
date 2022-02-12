@@ -1,6 +1,0 @@
-Andy Nguyen
-1. I looked at what ideas were presemted already and i agree with what we have so far.
-Some things I could add onto what we have already is having the packages be assigned to customers, tracking times, having an order #, and maybe an order history for customers to see.
-Something else to consider is returns or cancelled or lost packages.
-
-2. I am willing to do anything as well as I do not have much experience in databases. I know c++ and python.
