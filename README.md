@@ -13,7 +13,7 @@ Design UI
 - Implement UI: write HTML/CSS
 
 
-Nguyen, Andy:
+Nguyen, Andy: 8329705903, andynguyen7835@gmail.com
 Design UI
 watch https://frameworkless.js.org/course/1
 
