@@ -5,13 +5,10 @@ Contributors:
 
 La, Son : 3467150404 shiloh1712@gmail.com
 complete requirements document
-Design UI
-watch https://frameworkless.js.org/course/1
+
 
 Fowlks, Morrison: 8329958009, morrisonfolwks1@gmail.com
-Design UI
-- Implement UI: write HTML/CSS
-
+Design UI from approved layouts
 
 Nguyen, Andy: 8329705903, andynguyen7835@gmail.com
 Design UI
@@ -20,13 +17,11 @@ watch https://frameworkless.js.org/course/1
 
 Opie, Josh: 8323535360  blob28895@gmail.com
 draw er diagram from 
-Design UI
-watch https://frameworkless.js.org/course/1
 
 
 Salem, Bader: 7134473104, badersalem12@gmail.com
 Design UI
-- Implement UI: write HTML/CSS
+- Implement UI: write HTML/CSS according to designed UI 
 
 
 Work to do:
@@ -60,13 +55,9 @@ Work to do:
     * Attributes
     * Relationships
     * 
-  + 
-  
-  checkpoint 1:   Create the requirements document: https://docs.google.com/document/d/1RvaJqhX4yX2T4j6XtGkrv9AF6HnU0_cyD4j2WQ9mKao/edit?usp=sharing
-• Details of the mini-world
-• Entities and their properties, relationships, and
-constraints
-• Generate a conceptual schema
-
+- Discuss feedback
+- add attr 'registration code' to entity store: employee can only register acc by providing the correct code; only supervisors can change registration code
+- construct pages layouts
+ 
 
 - Present the project (everyone)
