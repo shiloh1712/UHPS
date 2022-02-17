@@ -47,6 +47,7 @@ Work to do:
   + add Registration_code to STORE: employee can only register if registration code provided; only supervisors can change their store's reg code
   + split Address into diff attr
 - discuss prof feedback
+- construct pages layouts together
 
 - Present the project:
   + PPT
