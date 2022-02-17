@@ -39,6 +39,11 @@ Son
 
 
 Professor:
+    Looks good.  Think about this – in a typical courier/post office setting, the customer can be either a sender or a recipient.  So, there are types of customers.  
+    Same goes for employees – there are different types of employees in an organization. Also, as we have discussed in the class, think of details of attributes.  
+    For eg., the ‘address’ attribute if set up as a string of 30 characters, does not give me any way to process and analyze that data, if I want to generate a 
+    report of how many packages were sent to a particular ZIP code last month.  So, think of the details when you are designing attributes of entities.
+    
     As regards recipients vs. senders of packages...   All of them are customers of your post office/courier service.  
     Today's recipient may be tomorrow's sender of packages.  Also, you want more than just email for the recipient, as you need other 
     data about recipients to run reports on how many packages were delivered to a particular city in the last year.  
