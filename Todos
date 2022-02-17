@@ -27,25 +27,26 @@ Work to do:
   + user/employee register form
   +
 - Implement UI: write HTML/CSS
-- Frontend:
-  + process URL
-  + send requests (POST, GET)
-  +
-- Backend:
-  + POST
-  + GET
-  + access DB: make queries
-  +  
-- Research frameworkless: 
-  + Frontend
-  + backend
-  + 
-- Design db: everyone
-  + ER diagram
-    * Entities
-    * Attributes
-    * Relationships
-  + 
+
+/*       - Frontend:
+          + process URL
+          + send requests (POST, GET)
+          +
+        - Backend:
+          + POST
+          + GET
+          + access DB: make queries
+          +  
+        - Research frameworkless: 
+          + Frontend
+          + backend
+          + 
+*/
+
+- db design:
+  + add Registration_code to STORE: employee can only register if registration code provided; only supervisors can change their store's reg code
+  + split Address into diff attr
 - discuss prof feedback
 
-- Present the project (everyone)
+- Present the project:
+  + PPT
