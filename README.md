@@ -5,7 +5,7 @@ Contributors:
 
 La, Son : 3467150404 shiloh1712@gmail.com
 complete requirements document
-
+document team progress/meeting/discussion
 
 Fowlks, Morrison: 8329958009, morrisonfolwks1@gmail.com
 Design UI from approved layouts
