@@ -7,7 +7,7 @@ La, Son : 3467150404 shiloh1712@gmail.com
 complete requirements document
 document team progress/meeting/discussion
 
-Fowlks, Morrison: 8329958009, morrisonfolwks1@gmail.com
+Fowlks, Morrison: 8329958009, morrisonfowlks1@gmail.com
 Design UI based on approved layouts
 
 Nguyen, Andy: 8329705903, andynguyen7835@gmail.com
