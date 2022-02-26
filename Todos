@@ -49,7 +49,7 @@ Work to do:
 - semantic constraints: >1 triggers
 
 - github training
-- .sql file colab: each person create a table
+- .sql file colab: each person create a table and insert sample data for that table
       + PACKAGE: Son
       + CUSTOMER: Josh
       + EMPLOYEE: Andy
