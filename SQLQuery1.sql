@@ -33,5 +33,10 @@ CREATE TABLE TRACKING_RECORD(
  );
 
 
---Bader
-CREATE TABLE STORE();
+--Bader begin
+CREATE TABLE STORE(
+	storeID int NOT NULL  
+	, Supervisor int NOT NULL
+	, Address int NOT NULL
+	, Register ()
+);
