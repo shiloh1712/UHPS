@@ -40,4 +40,9 @@ CREATE TABLE EMPLOYEE(
 CREATE TABLE TRACKING_RECORD():
 
 
-CREATE TABLE STORE();
+CREATE TABLE STORE(
+	storeID int NOT NULL  
+	, Supervisor int NOT NULL
+	, Address int NOT NULL
+	, Register ()
+);
