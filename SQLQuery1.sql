@@ -1,4 +1,4 @@
---CREATE SCHEMA
+--Son begin
 CREATE SCHEMA PO;
 GO
 
@@ -20,3 +20,30 @@ GO
 --DISPLAY ALL PKG
 select * from PACKAGE
 GO
+--Son end
+
+--Andy begin
+CREATE TABLE EMPLOYEE(
+);
+
+--Morrison begin
+CREATE TABLE TRACKING_RECORD(
+	ID INT NOT NULL,
+	Employee_ID INT NOT NULL,
+	Tracking_Number CHAR(12) NOT NULL,
+	Store_ID INT NOT NULL,
+	Time_In DATETIME NOT NULL,
+	Time_Out DATETIME,
+	Address_ID INT NOT NULL,
+	PRIMARY KEY (ID), 
+	FOREIGN KEY (Address_ID) REFERENCES PACKAGE(ToAddress)
+ );
+
+
+--Bader begin
+CREATE TABLE STORE(
+	storeID int NOT NULL  
+	, Supervisor int NOT NULL
+	, Address int NOT NULL
+	, Register ()
+);
