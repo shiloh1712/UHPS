@@ -1,35 +1,22 @@
-/*
+--CREATE SCHEMA
 CREATE SCHEMA PO;
 GO
-CREATE TABLE PO.PKG (ID INT, DESCN VARCHAR(20));
-GO
-*/
 
-
---SELECT * FROM PO.PKG;
-
-
-CREATE TABLE SQLTest (
-	ID INT NOT NULL PRIMARY KEY,
-	c1 VARCHAR(100) NOT NULL,
-	dt1 DATETIME NOT NULL DEFAULT getdate()
-)
-GO
-
-INSERT INTO SQLTest (ID, c1) VALUES (1, 'test1')
-GO
-
-select * from SQLTest;
-GO
-
+--CREATE ENTITY PACKAGE
 CREATE TABLE PACKAGE(
-	TrackingNumber char(12) NOT NULL PRIMARY KEY
-	, Sender int NOT NULL
-	, Recipient INT NOT NULL
-	, ToAddress int 
-	, Descrp varchar(60)
-	, Stat int (options: in store, in transit, out for delivery, delivered, lost, returned)
-	, TimeDelivered datetime
+	TrackingNumber char(12) NOT NULL PRIMARY KEY,
+	Sender int NOT NULL,
+	Recipient INT NOT NULL,
+	ToAddress int NOT NULL,
+	Descrp varchar(60),
+	Stat tinyint DEFAULT 0,
+	TimeDelivered datetime,
+	CHECK (Stat <= 5 and Stat >=0)
 )
 GO
-
+--TRY INSERTING A PKG
+INSERT INTO PACKAGE (TrackingNumber,Sender,	Recipient,ToAddress,Descrp) VALUES (123456789012, 1, 2, 3, 'SOME STUFF' )
+GO
+--DISPLAY ALL PKG
+select * from PACKAGE
+GO
