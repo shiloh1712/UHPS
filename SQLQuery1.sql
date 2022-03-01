@@ -33,6 +33,7 @@ CREATE TABLE PACKAGE(
 )
 GO
 
-andy is here
+CREATE TABLE EMPLOYEE(
+);
 
 
