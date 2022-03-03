@@ -34,6 +34,13 @@ CREATE TABLE PACKAGE(
 GO
 
 CREATE TABLE EMPLOYEE(
+	ID int NOT NULL,
+	Employee_Name varchar(15) NOT NULL,
+	Phone_Number char(10) NOT NULL,
+	Address int NOT NULL, /* Address is highlighted blue, will that be ok? Or does it need a name change*/
+	Password varchar(20) NOT NULL, /*dont know how to set parameters for varchar, maybe put input restrictions*/
+	Work_Place int NOT NULL
+
 );
 
 
