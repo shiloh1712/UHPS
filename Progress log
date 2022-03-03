@@ -10,3 +10,5 @@
 2/25: microsoft sql server set up and try out some sql codes; 
       add employee RegistrationCode to STORE: an employee can only register for an account by providing registration code for that store, only store supervisor can change registration code
       
+2/28: github training complete;
+      share .sql file, assigned each member 1 table to create
