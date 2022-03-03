@@ -47,3 +47,13 @@ CREATE TABLE STORE(
 	, Address int NOT NULL
 	, Register ()
 );
+
+--Josh Begin
+CREATE TABLE CUSTOMER(
+	ID int PRIMARY KEY NOT NULL,
+	custName varchar(15) NOT NULL,
+	phoneNumber char(10) NOT NULL,
+	email varchar(20) NOT NULL,
+	pswrd varchar(20) CONSTRAINT CK_Users_Pswrd CHECK (LEN(Pswrd) >= 8),
+	addr int NOT NULL,
+	)
