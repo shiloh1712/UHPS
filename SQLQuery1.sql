@@ -1,103 +1,109 @@
---Son begin
-														--1
-CREATE SCHEMA PO;
+-- create db+schema
+CREATE DATABASE PO
+CREATE SCHEMA PO
+USE PO
 
---CREATE ENTITY ADDRESS									--2
+SELECT * FROM SYS.TABLES
+
+--CREATE tables	AND INSERT SAMPLE DATA							
 CREATE TABLE ADDRESS(
-	AddrID INT PRIMARY KEY IDENTITY(1,1),
+	ID INT PRIMARY KEY IDENTITY(1,1),
 	StreetAddress VARCHAR(30),
 	City VARCHAR(10),
 	StateName CHAR(2),
 	Zipcode CHAR(5)
 )
+INSERT INTO ADDRESS (StreetAddress, City, StateName, Zipcode) VALUES 
+('4800 Calhoun Rd', 'Houston', 'TX', 77024),
+('4500 University Dr', 'Houston', 'TX', 77004),
+('4373 Cougar Village Dr', 'Houston', 'TX', 77204),
+('UH Entrance 14', 'Houston', 'TX', 77004),
+('4455 University Dr', 'Houston', 'TX', 77204)
 
---TRY INSERTING A PKG
-INSERT INTO ADDRESS (StreetAddress, City, StateName, Zipcode) VALUES ('4800 Calhoun Rd', 'Houston', 'TX', 77024)
-
---DISPLAY ALL PKG
-select * from ADDRESS
-
-
---order of create table: address, customer, package, STORE, EMPLOYEE (ADD REFERENCE FROM STORE), TRACKING_RECORD
---add foreign key for store								--7
-ALTER TABLE STORE
-ADD FOREIGN KEY (Supervisor) REFERENCES	EMPLOYEE(ID)
-
---CREATE ENTITY PACKAGE									--4
 CREATE TABLE PACKAGE(
-	TrackingNumber char(12) NOT NULL PRIMARY KEY,
-	Sender int NOT NULL, --reference customer
-	Recipient INT NOT NULL,	--reference customer
-	ToAddress int NOT NULL,	--reference address
+	TrackingNumber char(6) NOT NULL PRIMARY KEY,
+	Sender int NOT NULL, 
+	Recipient INT NOT NULL,	
+	ToAddress int NOT NULL,	
 	Descrp varchar(60),	
 	Stat tinyint DEFAULT 0,
 	TimeDelivered datetime,
 	CHECK (Stat <= 5 and Stat >=0)
 )
+INSERT INTO PACKAGE (TrackingNumber,Sender,	Recipient,ToAddress,Descrp) VALUES (123456, 1, 2, 3, 'SOME STUFF' )
 
---TRY INSERTING A PKG
-INSERT INTO PACKAGE (TrackingNumber,Sender,	Recipient,ToAddress,Descrp) VALUES (123456789012, 1, 2, 3, 'SOME STUFF' )
-
---DISPLAY ALL PKG
-select * from PACKAGE
-
-
-
---Son end
-
---Andy begin											--6
 CREATE TABLE EMPLOYEE(
-	ID int NOT NULL, 
-	Employee_Name varchar(15) NOT NULL,
-	Phone_Number char(10) NOT NULL,
-	Address int NOT NULL, /* Address is highlighted blue, will that be ok? Or does it need a name change*/
-	Password varchar(20) NOT NULL, /*dont know how to set parameters for varchar, maybe put input restrictions*/
-	Work_Place int NOT NULL
-	--missing PK; 
-	--use other attribute names for address+password; 
-	--Work_place,Address need to reference STORE, ADDRESS tables
-);
+	ID int NOT NULL PRIMARY KEY IDENTITY(1,1), 
+	Name varchar(15) NOT NULL,
+	PhoneNumber char(10) NOT NULL,
+	Address int NOT NULL, 
+	Password varchar(20) NOT NULL, 
+	WorkPlace int NOT NULL 
+)
+INSERT INTO EMPLOYEE (Name, PhoneNumber, Address,Password,WorkPlace) VALUES ('First Employee', 1234567890, 1, 'idunnowhatpassword', 1)
 
---Morrison begin										--8
 CREATE TABLE TRACKING_RECORD(
-	ID INT NOT NULL,
-	Employee_ID INT NOT NULL,
-	Tracking_Number CHAR(12) NOT NULL,
-	Store_ID INT NOT NULL,
-	Time_In DATETIME NOT NULL,
-	Time_Out DATETIME,
-	Address_ID INT NOT NULL,
-	PRIMARY KEY (ID), 
-	FOREIGN KEY (Address_ID) REFERENCES PACKAGE(ToAddress) 
-	/*
-	address_id actually reference address table, not package
-	Employee_ID, Tracking_Number, Store_ID need to reference EMPLOYEE, PACKAGE, STORE table
-	*/
- );
+	ID INT NOT NULL IDENTITY(1,1),
+	EmployeeID INT NOT NULL,
+	TrackingNumber CHAR(6) NOT NULL,
+	StoreID INT NOT NULL,
+	TimeIn DATETIME NOT NULL DEFAULT GETDATE(),
+	TimeOut DATETIME,
+	AddressID INT NOT NULL,
+	PRIMARY KEY (ID)
+) 
+INSERT INTO TRACKING_RECORD (EmployeeID, TrackingNumber, StoreID, AddressID) VALUES (1, 123456, 1, 2)
 
-
---Bader begin											--5
 CREATE TABLE STORE(
-	storeID int NOT NULL  
-	, Supervisor int NOT NULL
-	, Address int NOT NULL
-	, Register ()
-	/*
-	missing PK
-	Supervisor (Son did this), Address need to reference EMPLOYEE, ADDRESS tables
-	Register ()?
-	*/
-);
+	ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Supervisor int NOT NULL,
+	Address int NOT NULL,
+	RegisterCode char(6) NOT NULL
+)
+INSERT INTO STORE (Supervisor,Address,RegisterCode) VALUES (1,2,654321)
 
---Josh Begin											--3
 CREATE TABLE CUSTOMER(
-	ID int PRIMARY KEY NOT NULL,
-	custName varchar(15) NOT NULL,
+	ID int PRIMARY KEY NOT NULL IDENTITY(1,1),
+	Name varchar(15) NOT NULL,
 	phoneNumber char(10) NOT NULL,
 	email varchar(20) NOT NULL,
 	pswrd varchar(20) CONSTRAINT CK_Users_Pswrd CHECK (LEN(Pswrd) >= 8),
-	addr int NOT NULL,
-	/*
-	addr need to refenrece ADDRESS TABLE
-	*/
-	)
+	addr int NOT NULL
+)
+
+INSERT INTO CUSTOMER (Name, PHONENUMBER, email, pswrd, addr) VALUES
+('Snuffles', '0987654321', 'snuffles@gmail.com', 'password1', 4),
+('JOSH', '2345678901', 'JOSH@gmail.com', 'password2', 5)
+
+--add foreign keys
+ALTER TABLE STORE
+ADD
+CONSTRAINT EMP_REF FOREIGN KEY (Supervisor) REFERENCES	EMPLOYEE(ID),
+CONSTRAINT STORE_ADDR FOREIGN KEY (Address) REFERENCES ADDRESS(ID)
+
+ALTER TABLE EMPLOYEE
+ADD 
+CONSTRAINT EMP_STORE FOREIGN KEY (WorkPlace) REFERENCES STORE(ID),
+CONSTRAINT EMP_ADDR FOREIGN KEY (Address) REFERENCES ADDRESS(ID)
+
+ALTER TABLE PACKAGE ADD
+CONSTRAINT PKG_SENDER FOREIGN KEY (Sender) REFERENCES CUSTOMER(ID),
+CONSTRAINT PKG_RCVER FOREIGN KEY (Recipient) REFERENCES CUSTOMER(ID),
+CONSTRAINT PKG_TO FOREIGN KEY (ToAddress) REFERENCES ADDRESS(ID)
+
+ALTER TABLE TRACKING_RECORD ADD
+CONSTRAINT WHERE_AT FOREIGN KEY (AddressID) REFERENCES ADDRESS(ID),
+CONSTRAINT TRCK_PKG FOREIGN KEY (TrackingNumber) REFERENCES PACKAGE(TrackingNumber),
+CONSTRAINT CHECKER FOREIGN KEY (EMPLOYEEID) REFERENCES EMPLOYEE(ID),
+CONSTRAINT TRCK_STORE FOREIGN KEY (STOREID) REFERENCES STORE(ID)
+
+ALTER TABLE CUSTOMER ADD
+CONSTRAINT CUST_ADDR FOREIGN KEY (ADDR) REFERENCES ADDRESS(ID)
+
+
+--for testing
+USE MASTER
+DROP DATABASE PO
+
+drop table ADDRESS,CUSTOMER,PACKAGE,STORE,EMPLOYEE,TRACKING_RECORD
+
