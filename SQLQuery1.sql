@@ -61,7 +61,7 @@ CREATE TABLE STORE(
 	RegisterCode char(6) NOT NULL
 )
 INSERT INTO STORE (Supervisor,Address,RegisterCode) VALUES (1,2,654321)
-
+ 
 CREATE TABLE CUSTOMER(
 	ID int PRIMARY KEY NOT NULL IDENTITY(1,1),
 	Name varchar(15) NOT NULL,
