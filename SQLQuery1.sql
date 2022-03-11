@@ -55,13 +55,21 @@ CREATE TABLE TRACKING_RECORD(
 INSERT INTO TRACKING_RECORD (EmployeeID, TrackingNumber, StoreID, AddressID) VALUES (1, 123456, 1, 2)
 
 CREATE TABLE SHIPMENT_TYPE(
-	ID tinyint NOT NULL PRIMARY KEY IDENTITY(1,1),
-	Weight tinyint NOT NULL,
-	Length tinyint NOT NULL,
-	Girth tinyint NOT NULL,
-) 
+	ID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Weight decimal(3,2) NOT NULL, 
+	Length decimal(3,2) NOT NULL, 
+	Height decimal(3,2) NOT NULL,
+	Girth decimal(2,2) NOT NULL,
+	Priority varchar(3) NOT NULL,
+	Letter varchar(3) NOT NULL,
+	Package varchar(3) NOT NULL 
+)
+//weight has to be lower than 150 lbs
+//length has to be under 108 inches
+//last three possibly yes or no
+//Package as in not a letter, anything higher than 15 length, 12 height, .75 girth
 
-INSERT INTO SHIPMENT_TYPE (ID, Weight, Length, Girth) VALUES (1, 15, 15, 129)
+INSERT INTO SHIPMENT_TYPE (ID, Weight, Length, Height, Girth, Priority, Letter, Package) VALUES (4.2, 12.16, 13.62, 0.25, Yes, Yes, No)
 
 CREATE TABLE STORE(
 	ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -109,8 +117,8 @@ CONSTRAINT TRCK_STORE FOREIGN KEY (STOREID) REFERENCES STORE(ID)
 ALTER TABLE CUSTOMER ADD
 CONSTRAINT CUST_ADDR FOREIGN KEY (ADDR) REFERENCES ADDRESS(ID)
 
-ALTER TABLE SHIPMENT_TYPE ADD
-CONSTRAINT TYPE FOREIGN KEY (ID) REFERENCES PACKAGE(PkgType)
+ALTER TABLE PACKAGE ADD
+CONSTRAINT pkg_type FOREIGN KEY (PkgType) REFERENCES SHIPMENT_TYPE(ID)
 
 
 --for testing
