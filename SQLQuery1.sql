@@ -47,3 +47,10 @@ CREATE TABLE STORE(
 	, Address int NOT NULL
 	, Register ()
 );
+
+CREATE TABLE SALE(
+	ITEMID int NOT NULL
+    , QUANTITY int NOT NULL
+    , DATE datetime (YYYY-MM-DD) NOT NULL
+    , PRICE real (10, 2) NOT NULL
+);
