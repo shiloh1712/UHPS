@@ -69,6 +69,7 @@ CREATE TABLE SHIPMENT_TYPE(
 //last three possibly yes or no
 //Package as in not a letter, anything higher than 15 length, 12 height, .75 girth
 
+
 INSERT INTO SHIPMENT_TYPE (ID, Weight, Length, Height, Girth, Priority, Letter, Package) VALUES (4.2, 12.16, 13.62, 0.25, Yes, Yes, No)
 
 CREATE TABLE STORE(
