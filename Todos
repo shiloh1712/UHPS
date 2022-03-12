@@ -48,15 +48,5 @@ Work to do:
 - opinions on basic layouts
 - semantic constraints: >1 triggers
 
-- github training
-- .sql file colab: each person create a table and insert sample data for that table
-      + PACKAGE: Son
-      + CUSTOMER: Josh
-      + EMPLOYEE: Andy
-      + STORE: Bader
-      + TRACKING RECORD: Morrison
-      + ADDRESS: Son
-      + foreign keys: Son
-
 - Present the project:
   + PPT
