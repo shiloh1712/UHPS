@@ -1,4 +1,4 @@
--- create db+schema
+-- create db+schema;
 CREATE DATABASE PO
 CREATE SCHEMA PO
 USE PO
