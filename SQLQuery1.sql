@@ -75,6 +75,8 @@ INSERT INTO CUSTOMER (Name, PHONENUMBER, email, pswrd, addr) VALUES
 ('Snuffles', '0987654321', 'snuffles@gmail.com', 'password1', 4),
 ('JOSH', '2345678901', 'JOSH@gmail.com', 'password2', 5)
 
+CREATE TABLE 
+
 --add foreign keys
 ALTER TABLE STORE
 ADD
