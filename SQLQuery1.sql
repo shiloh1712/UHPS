@@ -32,12 +32,19 @@ CREATE TABLE PACKAGE(
 )
 INSERT INTO PACKAGE (TrackingNumber,Sender,	Recipient,ToAddress,Descrp) VALUES (123456, 1, 2, 3, 'SOME STUFF' )
 
+CREATE TABLE SERVICES(
+	ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Name varchar(15) NOT NULL,
+	UnitCost int NOT NULL,
+	Quantity int NOT NULL
+)
+
 CREATE TABLE EMPLOYEE(
 	ID int NOT NULL PRIMARY KEY IDENTITY(1,1), 
 	Name varchar(15) NOT NULL,
 	PhoneNumber char(10) NOT NULL,
 	Address int NOT NULL, 
-	Password varchar(20) NOT NULL, 
+	Password varchar(20) CONSTRAINT PasswordCheck CHECK (LEN(Password) >= 8) NOT NULL, 
 	WorkPlace int NOT NULL 
 )
 INSERT INTO EMPLOYEE (Name, PhoneNumber, Address,Password,WorkPlace) VALUES ('First Employee', 1234567890, 1, 'idunnowhatpassword', 1)
