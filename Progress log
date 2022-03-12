@@ -12,3 +12,13 @@
       
 2/28: github training complete;
       share .sql file, assigned each member 1 table to create
+
+3/4: each team member creates a table in .sql file:
+      + PACKAGE: Son
+      + CUSTOMER: Josh
+      + EMPLOYEE: Andy
+      + STORE: Bader
+      + TRACKING RECORD: Morrison
+      + ADDRESS: Son
+      + foreign keys: Son
+      Son backups the db for checkpoint 2
