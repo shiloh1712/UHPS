@@ -22,3 +22,8 @@
       + ADDRESS: Son
       + foreign keys: Son
       Son backups the db for checkpoint 2
+      
+3/11: Josh: add status table, add attributes to other tables
+      Andy: add services table
+      Morrison: add shipment_type table
+      Son: adjust/fix bugs before submitting dump file to Professor
