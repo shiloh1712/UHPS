@@ -1,65 +1,23 @@
 La, Son : 
-complete requirements document
-watch https://www.youtube.com/watch?v=eru2emiqow0 
 draw+upload basic web pages layout
 
 Fowlks, Morris:
-Design UI
 
 Nguyen, Andy:
-watch https://www.youtube.com/watch?v=eru2emiqow0 
 
 Opie, Josh:
-watch https://www.youtube.com/watch?v=eru2emiqow0 
 
 Salem, Bader:
 - Implement UI: write HTML/CSS
 
 
 Work to do:
-- how often meeting: Fridays >2pm 
-- internal deadlines? 
 //- Document what the team discusses; make visuals/presentation
-- Design UI (group consensus): what frontend website should look like including these pages
-  + Home 
-  + New package initialization form
-  + tracking history details (table, if employee: + (checkin button, checkout form link))
-  + sign in form
-  + user/employee register form
-  +
-- Implement UI: write HTML/CSS
 
-/*       - Frontend:
-          + process URL
-          + send requests (POST, GET)
-          +
-        - Backend:
-          + POST
-          + GET
-          + access DB: make queries
-          +  
-        - Research frameworkless: 
-          + Frontend
-          + backend
-          + 
-*/
-
-- db design changes:
-- opinions on basic layouts
 - semantic constraints: >1 triggers
-
-- github training
-- .sql file colab: each person create a table and insert sample data for that table
-      + PACKAGE: Son
-      + CUSTOMER: Josh
-      + EMPLOYEE: Andy
-      + STORE: Bader
-      + TRACKING RECORD: Morrison
-      + ADDRESS: Son
-      + foreign keys: Son
+- host website
+- discuss drawn layouts
+- assign pages
 
 - Present the project:
   + PPT
-
-
-Josh is here
