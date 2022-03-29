@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace test.Model
+namespace UHPostalService.Models
 {
-    public class TrackingRec
+    public class TrackingRecord
     {
         [Key]
         public int Id { get; set; }
@@ -21,6 +20,5 @@ namespace test.Model
         public DateTime TimeOut { get; set; } //Needs to include being Nullable
 
         public int Destination { get; set; } //Needs to be from Address table
-
     }
 }
