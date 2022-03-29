@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UHPostalService.Model
+namespace UHPostalService.Models
 {
-    public class SHIPMENT_TYPE
+    public class ShipmentClass
     {
         [Key]
         [Required]
@@ -18,10 +18,10 @@ namespace UHPostalService.Model
         public float WIDTH { get; set; }
         [Required]
         [DataType(DataType.Currency)]
-        public object UNITCOST { get; set; }
+        public float GroundCost { get; set; }
         [Required]
         [DataType(DataType.Currency)]
-        public object EXPRESSCOST { get; set; }
+        public float ExpressCost { get; set; }
 
     }
 }

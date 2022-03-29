@@ -1,8 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace test.Model
+namespace UHPostalService.Models
 {
+    public enum Status
+    {
+        InStore, InTransit, OutForDelivery, Delivered, Returned
+    }
     public class Package
     {
         [Key]
