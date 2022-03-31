@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UHPostalService.Model
+namespace UHPostalService.Models
 {
-    public class POSTAGE
+    public class Postage
     {
         [Key]
         [Required]

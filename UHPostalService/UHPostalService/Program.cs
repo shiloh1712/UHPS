@@ -3,10 +3,16 @@ using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+//access database 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+//add session authentication
+builder.Services.AddSession();
+builder.Services.AddMvc();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -26,6 +32,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//use sessions for authentication
+app.UseSession();
+//app.UseMvc();
 
 app.UseAuthorization();
 

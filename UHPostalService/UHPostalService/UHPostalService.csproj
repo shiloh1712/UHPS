@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Accounts\" />
+    <Folder Include="Pages\Account\" />
   </ItemGroup>
 
 </Project>
