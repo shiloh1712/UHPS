@@ -8,6 +8,7 @@ D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\UHPos
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\ref\UHPostalService.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\UHPostalService.pdb
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Humanizer.dll
+D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -58,11 +59,9 @@ D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\obj\Debug\net6.0\UHPos
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\obj\Debug\net6.0\ref\UHPostalService.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\obj\Debug\net6.0\UHPostalService.pdb
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\obj\Debug\net6.0\UHPostalService.genruntimeconfig.cache
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\obj\Debug\net6.0\UHPostalService.csproj.AssemblyReference.cache
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\MessagePack.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\MessagePack.Annotations.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Build.Locator.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.CodeAnalysis.AnalyzerUtilities.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
@@ -261,20 +260,4 @@ D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\zh-Ha
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\runtimes\win-arm\lib\net6.0\dotnet-aspnet-codegenerator-design.exe
 D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\runtimes\win-arm64\lib\net6.0\dotnet-aspnet-codegenerator-design.exe
-<<<<<<< HEAD
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Azure.Core.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Azure.Identity.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\System.Collections.Immutable.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
-D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\bin\Debug\net6.0\System.Runtime.CompilerServices.Unsafe.dll
-=======
->>>>>>> 56f28a800c8f6f4f9cac2d67027c0a006b25036f
+D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\obj\Debug\net6.0\UHPostalService.csproj.AssemblyReference.cache
