@@ -27,7 +27,7 @@ namespace UHPostalService.Pages
         }
         public IActionResult OnPost()
         {
-            if (Username.Equals("abc") && Password.Equals("123"))
+            if (Username != null && Username.Equals("abc") && Password.Equals("123"))
             {
                 HttpContext.Session.SetString("username", Username);
                 return RedirectToPage("Welcome");

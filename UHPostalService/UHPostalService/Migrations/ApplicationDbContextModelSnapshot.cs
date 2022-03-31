@@ -24,18 +24,18 @@ namespace UHPostalService.Migrations
 
             modelBuilder.Entity("UHPostalService.Models.Address", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("StateName")
+                    b.Property<string>("State")
                         .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
@@ -50,7 +50,7 @@ namespace UHPostalService.Migrations
                         .HasMaxLength(7)
                         .HasColumnType("nvarchar(7)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Addresses");
                 });
@@ -66,7 +66,7 @@ namespace UHPostalService.Migrations
                     b.Property<int>("AddressID")
                         .HasColumnType("int");
 
-                    b.Property<string>("EmailAddress")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -86,7 +86,46 @@ namespace UHPostalService.Migrations
 
                     b.HasIndex("AddressID");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("UHPostalService.Models.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AddressID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StoreID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressID");
+
+                    b.HasIndex("StoreID");
+
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Package", b =>
@@ -221,16 +260,16 @@ namespace UHPostalService.Migrations
 
             modelBuilder.Entity("UHPostalService.Models.Store", b =>
                 {
-                    b.Property<int>("StoreId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StoreId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AddressId")
+                    b.Property<int>("AddressID")
                         .HasColumnType("int");
 
-                    b.Property<string>("PhoneNum")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -238,10 +277,15 @@ namespace UHPostalService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<int>("SupervisorId")
+                    b.Property<int>("SupID")
                         .HasColumnType("int");
 
-                    b.HasKey("StoreId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressID");
+
+                    b.HasIndex("SupID")
+                        .IsUnique();
 
                     b.ToTable("Stores");
                 });
@@ -287,6 +331,53 @@ namespace UHPostalService.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("UHPostalService.Models.Employee", b =>
+                {
+                    b.HasOne("UHPostalService.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UHPostalService.Models.Store", "Store")
+                        .WithMany("Employees")
+                        .HasForeignKey("StoreID");
+
+                    b.Navigation("Address");
+
+                    b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("UHPostalService.Models.Store", b =>
+                {
+                    b.HasOne("UHPostalService.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UHPostalService.Models.Employee", "Supervisor")
+                        .WithOne("Supervised")
+                        .HasForeignKey("UHPostalService.Models.Store", "SupID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+
+                    b.Navigation("Supervisor");
+                });
+
+            modelBuilder.Entity("UHPostalService.Models.Employee", b =>
+                {
+                    b.Navigation("Supervised")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("UHPostalService.Models.Store", b =>
+                {
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

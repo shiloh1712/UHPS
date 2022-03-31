@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UHPostalService.Models
 {
@@ -10,17 +11,28 @@ namespace UHPostalService.Models
 		[DataType(DataType.PhoneNumber)]
 		public string PhoneNumber { get; set; }
 		[DataType(DataType.EmailAddress)]
-		public string EmailAddress { get; set; }
-		[Display(Name = "Home Address")]
-		public int AddressID { get; set; }		
+		public string Email { get; set; }	
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
-		[Display(Name = "Work Place")]
-		public int StoreID { get; set; }
+
 
 
 		//Navigation Properties: FK
+		[Display(Name = "Home Address")]
+		public int AddressID { get; set; }
 		public Address Address { get; set; }
+
+
+		//store working at: initially not assigned a store
+		[Display(Name = "Work Place")]
+		public int ? StoreID { get; set; }
+		[ForeignKey("StoreID")]
+		//[InverseProperty("Employees")]
 		public Store Store { get; set; }
+
+		//Store supervised: might not supervise any store
+		//public int ? SupervisedID { get; set; }
+		public Store Supervised { get; set; }
+
 	}
 }

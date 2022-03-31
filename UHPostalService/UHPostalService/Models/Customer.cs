@@ -10,7 +10,7 @@ namespace UHPostalService.Models
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
         [DataType(DataType.EmailAddress)]
-        public string EmailAddress { get; set; }
+        public string Email { get; set; }
         [Display(Name = "Home Address")]
         public int AddressID { get; set; }
         [DataType(DataType.Password)]
