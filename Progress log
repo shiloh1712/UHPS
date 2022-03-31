@@ -31,3 +31,4 @@
 3/29: Son: created initial proj, added Customer + Employee Models
       Josh: added Models: Package, Store, TrackingRecord
       Bader: added Models: Address, Postage, Sale, ShipmentClass, Product
+      Morrison: host a sample website at https://uhpostalservice.azurewebsites.net/
