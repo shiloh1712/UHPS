@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UHPostalService.Migrations
 {
-    public partial class AddModels : Migration
+    public partial class addFK : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,16 +13,16 @@ namespace UHPostalService.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StreetAddress = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     City = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    StateName = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
+                    State = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
                     Zipcode = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.ID);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,22 +105,6 @@ namespace UHPostalService.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stores",
-                columns: table => new
-                {
-                    StoreId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SupervisorId = table.Column<int>(type: "int", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    Registration = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    PhoneNum = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Stores", x => x.StoreId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TrackingRecords",
                 columns: table => new
                 {
@@ -139,38 +123,129 @@ namespace UHPostalService.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressID = table.Column<int>(type: "int", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Customer_Addresses_AddressID",
+                        name: "FK_Customers_Addresses_AddressID",
                         column: x => x.AddressID,
                         principalTable: "Addresses",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Employees",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AddressID = table.Column<int>(type: "int", nullable: false),
+                    StoreID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employees", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Employees_Addresses_AddressID",
+                        column: x => x.AddressID,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Registration = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SupID = table.Column<int>(type: "int", nullable: false),
+                    AddressID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stores", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stores_Addresses_AddressID",
+                        column: x => x.AddressID,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Stores_Employees_SupID",
+                        column: x => x.SupID,
+                        principalTable: "Employees",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_AddressID",
-                table: "Customer",
+                name: "IX_Customers_AddressID",
+                table: "Customers",
                 column: "AddressID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_AddressID",
+                table: "Employees",
+                column: "AddressID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_StoreID",
+                table: "Employees",
+                column: "StoreID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stores_AddressID",
+                table: "Stores",
+                column: "AddressID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stores_SupID",
+                table: "Stores",
+                column: "SupID",
+                unique: true);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Employees_Stores_StoreID",
+                table: "Employees",
+                column: "StoreID",
+                principalTable: "Stores",
+                principalColumn: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Employees_Addresses_AddressID",
+                table: "Employees");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Stores_Addresses_AddressID",
+                table: "Stores");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Employees_Stores_StoreID",
+                table: "Employees");
+
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Packages");
@@ -188,13 +263,16 @@ namespace UHPostalService.Migrations
                 name: "ShipmentClasses");
 
             migrationBuilder.DropTable(
-                name: "Stores");
-
-            migrationBuilder.DropTable(
                 name: "TrackingRecords");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "Stores");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
         }
     }
 }
