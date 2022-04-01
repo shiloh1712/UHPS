@@ -17,7 +17,7 @@ namespace UHPostalService.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.2")
+                .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -52,6 +52,9 @@ namespace UHPostalService.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StreetAddress", "City", "State", "Zipcode")
+                        .IsUnique();
+
                     b.ToTable("Addresses");
                 });
 
@@ -63,12 +66,12 @@ namespace UHPostalService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AddressID")
+                    b.Property<int?>("AddressID")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -79,12 +82,14 @@ namespace UHPostalService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressID");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Customers");
                 });
@@ -326,9 +331,7 @@ namespace UHPostalService.Migrations
                 {
                     b.HasOne("UHPostalService.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressID");
 
                     b.Navigation("Address");
                 });

@@ -13,7 +13,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddSession();
 builder.Services.AddMvc();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie("Cookies", options =>
+{
+    options.LoginPath = "/Account/Customers/Login";
+    options.LogoutPath = "/Account/Customers/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.ReturnUrlParameter = "ReturnUrl";
+});
 // Add services to the container.
 builder.Services.AddRazorPages();
 
@@ -37,7 +43,8 @@ app.UseRouting();
 app.UseSession();
 //app.UseMvc();
 
-app.UseAuthorization();
+app.UseAuthorization(); 
+app.UseAuthentication();
 
 app.MapRazorPages();
 

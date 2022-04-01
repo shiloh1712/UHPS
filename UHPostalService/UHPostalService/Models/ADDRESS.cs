@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace UHPostalService.Models
 {
+    [Index(nameof(StreetAddress), nameof(City), nameof(State), nameof(Zipcode), IsUnique=true)]
     public class Address
     {
         [Key]
@@ -9,17 +11,16 @@ namespace UHPostalService.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(30)]
+        [Display(Name="Street Address")]
         public string StreetAddress { get; set; }
         [Required]
         [MaxLength(10)]
         public string City { get; set; }
         [Required]
-        [MaxLength(2)]
-        [MinLength(7)]
+        [StringLength(2)]
         public string State { get; set; }
         [Required]
-        [MaxLength(7)]
-        [MinLength(7)]
+        [StringLength(7)]
         public string Zipcode { get; set; }
 
 
