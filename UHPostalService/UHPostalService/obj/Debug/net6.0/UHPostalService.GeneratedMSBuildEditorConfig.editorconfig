@@ -1,0 +1,108 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = UHPostalService
+build_property.RootNamespace = UHPostalService
+build_property.ProjectDir = D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Account/Customers/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxDdXN0b21lcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Account/Customers/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxDdXN0b21lcnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Account/Customers/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxDdXN0b21lcnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Account/Customers/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxDdXN0b21lcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Account/Customers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxDdXN0b21lcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Account/Customers/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxDdXN0b21lcnNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Account/Customers/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxDdXN0b21lcnNcTG9nb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Account/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Addresses/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkcmVzc2VzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Addresses/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkcmVzc2VzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Addresses/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkcmVzc2VzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Addresses/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkcmVzc2VzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Addresses/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkcmVzc2VzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Welcome.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VsY29tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-8udghvut3g
