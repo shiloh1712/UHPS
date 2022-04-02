@@ -15,9 +15,5 @@ Work to do:
 //- Document what the team discusses; make visuals/presentation
 
 - semantic constraints: >1 triggers
-- host website
-- discuss drawn layouts
-- assign pages
-
-- Present the project:
-  + PPT
+- refine models: add foreign keys, change attribute names to for consistency
+- seed the db 
