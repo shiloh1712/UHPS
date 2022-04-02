@@ -15,6 +15,7 @@ namespace UHPostalService.Models
         
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
         //FK
         [Display(Name = "Home Address")]
         public int? AddressID { get; set; }

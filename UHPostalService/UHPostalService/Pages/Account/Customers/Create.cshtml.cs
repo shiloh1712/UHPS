@@ -22,8 +22,12 @@ namespace UHPostalService.Pages.Account.Customers
         }
         [BindProperty]
         public Customer Customer { get; set; }
-
-        public IActionResult OnGet()
+        [BindProperty]
+        //public Address Address { get; set; }
+        public string ReturnUrl { get; set; }
+        
+        
+        public async Task OnGetAsync(string returnURL = null)
         {
             //customize address dropdown menu
             var AvailAddr = _context.Addresses.Select(x => new
@@ -32,14 +36,16 @@ namespace UHPostalService.Pages.Account.Customers
                 FullAddress = x.StreetAddress + " " + x.City
             });
         ViewData["AddressID"] = new SelectList(AvailAddr, "Id", "FullAddress");
-            return Page();
+            ReturnUrl = returnURL;
+            //return Page();
         }
 
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            returnUrl ??= Url.Content("~/");
             var user = _context.Customers.Where(f => f.Email == Customer.Email).FirstOrDefault();
             if (user != null)
             {
@@ -63,7 +69,7 @@ namespace UHPostalService.Pages.Account.Customers
                 HttpContext.Session.SetString("role", "Customer");
 
 
-                return RedirectToPage("./Index");
+                return RedirectToPage("RegisterConfirmation", new { email = Customer.Email });
             }
         }
     }

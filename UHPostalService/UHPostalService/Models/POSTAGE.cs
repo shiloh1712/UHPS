@@ -6,10 +6,10 @@ namespace UHPostalService.Models
     {
         [Key]
         [Required]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
         [MaxLength(6)]
-        public string PKG { get; set; }
+        public string PackageID { get; set; }
         [Required]
         public float WEIGHT { get; set; } // need to check that this is <70 but its almost midnight i wanna go to bed
 
