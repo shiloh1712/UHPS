@@ -9,23 +9,27 @@ namespace UHPostalService.Models
     public class Package
     {
         [Key]
-        public string TrackingNum { get; set; } //6 characters
+        public string TrackingNum { get; set; }
+        [MinLength(6)]
+        [MaxLength(6)]
 
         [Required]
-        public int ComingFrom { get; set; } //Needs to be from Customer table
+        public int ComingFrom { get; set; } 
+		public Customer Customer { get; set; }
 
         [Required]
-        public int RecipientId { get; set; } //Needs to be from Customer table
+        public int RecipientId { get; set; } 
+        public Customer Customer { get; set; }
 
         [Required]
-        public int GoingTo { get; set; } //Needs to be from Address table
+        public int GoingTo { get; set; }
+        public Address Address { get; set; }
 
         [Required]
-        public string Description { get; set; } //Max 60 characters
+        public string Description { get; set; } 
+        [MaxLength(60)]
 
-        public string Status { get; set; } //Needs to be a range of options from:
-                                           //in store, in transit, out for delivery, delivered, lost, returned
-
+        public string Status { get; set; } 
         public DateTime TimeDelivered { get; set; }
     }
 }

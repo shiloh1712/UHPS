@@ -9,7 +9,9 @@ namespace UHPostalService.Models
         public int Id { get; set; }
 
         [Required]
-        public char Registration { get; set; } //8 chars
+        public char Registration { get; set; }
+        [MinLength(8)]
+        [MaxLength(8)]
 
         [Required]
         public string PhoneNumber { get; set; }
@@ -17,7 +19,7 @@ namespace UHPostalService.Models
 
         [Required]
         [Display(Name = "Supervisor")]
-        public int SupID { get; set; } //Needs to be from Employee table
+        public int SupID { get; set; } 
         //[ForeignKey("EmployeeID")]
         public Employee Supervisor { get; set; }
 
@@ -26,7 +28,7 @@ namespace UHPostalService.Models
 
 
         [Required]
-        public int AddressID { get; set; } //Needs to be from Address table
+        public int AddressID { get; set; }
         public Address Address { get; set; }
 
     }
