@@ -34,24 +34,25 @@ namespace UHPostalService.Pages.Account.Customers
 
 
         }
+        public string ReturnUrl { get; set; }
 
-        public async Task OnGetAsync(string returnUrl = null)
-        {
-            //returnUrl ??= Url.Content("~/");
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            //ReturnUrl = returnUrl;
-            
-            //return Page();
-        }
         [BindProperty]
         public InputModel SignInUser { get; set; }
-
-
-        public async Task<IActionResult> OnPostAsync()
+        public async Task OnGetAsync(string? returnUrl = null)
         {
-            //if (ModelState.IsValid)
-            //{
+            returnUrl ??= Url.Content("~/");
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            ReturnUrl = returnUrl;
+            
+        }
+
+
+        public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/");
+            if (ModelState.IsValid)
+            {
                 var user = _context.Customers.Where(f => f.Email == SignInUser.Email && f.Password == SignInUser.Password).FirstOrDefault();
                 if (user == null)
                 {
@@ -75,8 +76,8 @@ namespace UHPostalService.Pages.Account.Customers
                         principal,
                         new AuthenticationProperties { IsPersistent = true });
 
-                return new RedirectToPageResult("Index");
-            //}
+                return LocalRedirect(returnUrl);
+            }
 
             return Page();
         }

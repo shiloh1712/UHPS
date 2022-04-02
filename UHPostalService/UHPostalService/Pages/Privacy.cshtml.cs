@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UHPostalService.Pages
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes ="Cookies")]
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
@@ -14,8 +14,13 @@ namespace UHPostalService.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("Index");
+            }
+            return Page();
         }
     }
 }
