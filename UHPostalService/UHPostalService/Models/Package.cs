@@ -11,8 +11,8 @@ namespace UHPostalService.Models
     public class Package
     {
         [Key]
-        public int Id { get; set; } 
-        public int SenderID{ get; set; } //Needs to be from Customer table
+        public int Id { get; set; }
+        public int SenderID { get; set; } //Needs to be from Customer table
         [ForeignKey("SenderID")]
         public Customer Sender { get; set; }
 
@@ -24,16 +24,13 @@ namespace UHPostalService.Models
         [ForeignKey("AddrToID")]
         public Address ToAddress { get; set; }
 
-        public string Description { get; set; } 
+        public string Description { get; set; }
         [DefaultValue(Status.InStore)]
-        public Status Status { get; set; } 
+        public Status Status { get; set; }
         public float Weight { get; set; }
         [DefaultValue(false)]
         public bool Express { get; set; }
         [DataType(DataType.Currency)]
         public float ShipCost { get; set; }
-
-
-        //public DateTime TimeDelivered { get; set; }
     }
 }
