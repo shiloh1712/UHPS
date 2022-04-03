@@ -34,3 +34,5 @@ Triggers:
 https://www.sqlshack.com/learn-sql-sql-triggers/
 Authentication:
 https://www.tektutorialshub.com/asp-net-core/user-registration-login-using-cookie-authentication-asp-net-core/
+Using raw sql in .NET Razor Pages:
+https://docs.microsoft.com/en-us/ef/core/querying/raw-sql
