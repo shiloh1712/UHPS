@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UHPostalService.Models
@@ -18,19 +19,21 @@ namespace UHPostalService.Models
 		//Navigation Properties: FK
 		[Display(Name = "Home Address")]
 		public int AddressID { get; set; }
+		[ForeignKey("AddressID")]
 		public Address Address { get; set; }
 
 
 		//store working at: initially not assigned a store
 		[Display(Name = "Work Place")]
+		[DefaultValue(-1)]
 		public int ? StoreID { get; set; }
 		[ForeignKey("StoreID")]
 		//[InverseProperty("Employees")]
-		public Store Store { get; set; }
+		public Store ? Store { get; set; }
 
 		//Store supervised: might not supervise any store
-		//public int ? SupervisedID { get; set; }
-		public Store Supervised { get; set; }
+		//public int ? SupID { get; set; }
+		public Store ? Supervised { get; set; }
 
 	}
 }

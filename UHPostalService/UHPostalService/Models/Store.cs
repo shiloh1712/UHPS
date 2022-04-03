@@ -8,9 +8,9 @@ namespace UHPostalService.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        /*[Required]
         public char Registration { get; set; } //8 chars
-
+        */
         [Required]
         public string PhoneNumber { get; set; }
 

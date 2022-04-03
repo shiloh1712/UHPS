@@ -12,8 +12,8 @@ using UHPostalService.Data;
 namespace UHPostalService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220331161543_testindex")]
-    partial class testindex
+    [Migration("20220402230657_restart")]
+    partial class restart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,7 @@ namespace UHPostalService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StreetAddress")
+                    b.HasIndex("StreetAddress", "City", "State", "Zipcode")
                         .IsUnique();
 
                     b.ToTable("Addresses");
@@ -80,7 +80,6 @@ namespace UHPostalService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -109,7 +108,7 @@ namespace UHPostalService.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -121,7 +120,7 @@ namespace UHPostalService.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("StoreID")
                         .HasColumnType("int");
@@ -130,6 +129,12 @@ namespace UHPostalService.Migrations
 
                     b.HasIndex("AddressID");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
+
                     b.HasIndex("StoreID");
 
                     b.ToTable("Employees");
@@ -137,53 +142,46 @@ namespace UHPostalService.Migrations
 
             modelBuilder.Entity("UHPostalService.Models.Package", b =>
                 {
-                    b.Property<string>("TrackingNum")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("ComingFrom")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AddrToID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GoingTo")
+                    b.Property<bool>("Express")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ReceiverID")
                         .HasColumnType("int");
 
-                    b.Property<int>("RecipientId")
+                    b.Property<int>("SenderID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("TimeDelivered")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("TrackingNum");
-
-                    b.ToTable("Packages");
-                });
-
-            modelBuilder.Entity("UHPostalService.Models.Postage", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("PKG")
-                        .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
-
-                    b.Property<float>("WEIGHT")
+                    b.Property<float>("ShipCost")
                         .HasColumnType("real");
 
-                    b.HasKey("ID");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.ToTable("Postages");
+                    b.Property<float>("Weight")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddrToID");
+
+                    b.HasIndex("ReceiverID");
+
+                    b.HasIndex("SenderID");
+
+                    b.ToTable("Packages");
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Product", b =>
@@ -280,10 +278,6 @@ namespace UHPostalService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Registration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)");
-
                     b.Property<int>("SupID")
                         .HasColumnType("int");
 
@@ -355,6 +349,33 @@ namespace UHPostalService.Migrations
                     b.Navigation("Store");
                 });
 
+            modelBuilder.Entity("UHPostalService.Models.Package", b =>
+                {
+                    b.HasOne("UHPostalService.Models.Address", "ToAddress")
+                        .WithMany()
+                        .HasForeignKey("AddrToID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UHPostalService.Models.Customer", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UHPostalService.Models.Customer", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+
+                    b.Navigation("ToAddress");
+                });
+
             modelBuilder.Entity("UHPostalService.Models.Store", b =>
                 {
                     b.HasOne("UHPostalService.Models.Address", "Address")
@@ -376,8 +397,7 @@ namespace UHPostalService.Migrations
 
             modelBuilder.Entity("UHPostalService.Models.Employee", b =>
                 {
-                    b.Navigation("Supervised")
-                        .IsRequired();
+                    b.Navigation("Supervised");
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Store", b =>

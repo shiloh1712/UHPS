@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UHPostalService.Migrations
 {
-    public partial class addFK : Migration
+    public partial class restart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,37 +24,8 @@ namespace UHPostalService.Migrations
                 {
                     table.PrimaryKey("PK_Addresses", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Packages",
-                columns: table => new
-                {
-                    TrackingNum = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ComingFrom = table.Column<int>(type: "int", nullable: false),
-                    RecipientId = table.Column<int>(type: "int", nullable: false),
-                    GoingTo = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TimeDelivered = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Packages", x => x.TrackingNum);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Postages",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PKG = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
-                    WEIGHT = table.Column<float>(type: "real", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Postages", x => x.ID);
-                });
+            //HEADQUARTER
+            migrationBuilder.Sql("INSERT INTO Addresses (StreetAddress, City, State, Zipcode) VALUES ('4800 Calhoun Rd', 'Houston', 'TX', '77024')");
 
             migrationBuilder.CreateTable(
                 name: "Products",
@@ -129,10 +100,10 @@ namespace UHPostalService.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressID = table.Column<int>(type: "int", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -141,8 +112,45 @@ namespace UHPostalService.Migrations
                         name: "FK_Customers_Addresses_AddressID",
                         column: x => x.AddressID,
                         principalTable: "Addresses",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Packages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SenderID = table.Column<int>(type: "int", nullable: false),
+                    ReceiverID = table.Column<int>(type: "int", nullable: false),
+                    AddrToID = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Weight = table.Column<float>(type: "real", nullable: false),
+                    Express = table.Column<bool>(type: "bit", nullable: false),
+                    ShipCost = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Packages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Packages_Addresses_AddrToID",
+                        column: x => x.AddrToID,
+                        principalTable: "Addresses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Packages_Customers_ReceiverID",
+                        column: x => x.ReceiverID,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Packages_Customers_SenderID",
+                        column: x => x.SenderID,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,8 +160,8 @@ namespace UHPostalService.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressID = table.Column<int>(type: "int", nullable: false),
                     StoreID = table.Column<int>(type: "int", nullable: true)
@@ -168,6 +176,9 @@ namespace UHPostalService.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+            //FOUNDER: ADIMN
+            migrationBuilder.Sql(@"INSERT INTO Employees (Name, PhoneNumber, Email, Password, AddressID)
+                                    VALUES ('Admin', '7777777777', 'admin@uhps.com', 'password', (SELECT Id FROM Addresses WHERE StreetAddress = '4800 Calhoun Rd'))");
 
             migrationBuilder.CreateTable(
                 name: "Stores",
@@ -175,7 +186,6 @@ namespace UHPostalService.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Registration = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SupID = table.Column<int>(type: "int", nullable: false),
                     AddressID = table.Column<int>(type: "int", nullable: false)
@@ -195,6 +205,15 @@ namespace UHPostalService.Migrations
                         principalTable: "Employees",
                         principalColumn: "Id");
                 });
+            //FIRST STORE
+            migrationBuilder.Sql(@"INSERT INTO Stores (PhoneNumber, SupID, AddressID)
+                                    VALUES ('1234567890', (SELECT Id FROM Employees WHERE Email = 'admin@uhps.com'), 1)");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_StreetAddress_City_State_Zipcode",
+                table: "Addresses",
+                columns: new[] { "StreetAddress", "City", "State", "Zipcode" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_AddressID",
@@ -202,14 +221,47 @@ namespace UHPostalService.Migrations
                 column: "AddressID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Customers_Email",
+                table: "Customers",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Employees_AddressID",
                 table: "Employees",
                 column: "AddressID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Employees_Email",
+                table: "Employees",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_PhoneNumber",
+                table: "Employees",
+                column: "PhoneNumber",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Employees_StoreID",
                 table: "Employees",
                 column: "StoreID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Packages_AddrToID",
+                table: "Packages",
+                column: "AddrToID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Packages_ReceiverID",
+                table: "Packages",
+                column: "ReceiverID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Packages_SenderID",
+                table: "Packages",
+                column: "SenderID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stores_AddressID",
@@ -228,6 +280,23 @@ namespace UHPostalService.Migrations
                 column: "StoreID",
                 principalTable: "Stores",
                 principalColumn: "Id");
+
+            //trigger: if package is sent to destination instead of another store, package status is updated to out-for-delivery 
+            migrationBuilder.Sql(@"drop trigger if exists autostatus
+                                    go
+                                    create trigger autostatus on trackingrecords
+                                    after insert, update
+                                    as begin
+	                                    declare @tracknum int;
+	                                    declare @dest int;
+	                                    declare @out int;
+	                                    select @tracknum=tracknum, @out=destination, @dest=addrtoid from inserted,Packages where Packages.Id = inserted.TrackNum;
+	                                    if @out = @dest
+	                                    begin
+		                                    update Packages set status = 4 where Id=@tracknum
+	                                    end
+                                    end"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -245,13 +314,7 @@ namespace UHPostalService.Migrations
                 table: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Customers");
-
-            migrationBuilder.DropTable(
                 name: "Packages");
-
-            migrationBuilder.DropTable(
-                name: "Postages");
 
             migrationBuilder.DropTable(
                 name: "Products");
@@ -264,6 +327,9 @@ namespace UHPostalService.Migrations
 
             migrationBuilder.DropTable(
                 name: "TrackingRecords");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

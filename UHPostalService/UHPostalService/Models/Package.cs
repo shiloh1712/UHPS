@@ -1,31 +1,39 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UHPostalService.Models
 {
     public enum Status
     {
-        InStore, InTransit, OutForDelivery, Delivered, Returned
+        InStore, InTransit, OutForDelivery, Delivered, Returned, Lost
     }
     public class Package
     {
         [Key]
-        public string TrackingNum { get; set; } //6 characters
+        public int Id { get; set; } 
+        public int SenderID{ get; set; } //Needs to be from Customer table
+        [ForeignKey("SenderID")]
+        public Customer Sender { get; set; }
 
-        [Required]
-        public int ComingFrom { get; set; } //Needs to be from Customer table
+        public int ReceiverID { get; set; } //Needs to be from Customer table
+        [ForeignKey("ReceiverID")]
+        public Customer Receiver { get; set; }
 
-        [Required]
-        public int RecipientId { get; set; } //Needs to be from Customer table
+        public int AddrToID { get; set; } //Needs to be from Address table
+        [ForeignKey("AddrToID")]
+        public Address ToAddress { get; set; }
 
-        [Required]
-        public int GoingTo { get; set; } //Needs to be from Address table
+        public string Description { get; set; } 
+        [DefaultValue(Status.InStore)]
+        public Status Status { get; set; } 
+        public float Weight { get; set; }
+        [DefaultValue(false)]
+        public bool Express { get; set; }
+        [DataType(DataType.Currency)]
+        public float ShipCost { get; set; }
 
-        [Required]
-        public string Description { get; set; } //Max 60 characters
 
-        public string Status { get; set; } //Needs to be a range of options from:
-                                           //in store, in transit, out for delivery, delivered, lost, returned
-
-        public DateTime TimeDelivered { get; set; }
+        //public DateTime TimeDelivered { get; set; }
     }
 }
