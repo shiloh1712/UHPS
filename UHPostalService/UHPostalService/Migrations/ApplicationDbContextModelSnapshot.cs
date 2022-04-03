@@ -297,19 +297,22 @@ namespace UHPostalService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Destination")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("Destination")
                         .HasColumnType("int");
 
-                    b.Property<int>("Store")
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StoreId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TimeIn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("TimeOut")
+                    b.Property<DateTime?>("TimeOut")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TrackNum")
@@ -317,6 +320,12 @@ namespace UHPostalService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("StoreId");
 
                     b.ToTable("TrackingRecords");
                 });
@@ -391,6 +400,29 @@ namespace UHPostalService.Migrations
                     b.Navigation("Address");
 
                     b.Navigation("Supervisor");
+                });
+
+            modelBuilder.Entity("UHPostalService.Models.TrackingRecord", b =>
+                {
+                    b.HasOne("UHPostalService.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UHPostalService.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("UHPostalService.Models.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId");
+
+                    b.Navigation("Address");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Employee", b =>
