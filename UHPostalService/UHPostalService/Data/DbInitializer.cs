@@ -43,7 +43,7 @@ namespace UHPostalService.Data
             };
             context.Employees.AddRange(emps);
             context.SaveChanges();
-
+            /*
             var packs = new Package[]
             {
                 new Package { SenderID= 1, ReceiverID =1, AddrToID =1, ShipCost =2.89},
@@ -91,7 +91,7 @@ namespace UHPostalService.Data
             };
             context.ShipmentClass.AddRange(tracks);
             context.SaveChanges();
-            
+            */
         }
 
 

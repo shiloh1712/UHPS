@@ -305,14 +305,16 @@ namespace UHPostalService.Migrations
                                     as begin
                                         declare @tin DateTime;
                                         declare @tout DateTime;
-                                        select @tin=TimeIn, @tout=TimeOut from trackingrecords;
+                                        declare @ident int;
+                                        select @ident=Id from inserted;
+                                        select @tin=trackingrecords.TimeIn, @tout=trackingrecords.TimeOut from inserted,trackingrecords where trackingrecords.Id=@ident;
                                         if @tin is NULL
                                         begin
-                                            update trackingrecords set TimeIn = getdate();
+                                            update trackingrecords set trackingrecords.TimeIn = getdate() where trackingrecords.Id=@ident;
                                         end
                                         else
                                         begin
-                                            update trackingrecords set TimeOut = getdate();
+                                            update trackingrecords set trackingrecords.TimeOut = getdate() where trackingrecords.Id=@ident;
                                         end
                                     end");
 
