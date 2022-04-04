@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UHPostalService.Models
 {
@@ -8,11 +9,15 @@ namespace UHPostalService.Models
         public int Id { get; set; }
 
         public int? EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        [ForeignKey("EmployeeId")]
+        public Employee? Employee { get; set; }
 
-        public string TrackNum { get; set; }
+        public int TrackNum { get; set; }
+        [ForeignKey("TrackNum")]
+        public Package Package { get; set; }
 
         public int? StoreId { get; set; }
+        [ForeignKey("StoreId")]
         public Store Store { get; set; }
 
         public DateTime? TimeIn { get; set; }
@@ -20,6 +25,7 @@ namespace UHPostalService.Models
         public DateTime? TimeOut { get; set; } 
 
         public int? Destination { get; set; }
+        [ForeignKey("Destination")]
         public Address Address { get; set; }
     }
 }

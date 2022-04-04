@@ -16,7 +16,7 @@ namespace UHPostalService.Models
         public string City { get; set; }
         [StringLength(2)]
         public string State { get; set; }
-        [StringLength(7)]
+        [StringLength(5)]
         public string Zipcode { get; set; }
 
 

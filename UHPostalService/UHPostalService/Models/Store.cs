@@ -7,21 +7,13 @@ namespace UHPostalService.Models
     {
         [Key]
         public int Id { get; set; }
-
-        [Required]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
-
-
-        [Required]
         [Display(Name = "Supervisor")]
         public int SupID { get; set; } 
         public Employee Supervisor { get; set; }
-
         //list of regular employees
         public List<Employee> Employees { get; set; }
-
-
-        [Required]
         public int AddressID { get; set; }
         public Address Address { get; set; }
 

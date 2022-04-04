@@ -6,14 +6,12 @@ namespace UHPostalService.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        [MaxLength(30)]
         [Display(Name = "Description")]
         public string Desc { get; set; }
-        [Required]
         [DataType(DataType.Currency)]
+        [Range(0,1000)]
         public float UnitCost { get; set; }
-        [Required]
+        [Range(0, 1000)]
         public int Stock { get; set; }
     }
 }

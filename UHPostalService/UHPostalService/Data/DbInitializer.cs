@@ -14,7 +14,6 @@ namespace UHPostalService.Data
 
             var addresses = new Address[]
             {
-                new Address { StreetAddress = "4800 Calhoun Rd", City = "Houston", State = "TX", Zipcode = "77024" },
                 new Address { StreetAddress = "4500 University Dr", City = "Houston", State = "TX", Zipcode = "77004" },
                 /*
                 new Address { StreetAddress = "4373 Cougar Village Dr", City = "Houston", State = "TX", Zipcode = "77204" },
@@ -44,18 +43,18 @@ namespace UHPostalService.Data
             context.Employees.AddRange(emps);
             context.SaveChanges();
 
-            var packs = new Package[]
+            /*var packs = new Package[]
             {
-                new Package { SenderID= 1, ReceiverID =1, AddrToID =1, ShipCost =2.89},
-                new Package { SenderID= 2, ReceiverID =2, AddrToID =2, ShipCost =3.50},
+                new Package { SenderID= 1, ReceiverID =1, AddrToID =1, ShipCost =2.89F},
+                new Package { SenderID= 2, ReceiverID =2, AddrToID =2, ShipCost =3.50F},
             };
             context.Packages.AddRange(packs);
             context.SaveChanges();
 
             var prods = new Product[]
             {
-                new Product { Description= "Item description", UnitCost =5.99, Stock =100},
-                new Product { Description= "New item description", UnitCost =10.99, Stock =50},
+                new Product { Desc= "Item description", UnitCost =5.99F, Stock =100},
+                new Product { Desc= "New item description", UnitCost =10.99F, Stock =50},
             };
             context.Products.AddRange(prods);
             context.SaveChanges();
@@ -70,7 +69,7 @@ namespace UHPostalService.Data
 
             var ships = new ShipmentClass[]
             {
-                new ShipmentClass { Descr= "Shipment Class Description", Length =4.50, Height =1.00, Width= 7.00, GroundCost =1.50, ExpressCost =12.00},
+                new ShipmentClass { DESCR= "Shipment Class Description", Length =4.50, Height =1.00, Width= 7.00, GroundCost =1.50, ExpressCost =12.00},
                 new ShipmentClass { Descr= "New Shipment Class Description", Length =5.00, Height =2.00, Width= 7.50, GroundCost =2.00, ExpressCost =13.00},
             };
             context.ShipmentClass.AddRange(ships);
@@ -91,6 +90,7 @@ namespace UHPostalService.Data
             };
             context.ShipmentClass.AddRange(tracks);
             context.SaveChanges();
+            */
             
         }
 

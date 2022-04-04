@@ -5,15 +5,13 @@ namespace UHPostalService.Models
     public class Sale
     {
         [Key]
-        [Required]
         public int ID { get; set; }
-        [Required]
-        public int ItemID { get; set; }
-        [Required]
+        public int ProductID { get; set; }
+        public Product Product { get; set; }
+        [Range(1,100)]
         public int Quantity { get; set; }
-        [Required]
-        [DataType(DataType.DateTime)]
-        public DateTime PURCHASE_DATE { get; set; }
-
+        public DateTime PurchaseDate { get; set; }
+        [DataType(DataType.Currency)]
+        public float? Total { get; set; }
     }
 }
