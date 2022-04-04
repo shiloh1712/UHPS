@@ -296,7 +296,26 @@ namespace UHPostalService.Migrations
 		                                    update Packages set status = 4 where Id=@tracknum
 	                                    end
                                     end"
+
             );
+            migrationBuilder.Sql(@"drop trigger if exists datechange
+                                    go
+                                    create trigger datechange on trackingrecords
+                                    after insert, update
+                                    as begin
+                                        declare @tin DateTime;
+                                        declare @tout DateTime;
+                                        select @tin=TimeIn, @tout=TimeOut from trackingrecords;
+                                        if @tin is NULL
+                                        begin
+                                            update trackingrecords set TimeIn = getdate();
+                                        end
+                                        else
+                                        begin
+                                            update trackingrecords set TimeOut = getdate();
+                                        end
+                                    end");
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

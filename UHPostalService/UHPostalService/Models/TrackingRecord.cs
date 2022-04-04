@@ -15,7 +15,7 @@ namespace UHPostalService.Models
         public int? StoreId { get; set; }
         public Store Store { get; set; }
 
-        public DateTime TimeIn { get; set; }
+        public DateTime? TimeIn { get; set; }
 
         public DateTime? TimeOut { get; set; } 
 

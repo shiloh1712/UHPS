@@ -32,3 +32,6 @@
       Josh: added Models: Package, Store, TrackingRecord
       Bader: added Models: Address, Postage, Sale, ShipmentClass, Product
       Morrison: host a sample website at https://uhpostalservice.azurewebsites.net/
+     
+4/3:  Josh: added date changing trigger
+      Bader: seeded the database
