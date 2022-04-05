@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAPaoNaXv8WE+XSo1PyFA8tAAAAAACAAAAAAAQZgAAAAEAACAAAAASmHpkXZuJYwDgRpXmXjdCwMPYRGTIbcen52W7NO2hagAAAAAOgAAAAAIAACAAAAAThLpfW3ElF8CdvKwcQur6Hmq0GOPeuVIGxgX4zPARMIAAAABsF3ua+uAgkyPPQmC1LpxvZ5Nk4U0wu+wUIwNLkz5IpHGoUDlPNCHfzsXmSgra9nTaQJMv+GnUePxJknCP6v/kXCR2/R+lG2ENJAdpWRCHobo/X3q/CFtHyAjh9XliF7eSsD8dSRBQIuDQ0Vl8YDn1v3bBSWEvvaZBRse6S8eqv0AAAABzN1+N5daF7ylLnr0thoY0NMJTj2KcReW49a+kqmRhNIgiUA6FKJBxI1FVVtLVXlkdiSJytMhojKxsZEOy6d8s</EncryptedPassword>
+    <History>True|2022-04-05T06:29:49.1033482Z;True|2022-04-05T01:19:48.2859778-05:00;False|2022-04-05T01:17:48.1015826-05:00;False|2022-04-05T01:13:54.2911598-05:00;False|2022-04-05T01:07:55.4289971-05:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:uhpsserver.database.windows.net,1433%3bInitial Catalog=aspnet-uhps%3bUser Id=admin-uhps%40uhpsserver%3bPassword=Tiap4aduh</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="UHPostalService.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:uhpsserver.database.windows.net,1433%3bInitial Catalog=aspnet-uhps%3bUser Id=admin-uhps%40uhpsserver%3bPassword=Tiap4aduh</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

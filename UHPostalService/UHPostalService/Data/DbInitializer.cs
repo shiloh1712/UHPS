@@ -7,7 +7,7 @@ namespace UHPostalService.Data
         public static void Initialize(ApplicationDbContext context)
         {
             // Look for any students./*
-            if (context.Employees.Any())
+            if (context.Customers.Any())
             {
                 return;   // DB has been seeded
             }
@@ -37,8 +37,8 @@ namespace UHPostalService.Data
 
             var emps = new Employee[]
             {
-                new Employee { Name= "Son", PhoneNumber ="1234567890", Email ="son@uhps.com", Password ="son", AddressID =1, StoreID = 1},
-                new Employee { Name= "Josh", PhoneNumber ="2345678901", Email ="josh@uhps.com", Password ="josh", AddressID =2, StoreID = 2},
+                new Employee { Name= "Son", PhoneNumber ="1234567890", Email ="son@uhps.com", Password ="son", AddressID =1, StoreID = 1, Role = Role.Employee},
+                new Employee { Name= "Josh", PhoneNumber ="2345678901", Email ="josh@uhps.com", Password ="josh", AddressID =2, StoreID = 1},
             };
             context.Employees.AddRange(emps);
             context.SaveChanges();
@@ -69,24 +69,25 @@ namespace UHPostalService.Data
 
             var ships = new ShipmentClass[]
             {
-                new ShipmentClass { Desc= "Shipment Class Description", MaxLength =4.50f, MaxHeight =1.00f, MaxWidth= 7.00f, GroundCost =1.50f, ExpressCost =12.00f},
-                new ShipmentClass { Desc= "New Shipment Class Description", MaxLength =5.00f, MaxHeight =2.00f, MaxWidth= 7.50f, GroundCost =2.00f, ExpressCost =13.00f},
+                new ShipmentClass { Desc= "Letter", MaxLength =11.50f, MaxHeight =6.20f, MaxWidth= 0.25f, GroundCost =1.50f, ExpressCost =9.00f},
+                new ShipmentClass { Desc= "Large Envelope", MaxLength =15.00f, MaxHeight =12.00f, MaxWidth= 0.75f, GroundCost =2.00f, ExpressCost =10.00f},
+                new ShipmentClass { Desc= "Box", MaxLength =90.00f, MaxHeight =90.00f, MaxWidth= 90.00f, GroundCost =4.00f, ExpressCost =15.00f},
             };
             context.ShipmentClasses.AddRange(ships);
             context.SaveChanges();
 
              var stores = new Store[]
             {
-                new Store { SupID= 1, PhoneNumber ="1357924680", AddressID =1},
-                new Store { SupID= 2, PhoneNumber ="2468013579", AddressID =2},
+                new Store { SupID= 3, PhoneNumber ="135794680", AddressID =3},
+                new Store { SupID= 2, PhoneNumber ="246813579", AddressID =2},
             };
             context.Stores.AddRange(stores);
             context.SaveChanges();
 
              var tracks = new TrackingRecord[]
             {
-                new TrackingRecord { EmployeeId= 1, TrackNum =123456, StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =1},
-                new TrackingRecord { EmployeeId= 2, TrackNum =789012, StoreId =2, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28"), Destination =2},
+                new TrackingRecord { EmployeeId= 1, TrackNum =1, StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =1},
+                new TrackingRecord { EmployeeId= 2, TrackNum =1, StoreId =2, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28"), Destination =2},
             };
             context.TrackingRecords.AddRange(tracks);
             context.SaveChanges();

@@ -126,7 +126,7 @@ namespace UHPostalService.Migrations
                     table.PrimaryKey("PK_Packages", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Packages_Addresses_AddrToID",
-                        column: x => x.AddrToID,
+                        column: x => x.AddressID,
                         principalTable: "Addresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
@@ -141,7 +141,8 @@ namespace UHPostalService.Migrations
                         column: x => x.SenderID,
                         principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.NoAction,
+                        onUpdate: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -248,7 +249,7 @@ namespace UHPostalService.Migrations
                                             declare @tracknum int;
                                             declare @dest int;
                                             declare @out int;
-                                            select @tracknum=tracknum, @out=destination, @dest=addrtoid from inserted,Packages where Packages.Id = inserted.TrackNum;
+                                            select @tracknum=tracknum, @out=destination, @dest=addressid from inserted,Packages where Packages.Id = inserted.TrackNum;
                                             if @out = @dest
                                             begin
                                                     update Packages set status = 4 where Id=@tracknum

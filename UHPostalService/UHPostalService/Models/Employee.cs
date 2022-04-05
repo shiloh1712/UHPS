@@ -32,7 +32,7 @@ namespace UHPostalService.Models
 		//Store supervised: might not supervise any store
 		//public int ? SupID { get; set; }
 		public Store ? Supervised { get; set; }
-		[DefaultValue(Role.Employee)]
+		[DefaultValue(2)]
 		public Role Role { get; set; }
 
 	}

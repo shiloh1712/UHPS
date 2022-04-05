@@ -22,7 +22,7 @@ namespace UHPostalService.Models
         public Customer Receiver { get; set; }
         [Display(Name ="Destination")]
         public int AddressID { get; set; } 
-        [ForeignKey("AddrToID")]
+        [ForeignKey("AddressID")]
         public Address Destination { get; set; }
 
         public string? Description { get; set; }

@@ -11,5 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>UHPostalService.Data.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
     <RazorPage_SelectedScaffolderID>RazorPageScaffolder</RazorPage_SelectedScaffolderID>
     <RazorPage_SelectedScaffolderCategoryPath>root/Common/RazorPage</RazorPage_SelectedScaffolderCategoryPath>
+    <NameOfLastUsedPublishProfile>D:\UH\COSC 3380\UHPS\UHPS\UHPostalService\UHPostalService\Properties\PublishProfiles\UHPostalServices - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
