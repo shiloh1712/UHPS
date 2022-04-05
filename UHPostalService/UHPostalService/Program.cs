@@ -15,7 +15,7 @@ builder.Services.AddMvc();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie("Cookies", options =>
 {
-    options.LoginPath = "/Account/Customers/Login";
+    options.LoginPath = "/Account/Employees/Login";
     options.LogoutPath = "/Account/Customers/Logout";
     options.AccessDeniedPath = "/Account/AccessDenied";
     options.ReturnUrlParameter = "ReturnUrl";

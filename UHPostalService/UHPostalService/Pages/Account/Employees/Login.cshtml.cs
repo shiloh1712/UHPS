@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using UHPostalService.Data;
 using UHPostalService.Models;
 
+
 namespace UHPostalService.Pages.Account.Employees
 {
     public class LoginModel : PageModel
@@ -59,9 +60,7 @@ namespace UHPostalService.Pages.Account.Employees
                     ModelState.AddModelError(string.Empty, "Invalid Email or Password");
                     return Page();
                 }
-                /*string role;
-                if (user.Email == "admin@uhps.com")
-                    role */
+                
                 //claim loggin info/roles
                 var claims = new List<Claim>
                 {
