@@ -6,7 +6,7 @@ namespace UHPostalService.Data
     {
         public static void Initialize(ApplicationDbContext context)
         {
-            // Look for any students.
+            // Look for any students./*
             if (context.Employees.Any())
             {
                 return;   // DB has been seeded
@@ -15,12 +15,12 @@ namespace UHPostalService.Data
             var addresses = new Address[]
             {
                 new Address { StreetAddress = "4500 University Dr", City = "Houston", State = "TX", Zipcode = "77004" },
-                /*
+                
                 new Address { StreetAddress = "4373 Cougar Village Dr", City = "Houston", State = "TX", Zipcode = "77204" },
                 new Address { StreetAddress = "UH Entrance 14", City = "Houston", State = "TX", Zipcode = "77004" },
                 new Address { StreetAddress = "4455 University Dr", City = "Houston", State = "TX", Zipcode = "77204" },
                 new Address { StreetAddress = "another address", City = "Cypress", State = "TX", Zipcode = "77433" },
-                new Address { StreetAddress = "one other address", City = "Austin", State = "TX", Zipcode = "73301" },*/
+                new Address { StreetAddress = "one other address", City = "Austin", State = "TX", Zipcode = "73301" },
 
 
             };
@@ -43,10 +43,10 @@ namespace UHPostalService.Data
             context.Employees.AddRange(emps);
             context.SaveChanges();
 
-            /*var packs = new Package[]
+            var packs = new Package[]
             {
-                new Package { SenderID= 1, ReceiverID =1, AddrToID =1, ShipCost =2.89F},
-                new Package { SenderID= 2, ReceiverID =2, AddrToID =2, ShipCost =3.50F},
+                new Package { SenderID= 1, ReceiverID =1, AddressID =1, ShipCost =2.89F},
+                new Package { SenderID= 2, ReceiverID =2, AddressID =2, ShipCost =3.50F},
             };
             context.Packages.AddRange(packs);
             context.SaveChanges();
@@ -61,18 +61,18 @@ namespace UHPostalService.Data
 
             var sales = new Sale[]
             {
-                new Sale { ItemID= 1, Quantity =75, PurchaseDate =DateTime.Parse("2010-09-01")},
-                new Sale { ItemID= 2, Quantity =30, PurchaseDate =DateTime.Parse("2015-07-24")},
+                new Sale { ProductID= 1, Quantity =75, PurchaseDate =DateTime.Parse("2010-09-01")},
+                new Sale { ProductID= 2, Quantity =30, PurchaseDate =DateTime.Parse("2015-07-24")},
             };
             context.Sales.AddRange(sales);
             context.SaveChanges();
 
             var ships = new ShipmentClass[]
             {
-                new ShipmentClass { DESCR= "Shipment Class Description", Length =4.50, Height =1.00, Width= 7.00, GroundCost =1.50, ExpressCost =12.00},
-                new ShipmentClass { Descr= "New Shipment Class Description", Length =5.00, Height =2.00, Width= 7.50, GroundCost =2.00, ExpressCost =13.00},
+                new ShipmentClass { Desc= "Shipment Class Description", MaxLength =4.50f, MaxHeight =1.00f, MaxWidth= 7.00f, GroundCost =1.50f, ExpressCost =12.00f},
+                new ShipmentClass { Desc= "New Shipment Class Description", MaxLength =5.00f, MaxHeight =2.00f, MaxWidth= 7.50f, GroundCost =2.00f, ExpressCost =13.00f},
             };
-            context.ShipmentClass.AddRange(ships);
+            context.ShipmentClasses.AddRange(ships);
             context.SaveChanges();
 
              var stores = new Store[]
@@ -80,17 +80,17 @@ namespace UHPostalService.Data
                 new Store { SupID= 1, PhoneNumber ="1357924680", AddressID =1},
                 new Store { SupID= 2, PhoneNumber ="2468013579", AddressID =2},
             };
-            context.ShipmentClass.AddRange(stores);
+            context.Stores.AddRange(stores);
             context.SaveChanges();
 
              var tracks = new TrackingRecord[]
             {
-                new TrackingRecord { EmployeeId= 1, TrackNum ="123456", StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =1},
-                new TrackingRecord { EmployeeId= 2, TrackNum ="789012", StoreId =2, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28"), Destination =2},
+                new TrackingRecord { EmployeeId= 1, TrackNum =123456, StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =1},
+                new TrackingRecord { EmployeeId= 2, TrackNum =789012, StoreId =2, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28"), Destination =2},
             };
-            context.ShipmentClass.AddRange(tracks);
+            context.TrackingRecords.AddRange(tracks);
             context.SaveChanges();
-            */
+            
             
         }
 
