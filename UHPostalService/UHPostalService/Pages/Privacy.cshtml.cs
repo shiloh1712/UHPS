@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace UHPostalService.Pages
 {
-    [Authorize(AuthenticationSchemes ="Cookies")]
+    [Authorize(AuthenticationSchemes ="Cookies", Roles ="Customer")]
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;

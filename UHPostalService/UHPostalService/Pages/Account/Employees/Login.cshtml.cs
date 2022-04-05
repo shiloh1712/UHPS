@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using UHPostalService.Data;
 using UHPostalService.Models;
 
-namespace UHPostalService.Pages.Account.Customers
+namespace UHPostalService.Pages.Account.Employees
 {
     public class LoginModel : PageModel
     {
@@ -44,7 +44,7 @@ namespace UHPostalService.Pages.Account.Customers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             ReturnUrl = returnUrl;
-            
+
         }
 
 
@@ -53,19 +53,21 @@ namespace UHPostalService.Pages.Account.Customers
             returnUrl ??= Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = _context.Customers.Where(f => f.Email == SignInUser.Email && f.Password == SignInUser.Password).FirstOrDefault();
+                var user = _context.Employees.Where(f => f.Email == SignInUser.Email && f.Password == SignInUser.Password).FirstOrDefault();
                 if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "Invalid Email or Password");
                     return Page();
                 }
-
+                /*string role;
+                if (user.Email == "admin@uhps.com")
+                    role */
                 //claim loggin info/roles
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Email),
-                    new Claim(ClaimTypes.Role, "Customer")
+                    new Claim(ClaimTypes.Role, user.Role.ToString())
                     //new Claim("UserDefined", "whatever"),
                 };
 

@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UHPostalService.Models
 {
+	public enum Role
+    {
+		Admin, Supervisor, Employee
+    }
     public class Employee
     {
 		[Key]
@@ -28,6 +32,8 @@ namespace UHPostalService.Models
 		//Store supervised: might not supervise any store
 		//public int ? SupID { get; set; }
 		public Store ? Supervised { get; set; }
+		[DefaultValue(Role.Employee)]
+		public Role Role { get; set; }
 
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using UHPostalService.Models;
 
 #nullable disable
 
@@ -154,7 +155,8 @@ namespace UHPostalService.Migrations
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressID = table.Column<int>(type: "int", nullable: false),
-                    StoreID = table.Column<int>(type: "int", nullable: true)
+                    StoreID = table.Column<int>(type: "int", nullable: true),
+                    Role = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -166,9 +168,9 @@ namespace UHPostalService.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-            //FOUNDER: ADIMN
-            migrationBuilder.Sql(@"INSERT INTO Employees (Name, PhoneNumber, Email, Password, AddressID)
-                                    VALUES ('Admin', '7777777777', 'admin@uhps.com', 'password', (SELECT Id FROM Addresses WHERE StreetAddress = '4800 Calhoun Rd'))");
+            //FOUNDER:
+            migrationBuilder.Sql(@"INSERT INTO Employees (Name, PhoneNumber, Email, Password, AddressID, Role)
+                                    VALUES ('Admin', '7777777777', 'admin@uhps.com', 'password', (SELECT TOP 1 Id FROM Addresses)," + $"{(int)Role.Admin})");
 
             migrationBuilder.CreateTable(
                 name: "Stores",
@@ -196,8 +198,8 @@ namespace UHPostalService.Migrations
                         principalColumn: "Id");
                 });
             //FIRST STORE
-            migrationBuilder.Sql(@"INSERT INTO Stores (PhoneNumber, SupID, AddressID) VALUES('1234567890', (SELECT Id FROM Employees WHERE Email = 'admin@uhps.com'), 1)");
-            
+            migrationBuilder.Sql(@"INSERT INTO Stores (PhoneNumber, SupID, AddressID) VALUES('1234567890', (SELECT Top 1 Id FROM Employees), 1)");
+
             migrationBuilder.CreateTable(
                 name: "TrackingRecords",
                 columns: table => new

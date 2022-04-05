@@ -120,6 +120,9 @@ namespace UHPostalService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<int?>("StoreID")
                         .HasColumnType("int");
 

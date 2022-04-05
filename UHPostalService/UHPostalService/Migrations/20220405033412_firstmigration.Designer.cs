@@ -12,7 +12,7 @@ using UHPostalService.Data;
 namespace UHPostalService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220404191942_firstmigration")]
+    [Migration("20220405033412_firstmigration")]
     partial class firstmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,6 +121,9 @@ namespace UHPostalService.Migrations
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<int?>("StoreID")
                         .HasColumnType("int");
