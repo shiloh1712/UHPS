@@ -1,0 +1,37 @@
+2/11: 1st meeting; 
+      designed schema; 
+      everyone: design UI (web pages) and finalize later; 
+      Morrison+Bader: implement UI (write HTML/CSS); 
+      Josh: make ER diagram;
+      Josh+Son+Andy: watch JS video; 
+
+2/15:  submitted checkpoint 1:  https://docs.google.com/document/d/1RvaJqhX4yX2T4j6XtGkrv9AF6HnU0_cyD4j2WQ9mKao/edit?usp=sharing
+
+2/25: microsoft sql server set up and try out some sql codes; 
+      add employee RegistrationCode to STORE: an employee can only register for an account by providing registration code for that store, only store supervisor can change registration code
+      
+2/28: github training complete;
+      share .sql file, assigned each member 1 table to create
+
+3/4: each team member creates a table in .sql file:
+      + PACKAGE: Son
+      + CUSTOMER: Josh
+      + EMPLOYEE: Andy
+      + STORE: Bader
+      + TRACKING RECORD: Morrison
+      + ADDRESS: Son
+      + foreign keys: Son
+      Son backups the db for checkpoint 2
+      
+3/11: Josh: add status table, add attributes to other tables
+      Andy: add services table
+      Morrison: add shipment_type table
+      Son: adjust/fix bugs before submitting dump file to Professor
+
+3/29: Son: created initial proj, added Customer + Employee Models
+      Josh: added Models: Package, Store, TrackingRecord
+      Bader: added Models: Address, Postage, Sale, ShipmentClass, Product
+      Morrison: host a sample website at https://uhpostalservice.azurewebsites.net/
+     
+4/3:  Josh: added date changing trigger
+      Bader: seeded the database
