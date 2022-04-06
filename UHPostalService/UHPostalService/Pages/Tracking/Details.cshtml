@@ -1,0 +1,55 @@
+﻿@page
+@model UHPostalService.Pages.Tracking.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TrackingRecord</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrackingRecord.Employee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrackingRecord.Employee.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrackingRecord.Package)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrackingRecord.Package.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrackingRecord.Store)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrackingRecord.Store.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrackingRecord.TimeIn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrackingRecord.TimeIn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrackingRecord.TimeOut)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrackingRecord.TimeOut)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrackingRecord.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrackingRecord.Address.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.TrackingRecord.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
