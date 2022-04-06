@@ -23,10 +23,10 @@ namespace UHPostalService.Pages.Account.Customers
         [BindProperty]
         public Customer Customer { get; set; }
         [BindProperty]
-        //public Address Address { get; set; }
+        public Address Address { get; set; }
         public string ReturnUrl { get; set; }
         
-        
+        /*
         public async Task OnGetAsync(string returnURL = null)
         {
             //customize address dropdown menu
@@ -38,7 +38,7 @@ namespace UHPostalService.Pages.Account.Customers
         ViewData["AddressID"] = new SelectList(AvailAddr, "Id", "FullAddress");
             ReturnUrl = returnURL;
             //return Page();
-        }
+        }*/
 
         
 
@@ -53,6 +53,18 @@ namespace UHPostalService.Pages.Account.Customers
                 return Page();
             }
 
+            var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress 
+            && f.City == Address.City
+            && f.State == Address.State
+            && f.Zipcode == Address.Zipcode)).FirstOrDefault();
+            
+            if(addr == null)
+            {
+                _context.Addresses.Add(Address);
+                await _context.SaveChangesAsync();
+            }
+            Customer.AddressID = Address.Id;
+            
             if (!ModelState.IsValid)
             {
                 return Page();
