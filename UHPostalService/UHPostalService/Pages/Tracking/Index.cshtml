@@ -38,7 +38,7 @@
 @foreach (var item in Model.TrackingRecord) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Employee.Id)
+                @Html.DisplayFor(modelItem => item.Employee.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Package.Id)

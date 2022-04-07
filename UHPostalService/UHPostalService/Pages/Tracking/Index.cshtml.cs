@@ -19,16 +19,28 @@ namespace UHPostalService.Pages.Tracking
         {
             _context = context;
         }
-
+        [BindProperty]
+        public int SearchTracking { get; set; }
         public IList<TrackingRecord> TrackingRecord { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? SearchTracking)
         {
-            TrackingRecord = await _context.TrackingRecords
+            if (SearchTracking != null)
+            {
+                TrackingRecord = await _context.TrackingRecords
                 .Include(t => t.Address)
                 .Include(t => t.Employee)
                 .Include(t => t.Package)
-                .Include(t => t.Store).ToListAsync();
+                .Include(t => t.Store).Where(f => f.TrackNum == SearchTracking).ToListAsync();
+            }
+            else
+            {
+                TrackingRecord = await _context.TrackingRecords
+                    .Include(t => t.Address)
+                    .Include(t => t.Employee)
+                    .Include(t => t.Package)
+                    .Include(t => t.Store).ToListAsync();
+            }
         }
     }
 }

@@ -1,6 +1,14 @@
 ﻿<!DOCTYPE html>
 
 <ul class="navbar-nav">
+    <li class="nav-item">
+        <form method="get" asp-page="/Tracking/Index">
+            <p>
+                <input type="text" name="SearchTracking" placeholder="Tracking Number">
+                <input type="submit" value="Search" />
+            </p>
+        </form>
+    </li>
     @if (User.Identity.IsAuthenticated)
     {
         <li class="nav-item">
