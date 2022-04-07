@@ -276,6 +276,25 @@ namespace UHPostalService.Migrations
                                             update trackingrecords set trackingrecords.TimeOut = getdate() where trackingrecords.Id=@ident;
                                         end
                                     end");
+            //trigger: automatically set the cost of a package
+            migrationBuilder.Sql(@"drop trigger if exists cost
+		                            go
+		                            create trigger cost on packages
+		                            after insert
+		                            as begin
+			                            declare @total float;
+			                            declare @W float;
+			                            declare @exp int;
+			                            declare @ident int;
+			                            select @ident=Id from inserted;
+			                            select @W = packages.Weight, @exp = packages.Express from packages where packages.Id =@ident;
+			                            select @total = 1.50 + @W;
+			                            if @exp = 1
+			                            begin
+				                            set @total = @total + (@total*0.5)
+			                            end
+			                            update packages set packages.ShipCost = @total where packages.Id = @ident;
+		                            end");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_StreetAddress_City_State_Zipcode",
