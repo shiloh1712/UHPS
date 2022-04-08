@@ -159,6 +159,46 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shipments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hpcG1lbnRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shipments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hpcG1lbnRzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shipments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hpcG1lbnRzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shipments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hpcG1lbnRzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shipments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hpcG1lbnRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shop/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shop/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shop/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shop/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Shop/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Stores/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RvcmVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -177,6 +217,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Stores/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RvcmVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Tracking/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhY2tpbmdcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Tracking/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhY2tpbmdcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Tracking/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhY2tpbmdcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Tracking/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhY2tpbmdcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Tracking/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhY2tpbmdcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/UH/COSC 3380/UHPS/UHPS/UHPostalService/UHPostalService/Pages/Welcome.cshtml]
