@@ -22,6 +22,9 @@
             <th>
                 Address
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Store[0].Id)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address.StreetAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
