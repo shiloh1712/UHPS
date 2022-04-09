@@ -303,6 +303,7 @@ namespace UHPostalService.Migrations
 			                            update packages set packages.ShipCost = @total where packages.Id = @ident;
 		                            end");
 
+
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_StreetAddress_City_State_Zipcode",
                 table: "Addresses",
