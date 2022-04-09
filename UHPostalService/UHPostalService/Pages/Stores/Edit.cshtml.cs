@@ -23,6 +23,8 @@ namespace UHPostalService.Pages.Stores
 
         [BindProperty]
         public Store Store { get; set; }
+        [BindProperty]
+        public Address Address { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

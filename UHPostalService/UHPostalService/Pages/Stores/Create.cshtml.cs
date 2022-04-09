@@ -29,6 +29,8 @@ namespace UHPostalService.Pages.Stores
 
         [BindProperty]
         public Store Store { get; set; }
+        [BindProperty]
+        public Address Address { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
