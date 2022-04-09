@@ -90,7 +90,7 @@ namespace UHPostalService.Pages.Account.Employees
                 HttpContext.Session.SetString("role", "Employee");
 
 
-                return RedirectToPage("RegisterConfirmation", new { email = Employee.Email });
+                return RedirectToPage("../RegisterConfirmation", new { email = Employee.Email });
 
                 //return RedirectToPage("./Index");
             }

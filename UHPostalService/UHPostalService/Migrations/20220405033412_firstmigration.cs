@@ -249,11 +249,18 @@ namespace UHPostalService.Migrations
                                             declare @tracknum int;
                                             declare @dest int;
                                             declare @out int;
+                                            declare @stat int;
                                             select @tracknum=tracknum, @out=destination, @dest=addressid from inserted,Packages where Packages.Id = inserted.TrackNum;
-                                            if @out = @dest
-                                            begin
-                                                    update Packages set status = 4 where Id=@tracknum
-                                            end
+                                            if @out is null
+                                                select @stat = " + ((int)Status.InStore).ToString() + @"
+                                            else
+                                                begin
+                                                    if @out = @dest
+                                                        select @stat = " + ((int)Status.OutForDelivery).ToString() + @"
+                                                    else
+                                                        select @stat = " + ((int)Status.InTransit).ToString() + @"
+                                                end
+                                            update Packages set status = @stat where Id=@tracknum
                                     end"
             );
             //trigger: auto update timein/timeout of package when check in/out
