@@ -35,3 +35,10 @@
      
 4/3:  Josh: added date changing trigger
       Bader: seeded the database
+      
+4/4: Son: hosted website for checkpoint 3; added autostat trigger; 
+      Josh: edit create new employee/customer pages
+      
+4/8: Son: combine employee/customer registrationconfirmation/logout pages; add package dimensions to package table; edit trigger autostat
+      Josh: edit new package page; edit trigger date changing; add auto cost trigger
+      Andy: edit new store page
