@@ -10,9 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace UHPostalService.Pages.Account.Customers
+namespace UHPostalService.Pages.Account
 {
-    [AllowAnonymous]
     public class LogoutModel : PageModel
     {
         public LogoutModel(ILogger<LogoutModel> logger)
@@ -28,7 +27,7 @@ namespace UHPostalService.Pages.Account.Customers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToPage();
-            
+
         }
     }
 }

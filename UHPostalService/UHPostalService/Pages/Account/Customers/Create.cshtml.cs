@@ -62,8 +62,10 @@ namespace UHPostalService.Pages.Account.Customers
             {
                 _context.Addresses.Add(Address);
                 await _context.SaveChangesAsync();
+                addr = Address;
+
             }
-            Customer.AddressID = Address.Id;
+            Customer.AddressID = addr.Id;
             
             if (!ModelState.IsValid)
             {
@@ -81,7 +83,7 @@ namespace UHPostalService.Pages.Account.Customers
                 HttpContext.Session.SetString("role", "Customer");
 
 
-                return RedirectToPage("RegisterConfirmation", new { email = Customer.Email });
+                return RedirectToPage("../RegisterConfirmation", new { email = Customer.Email });
             }
         }
     }

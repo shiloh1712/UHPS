@@ -54,7 +54,7 @@ namespace UHPostalService.Pages.Tracking
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                //return Page();
             }
 
             _context.Attach(TrackingRecord).State = EntityState.Modified;

@@ -45,8 +45,8 @@ namespace UHPostalService.Data
 
             var packs = new Package[]
             {
-                new Package { SenderID= 1, ReceiverID =1, AddressID =1, ShipCost =2.89F},
-                new Package { SenderID= 2, ReceiverID =2, AddressID =2, ShipCost =3.50F},
+                new Package { SenderID= 1, ReceiverID =1, AddressID =3, ShipCost =2.89F, Width=1.2F, Depth=2.3F, Height=4.5F},
+                new Package { SenderID= 2, ReceiverID =2, AddressID =4, ShipCost =3.50F, Width=1.2F, Depth=2.3F, Height=4.5F},
             };
             context.Packages.AddRange(packs);
             context.SaveChanges();
@@ -86,8 +86,8 @@ namespace UHPostalService.Data
 
              var tracks = new TrackingRecord[]
             {
-                new TrackingRecord { EmployeeId= 1, TrackNum =1, StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =1},
-                new TrackingRecord { EmployeeId= 2, TrackNum =1, StoreId =2, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28"), Destination =2},
+                new TrackingRecord { EmployeeId= 1, TrackNum =1, StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =2},
+                new TrackingRecord { EmployeeId= 2, TrackNum =1, StoreId =2, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28")},
             };
             context.TrackingRecords.AddRange(tracks);
             context.SaveChanges();

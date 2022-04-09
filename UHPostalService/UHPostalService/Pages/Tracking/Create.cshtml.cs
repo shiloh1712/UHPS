@@ -23,7 +23,7 @@ namespace UHPostalService.Pages.Tracking
         public IActionResult OnGet()
         {
         ViewData["Destination"] = new SelectList(_context.Addresses, "Id", "Id");
-        ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id");
+        //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id");
         ViewData["TrackNum"] = new SelectList(_context.Packages, "Id", "Id");
         ViewData["StoreId"] = new SelectList(_context.Stores, "Id", "Id");
             return Page();
@@ -37,8 +37,9 @@ namespace UHPostalService.Pages.Tracking
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                //return Page();
             }
+            TrackingRecord.Destination = null; 
 
             _context.TrackingRecords.Add(TrackingRecord);
             await _context.SaveChangesAsync();

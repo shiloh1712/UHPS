@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Linq;
 using UHPostalService.Data;
 
-namespace UHPostalService.Pages.Account.Customers
+namespace UHPostalService.Pages.Account
 {
-    [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
         private readonly ApplicationDbContext Db;
@@ -27,7 +26,8 @@ namespace UHPostalService.Pages.Account.Customers
             var user = Db.Customers.Where(f => f.Email == email).FirstOrDefault();
             if (user == null)
             {
-                return NotFound($"Unable to load user with email '{email}'.");
+                if (Db.Employees.Where(f => f.Email == email).FirstOrDefault() == null)
+                    return NotFound($"Unable to load user with email '{email}'.");
             }
 
             Email = email;
