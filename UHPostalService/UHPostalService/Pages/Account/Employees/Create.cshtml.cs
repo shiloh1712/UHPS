@@ -72,8 +72,9 @@ namespace UHPostalService.Pages.Account.Employees
             {
                 _context.Addresses.Add(Address);
                 await _context.SaveChangesAsync();
+                addr = Address;
             }
-            Employee newemp = new Models.Employee { Name = Employee.Name, PhoneNumber = Employee.PhoneNumber, Email = Employee.Email, Password = Employee.Password, AddressID = Address.Id, Role = Role.Employee };
+            Employee newemp = new Models.Employee { Name = Employee.Name, PhoneNumber = Employee.PhoneNumber, Email = Employee.Email, Password = Employee.Password, AddressID = addr.Id, Role = Role.Employee };
             //Employee.AddressID = Address.Id;
 
             if (!ModelState.IsValid)
