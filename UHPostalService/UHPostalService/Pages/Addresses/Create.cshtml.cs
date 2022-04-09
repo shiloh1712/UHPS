@@ -31,13 +31,26 @@ namespace UHPostalService.Pages.Addresses
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress
+            && f.City == Address.City
+            && f.State == Address.State
+            && f.Zipcode == Address.Zipcode)).FirstOrDefault();
+
+            if (addr == null)
+            {
+                _context.Addresses.Add(Address);
+                await _context.SaveChangesAsync();
+                addr = Address;
+
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Addresses.Add(Address);
-            await _context.SaveChangesAsync();
+            //_context.Addresses.Add(Address);
+            //await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
