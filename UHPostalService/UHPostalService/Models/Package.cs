@@ -31,6 +31,10 @@ namespace UHPostalService.Models
         public float Weight { get; set; }
         [DefaultValue(false)]
         public bool Express { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+        public float Depth { get; set; }
+
         [DataType(DataType.Currency)]
         public float? ShipCost { get; set; }
     }
