@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAPaoNaXv8WE+XSo1PyFA8tAAAAAACAAAAAAAQZgAAAAEAACAAAAASmHpkXZuJYwDgRpXmXjdCwMPYRGTIbcen52W7NO2hagAAAAAOgAAAAAIAACAAAAAThLpfW3ElF8CdvKwcQur6Hmq0GOPeuVIGxgX4zPARMIAAAABsF3ua+uAgkyPPQmC1LpxvZ5Nk4U0wu+wUIwNLkz5IpHGoUDlPNCHfzsXmSgra9nTaQJMv+GnUePxJknCP6v/kXCR2/R+lG2ENJAdpWRCHobo/X3q/CFtHyAjh9XliF7eSsD8dSRBQIuDQ0Vl8YDn1v3bBSWEvvaZBRse6S8eqv0AAAABzN1+N5daF7ylLnr0thoY0NMJTj2KcReW49a+kqmRhNIgiUA6FKJBxI1FVVtLVXlkdiSJytMhojKxsZEOy6d8s</EncryptedPassword>
-    <History>True|2022-04-05T06:29:49.1033482Z;True|2022-04-05T01:19:48.2859778-05:00;False|2022-04-05T01:17:48.1015826-05:00;False|2022-04-05T01:13:54.2911598-05:00;False|2022-04-05T01:07:55.4289971-05:00;</History>
+    <History>False|2022-04-07T01:54:54.7650785Z;True|2022-04-05T01:29:49.1033482-05:00;True|2022-04-05T01:19:48.2859778-05:00;False|2022-04-05T01:17:48.1015826-05:00;False|2022-04-05T01:13:54.2911598-05:00;False|2022-04-05T01:07:55.4289971-05:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">
