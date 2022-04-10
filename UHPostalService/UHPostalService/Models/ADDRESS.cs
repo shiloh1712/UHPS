@@ -19,6 +19,10 @@ namespace UHPostalService.Models
         [StringLength(5)]
         public string Zipcode { get; set; }
 
+        public override string ToString()
+        {
+            return $"{StreetAddress}, {City}, {State}, {Zipcode}";
+        }
 
     }
 }

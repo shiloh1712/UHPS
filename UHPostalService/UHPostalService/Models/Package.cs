@@ -6,7 +6,13 @@ namespace UHPostalService.Models
 {
     public enum Status
     {
-        InStore, InTransit, OutForDelivery, Delivered, Returned, Lost
+        [Display(Name ="In Store")]
+        InStore,
+        [Display(Name = "In Transit")]
+        InTransit, 
+        [Display(Name = "Out for delivery")]
+        OutForDelivery, 
+        Delivered, Returned, Lost
     }
     public class Package
     {

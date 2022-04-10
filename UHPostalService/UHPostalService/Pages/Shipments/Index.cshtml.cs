@@ -19,15 +19,42 @@ namespace UHPostalService.Pages.Shipments
         {
             _context = context;
         }
+        public string StatusSort { get; set; }
 
         public IList<Package> Package { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder)
         {
-            Package = await _context.Packages
-                .Include(p => p.Destination)
+            StatusSort = String.IsNullOrEmpty(sortOrder) ? "status_desc" : "";
+            IQueryable<Package> packageIQ = from s in _context.Packages
+                                             select s;
+            switch (sortOrder)
+            {
+                case "status_desc":
+                    packageIQ = packageIQ.OrderByDescending(s => s.Status);
+                    break;
+                default:
+                    packageIQ = packageIQ.OrderBy(s => s.Status);
+                    break;
+            }
+            
+            Package = await packageIQ.AsNoTracking().Include(p => p.Destination)
                 .Include(p => p.Receiver)
                 .Include(p => p.Sender).ToListAsync();
+            /*Package = (IList<Package>)_context.Packages.Select(x => new
+            {
+                Sender = x.Sender,
+                Receiver = x.Receiver,
+                Destination = x.Destination.StreetAddress+x.Destination.City,
+                Description = x.Description,
+                Status = x.Status,
+                Express = x.Express,
+                ShipCost = x.ShipCost
+
+            });*/
+            /*.Include(p => p.Destination)
+            .Include(p => p.Receiver)
+            .Include(p => p.Sender).ToListAsync();*/
         }
     }
 }
