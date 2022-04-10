@@ -42,3 +42,5 @@
 4/8: Son: combine employee/customer registrationconfirmation/logout pages; add package dimensions to package table; edit trigger autostat
       Josh: edit new package page; edit trigger date changing; add auto cost trigger
       Andy: edit new store page
+
+4/9: Josh: Changed cost trigger to work with ShippingClass, fixed address create page to work when a duplicate address is added

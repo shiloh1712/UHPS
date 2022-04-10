@@ -9453,19 +9453,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\thais\\.nuget\\packages\\": {}
+    "C:\\Users\\blob2\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\UHPS\\UHPostalService\\UHPostalService\\UHPostalService.csproj",
+      "projectUniqueName": "C:\\repo2\\UHPS\\UHPostalService\\UHPostalService\\UHPostalService.csproj",
       "projectName": "UHPostalService",
-      "projectPath": "C:\\UHPS\\UHPostalService\\UHPostalService\\UHPostalService.csproj",
-      "packagesPath": "C:\\Users\\thais\\.nuget\\packages\\",
-      "outputPath": "C:\\UHPS\\UHPostalService\\UHPostalService\\obj\\",
+      "projectPath": "C:\\repo2\\UHPS\\UHPostalService\\UHPostalService\\UHPostalService.csproj",
+      "packagesPath": "C:\\Users\\blob2\\.nuget\\packages\\",
+      "outputPath": "C:\\repo2\\UHPS\\UHPostalService\\UHPostalService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\thais\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\blob2\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9524,7 +9524,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
