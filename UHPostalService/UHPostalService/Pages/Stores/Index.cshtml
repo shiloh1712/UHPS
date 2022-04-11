@@ -14,12 +14,20 @@
     <div class="form-actions no-color">
         <p>
             Find by State:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="select" name="SearchString" value="@Model.CurrentFilter" />
             <input type="submit" value="Search" class="btn btn-primary" /> |
             <a asp-page="./Index">Back to full List</a>
         </p>
     </div>
 </form>
+<div class="dropdown">
+  <button class="dropbtn">Dropdown</button>
+  <div class="dropdown-content">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div>
 <table class="table">
     <thead>
         <tr>
