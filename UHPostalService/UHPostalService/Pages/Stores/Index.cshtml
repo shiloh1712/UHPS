@@ -5,11 +5,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Stores</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by State:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -21,6 +31,17 @@
             </th>
             <th>
                 Address
+            </th>
+            <!--</th>-->
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.StateSort">
+                @Html.DisplayNameFor(model => model.Store[0].Address.State)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ZipSort">
+                @Html.DisplayNameFor(model => model.Store[0].Address.Zipcode)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Store[0].Id)
@@ -38,6 +59,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address.StreetAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.Zipcode)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
