@@ -20,14 +20,58 @@ namespace UHPostalService.Pages.Stores
             _context = context;
         }
 
-
+        public string StateSort { get; set; }
+        public string ZipSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
         public IList<Store> Store { get;set; }
+        
+        public IList<Address> Address { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
-            Store = await _context.Stores
+            // using System;
+            StateSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ZipSort = sortOrder == "Date" ? "date_desc" : "Date";
+
+            CurrentFilter = searchString;
+            IQueryable<Store> StoreIdent = from s in _context.Stores
+                                             select s;
+            /*IQueryable<Store> AddressIdent = from s in _context.Addresses
+                                           select s;*/
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                StoreIdent = StoreIdent.Where(s => s.Address.State.Contains(searchString)
+
+                                       /*|| s.FirstMidName.Contains(searchString)*/);
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    StoreIdent = StoreIdent.OrderByDescending(s => s.Address.State);
+                    break;
+                case "Date":
+                    StoreIdent = StoreIdent.OrderBy(s => s.Address.Zipcode);
+                    break;
+                case "date_desc":
+                    StoreIdent = StoreIdent.OrderByDescending(s => s.Address.Zipcode);
+                    break;
+                default:
+                    StoreIdent = StoreIdent.OrderBy(s => s.Address.State);
+                    break;
+            }
+
+            Store = await StoreIdent
                 .Include(s => s.Address)
                 .Include(s => s.Supervisor).ToListAsync();
+            //Address = await AddressIdent.AsNoTracking().ToListAsync();
+                
+            
+            /*Store = await _context.Stores
+                .Include(s => s.Address)
+                .Include(s => s.Supervisor).ToListAsync();*/
         }
     }
 }
