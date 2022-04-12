@@ -353,8 +353,8 @@ namespace UHPostalService.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Stores_SupID",
                 table: "Stores",
-                column: "SupID",
-                unique: true);
+                column: "SupID"/*,
+                unique: true*/);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrackingRecords_Destination",

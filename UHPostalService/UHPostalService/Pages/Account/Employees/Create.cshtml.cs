@@ -59,7 +59,7 @@ namespace UHPostalService.Pages.Account.Employees
             var user = _context.Employees.Where(f => f.Email == Employee.Email).FirstOrDefault();
             if (user != null)
             {
-                ModelState.AddModelError(string.Empty, user.Email + " Alrready exists");
+                ModelState.AddModelError(string.Empty, user.Email + " already exists");
                 return Page();
             }
 
