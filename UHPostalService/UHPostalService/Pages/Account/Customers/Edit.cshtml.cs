@@ -38,12 +38,13 @@ namespace UHPostalService.Pages.Account.Customers
             {
                 return NotFound();
             }
-           ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "City");
+           ViewData["Address.City"] = new SelectList(_context.Addresses, "Id", "City");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
+        public Address Address { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -67,6 +68,23 @@ namespace UHPostalService.Pages.Account.Customers
                 {
                     throw;
                 }
+            }
+            var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress
+            && f.City == Address.City
+            && f.State == Address.State
+            && f.Zipcode == Address.Zipcode)).FirstOrDefault();
+
+            if (addr == null)
+            {
+                _context.Addresses.Add(Address);
+                await _context.SaveChangesAsync();
+                addr = Address;
+
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
             }
 
             return RedirectToPage("./Index");
