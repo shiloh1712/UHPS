@@ -22,9 +22,10 @@ namespace UHPostalService.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().HasOne(a => a.Store).WithMany(/*c=>c.Employees*/).HasForeignKey(a => a.StoreID).IsRequired(false);
+            modelBuilder.Entity<Employee>().HasOne(a => a.Store).WithMany(/*c=>c.Employees*/).HasForeignKey(a => a.StoreID).IsRequired(false).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Store>().HasOne(a => a.Supervisor).WithOne(/*b => b.Supervised*/)
-                .HasForeignKey<Store>(a => a.SupID).OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey<Store>(a => a.SupID).OnDelete(DeleteBehavior.Restrict);
+            
             
             modelBuilder.Entity<Customer>().HasIndex(p => p.Email).IsUnique();
             modelBuilder.Entity<Employee>().HasIndex(p => p.Email).IsUnique();

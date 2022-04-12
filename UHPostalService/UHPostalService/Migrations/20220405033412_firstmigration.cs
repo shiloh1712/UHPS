@@ -196,8 +196,10 @@ namespace UHPostalService.Migrations
                         name: "FK_Stores_Employees_SupID",
                         column: x => x.SupID,
                         principalTable: "Employees",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
+            
             //FIRST STORE
             migrationBuilder.Sql(@"INSERT INTO Stores (PhoneNumber, SupID, AddressID) VALUES('1234567890', (SELECT Top 1 Id FROM Employees), 1)");
 
@@ -226,7 +228,8 @@ namespace UHPostalService.Migrations
                         name: "FK_TrackingRecords_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TrackingRecords_Packages_TrackNum",
                         column: x => x.TrackNum,
@@ -353,8 +356,8 @@ namespace UHPostalService.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Stores_SupID",
                 table: "Stores",
-                column: "SupID",
-                unique: true);
+                column: "SupID"/*,
+                unique: true*/);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrackingRecords_Destination",

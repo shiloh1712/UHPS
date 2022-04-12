@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UHPostalService.Data;
 
@@ -11,9 +12,10 @@ using UHPostalService.Data;
 namespace UHPostalService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220412125707_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,7 +292,7 @@ namespace UHPostalService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SupID")
+                    b.Property<int>("SupID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -298,8 +300,7 @@ namespace UHPostalService.Migrations
                     b.HasIndex("AddressID");
 
                     b.HasIndex("SupID")
-                        .IsUnique()
-                        .HasFilter("[SupID] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Stores");
                 });
@@ -420,7 +421,8 @@ namespace UHPostalService.Migrations
                     b.HasOne("UHPostalService.Models.Employee", "Supervisor")
                         .WithOne()
                         .HasForeignKey("UHPostalService.Models.Store", "SupID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Address");
 
