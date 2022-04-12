@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="IIS Web Application Name" description="" value="UHPostalServices" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\UH\\COSC\ 3380\\UHPS\\UHPS\\UHPostalService\\UHPostalService\\obj\\Release\\net6\.0\\win-x86\\PubTmp\\Out\\$" />
-  </parameter>
-  <parameter name="UHPostalService.Data.ApplicationDbContext" description="" value="Data Source=tcp:uhpsserver.database.windows.net,1433;Initial Catalog=aspnet-uhps;User Id=admin-uhps@uhpsserver;Password=Tiap4aduh" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^D:\\UH\\COSC\ 3380\\UHPS\\UHPS\\UHPostalService\\UHPostalService\\obj\\Release\\net6\.0\\win-x86\\PubTmp\\EFSQLScripts\\UHPostalService\.Data\.ApplicationDbContext\.sql$" />
-  </parameter>
-</parameters>
