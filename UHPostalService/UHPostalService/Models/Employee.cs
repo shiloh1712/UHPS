@@ -27,11 +27,11 @@ namespace UHPostalService.Models
 		[Display(Name = "Work Place")]
 		public int ? StoreID { get; set; }
 		[ForeignKey("StoreID")]
-		[InverseProperty("Employees")]
+		//[InverseProperty("Employees")]
 		public Store ? Store { get; set; }
 		//Store supervised: might not supervise any store
 		//public int ? SupID { get; set; }
-		public Store ? Supervised { get; set; }
+		//public Store ? Supervised { get; set; }
 		[DefaultValue(2)]
 		public Role Role { get; set; }
 

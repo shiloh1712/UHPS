@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
@@ -20,11 +21,22 @@ namespace UHPostalService.Pages.Shipments
             _context = context;
         }
         public string StatusSort { get; set; }
+        public List<Status> StatusOptions { get; set; }
 
         public IList<Package> Package { get;set; }
+        public string StatusFilter { get; set; }
 
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, string statusFilter)
         {
+            /*StatusOptions = 
+            StatusFilterOptions = _context.Packages.Select(p =>
+                                  new SelectListItem
+                                  {
+                                      Value = p.Status.ToString(),
+                                      Text = p.Status.ToString()
+                                  }).Distinct().ToList();
+            ViewData["StatusOptions"] = StatusFilterOptions;*/
+
             StatusSort = String.IsNullOrEmpty(sortOrder) ? "status_desc" : "";
             IQueryable<Package> packageIQ = from s in _context.Packages
                                              select s;

@@ -13,7 +13,7 @@ namespace UHPostalService.Models
         public int SupID { get; set; } 
         public Employee Supervisor { get; set; }
         //list of regular employees
-        public List<Employee> Employees { get; set; }
+        //public List<Employee> Employees { get; set; }
         public int AddressID { get; set; }
         public Address Address { get; set; }
 
