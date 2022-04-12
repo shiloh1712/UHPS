@@ -10,7 +10,7 @@ namespace UHPostalService.Models
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
         [Display(Name = "Supervisor")]
-        public int SupID { get; set; } 
+        public int? SupID { get; set; } 
         public Employee Supervisor { get; set; }
         //list of regular employees
         //public List<Employee> Employees { get; set; }
