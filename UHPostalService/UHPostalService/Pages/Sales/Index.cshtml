@@ -20,19 +20,19 @@
                 @Html.DisplayNameFor(model => model.Sale[0].Quantity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sale[0].PurchaseDate)
+               Purchase Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sale[0].Total)
+               Total Price
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Sale) {
+@foreach (var item in Model.Sale ) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Id)
+                @Html.DisplayFor(modelItem => item.Product.Desc)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
