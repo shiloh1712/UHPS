@@ -12,7 +12,7 @@ namespace UHPostalService.Models
         [Display(Name = "Supervisor")]
         public int? SupID { get; set; } 
         public Employee Supervisor { get; set; }
-        public int AddressID { get; set; }
+        public int ? AddressID { get; set; }
         public Address Address { get; set; }
 
     }

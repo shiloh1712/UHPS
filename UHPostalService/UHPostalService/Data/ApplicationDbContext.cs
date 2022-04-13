@@ -22,21 +22,22 @@ namespace UHPostalService.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>().HasOne(a => a.Address).WithMany().HasForeignKey(a=>a.AddressID).IsRequired(false).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Customer>().HasOne(a => a.Address).WithMany().HasForeignKey(a=>a.AddressID).IsRequired(false).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Employee>().HasOne(a => a.Address).WithMany().HasForeignKey(a => a.AddressID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Employee>().HasOne(a => a.Store).WithMany().HasForeignKey(a => a.StoreID).IsRequired(false).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Employee>().HasOne(a => a.Store).WithMany().HasForeignKey(a => a.StoreID).IsRequired(false).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Employee>().Property(b => b.Role).HasDefaultValue(Role.Employee);
-            modelBuilder.Entity<Store>().HasOne(a => a.Supervisor).WithMany().IsRequired(false).HasForeignKey(a => a.SupID).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Store>().HasOne(a => a.Address).WithOne().IsRequired(false).HasForeignKey<Store>(a => a.AddressID).OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Package>().HasOne(a => a.Sender).WithMany().HasForeignKey(a => a.SenderID).IsRequired(false).OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Package>().HasOne(a => a.Receiver).WithMany().HasForeignKey(a => a.ReceiverID).IsRequired(false).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Store>().HasOne(a => a.Supervisor).WithMany().IsRequired(false).HasForeignKey(a => a.SupID).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Store>().HasOne(a => a.Address).WithOne().IsRequired(false).HasForeignKey<Store>(a => a.AddressID).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Package>().HasOne(a => a.Sender).WithMany().HasForeignKey(a => a.SenderID).IsRequired(false).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Package>().HasOne(a => a.Receiver).WithMany().HasForeignKey(a => a.ReceiverID).IsRequired(false).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Package>().HasOne(a => a.Destination).WithMany().HasForeignKey(a => a.AddressID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Sale>().HasOne(a => a.Product).WithMany().HasForeignKey(a => a.ProductID).IsRequired(false).OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<TrackingRecord>().HasOne(a => a.Employee).WithMany().IsRequired(false).HasForeignKey(a => a.EmployeeId).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Package>().HasOne(a => a.Type).WithMany().HasForeignKey(a => a.ClassID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Sale>().HasOne(a => a.Product).WithMany().HasForeignKey(a => a.ProductID).IsRequired(false).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<TrackingRecord>().HasOne(a => a.Employee).WithMany().IsRequired(false).HasForeignKey(a => a.EmployeeId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<TrackingRecord>().HasOne(a => a.Package).WithMany().IsRequired(true).HasForeignKey(a => a.TrackNum).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<TrackingRecord>().HasOne(a => a.Store).WithMany().IsRequired(true).HasForeignKey(a => a.StoreId).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<TrackingRecord>().HasOne(a => a.Address).WithMany().IsRequired(false).HasForeignKey(a => a.Destination).OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Sale>().HasOne(a => a.Buyer).WithMany().IsRequired(false).HasForeignKey(a => a.BuyerID).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<TrackingRecord>().HasOne(a => a.Address).WithMany().IsRequired(false).HasForeignKey(a => a.Destination).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Sale>().HasOne(a => a.Buyer).WithMany().IsRequired(false).HasForeignKey(a => a.BuyerID).OnDelete(DeleteBehavior.NoAction);
 
             
 

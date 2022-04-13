@@ -40,7 +40,8 @@ namespace UHPostalService.Models
         public float Depth { get; set; }
         [DefaultValue(false)]
         public bool Express { get; set; }
-        //public ShipmentClass Type { get; set; }
+        public int ClassID { get; set; }
+        public ShipmentClass Type { get; set; }
         [DataType(DataType.Currency)]
         public float? ShipCost { get; set; }
     }

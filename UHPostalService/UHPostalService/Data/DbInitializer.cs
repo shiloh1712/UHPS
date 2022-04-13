@@ -15,7 +15,6 @@ namespace UHPostalService.Data
             var addresses = new Address[]
             {
                 new Address { StreetAddress = "4500 University Dr", City = "Houston", State = "TX", Zipcode = "77004" },
-                
                 new Address { StreetAddress = "4373 Cougar Village Dr", City = "Houston", State = "TX", Zipcode = "77204" },
                 new Address { StreetAddress = "UH Entrance 14", City = "Houston", State = "TX", Zipcode = "77004" },
                 new Address { StreetAddress = "4455 University Dr", City = "Houston", State = "TX", Zipcode = "77204" },
@@ -43,30 +42,6 @@ namespace UHPostalService.Data
             context.Employees.AddRange(emps);
             context.SaveChanges();
 
-            var packs = new Package[]
-            {
-                new Package { SenderID= 1, ReceiverID =1, AddressID =3, ShipCost =2.89F, Width=1.2F, Depth=2.3F, Height=4.5F},
-                new Package { SenderID= 2, ReceiverID =2, AddressID =4, ShipCost =3.50F, Width=1.2F, Depth=2.3F, Height=4.5F},
-            };
-            context.Packages.AddRange(packs);
-            context.SaveChanges();
-
-            var prods = new Product[]
-            {
-                new Product { Desc= "Item description", UnitCost =5.99F, Stock =100},
-                new Product { Desc= "New item description", UnitCost =10.99F, Stock =50},
-            };
-            context.Products.AddRange(prods);
-            context.SaveChanges();
-
-            var sales = new Sale[]
-            {
-                new Sale { ProductID= 1, Quantity =75, PurchaseDate =DateTime.Parse("2010-09-01")},
-                new Sale { ProductID= 2, Quantity =30, PurchaseDate =DateTime.Parse("2015-07-24")},
-            };
-            context.Sales.AddRange(sales);
-            context.SaveChanges();
-
             var ships = new ShipmentClass[]
             {
                 new ShipmentClass { Desc= "Letter", MaxLength =11.50f, MaxHeight =6.20f, MaxWidth= 0.25f, GroundCost =1.50f, ExpressCost =9.00f},
@@ -76,6 +51,31 @@ namespace UHPostalService.Data
             context.ShipmentClasses.AddRange(ships);
             context.SaveChanges();
 
+            var packs = new Package[]
+            {
+                new Package { SenderID= 1, ReceiverID =1, Description="luxury", AddressID =3, ShipCost =2.89F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=3.4F, ClassID=1, Express=true},
+                new Package { SenderID= 2, ReceiverID =1, AddressID =4, ShipCost =3.50F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=1.5f, ClassID=2},
+            };
+            context.Packages.AddRange(packs);
+            context.SaveChanges();
+
+            var prods = new Product[]
+            {
+                new Product { Desc= "Stamp", UnitCost =5.99F, Stock =100},
+                new Product { Desc= "Envelope", UnitCost =10.99F, Stock =50},
+            };
+            context.Products.AddRange(prods);
+            context.SaveChanges();
+
+            var sales = new Sale[]
+            {
+                new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2010-09-01")},
+                new Sale { ProductID= 2, Quantity =10, PurchaseDate =DateTime.Parse("2015-07-24"), BuyerID=1},
+            };
+            context.Sales.AddRange(sales);
+            context.SaveChanges();
+
+            
              var stores = new Store[]
             {
                 new Store { SupID= 3, PhoneNumber ="135794680", AddressID =3},
