@@ -18,7 +18,7 @@ namespace UHPostalService.Models
         public string? Password { get; set; }
         [Display(Name = "Home Address")]
         public int? AddressID { get; set; }
-        [ForeignKey("AddressID")]
+        //[ForeignKey("AddressID")]
         public Address? Address { get; set; }
     }
 }

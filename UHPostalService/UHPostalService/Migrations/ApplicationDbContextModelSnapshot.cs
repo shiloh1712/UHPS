@@ -121,7 +121,9 @@ namespace UHPostalService.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Role")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(2);
 
                     b.Property<int?>("StoreID")
                         .HasColumnType("int");
@@ -164,10 +166,10 @@ namespace UHPostalService.Migrations
                     b.Property<float>("Height")
                         .HasColumnType("real");
 
-                    b.Property<int>("ReceiverID")
+                    b.Property<int?>("ReceiverID")
                         .HasColumnType("int");
 
-                    b.Property<int>("SenderID")
+                    b.Property<int?>("SenderID")
                         .HasColumnType("int");
 
                     b.Property<float?>("ShipCost")
@@ -224,7 +226,10 @@ namespace UHPostalService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("ProductID")
+                    b.Property<int>("BuyerID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PurchaseDate")
@@ -237,6 +242,8 @@ namespace UHPostalService.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("BuyerID");
 
                     b.HasIndex("ProductID");
 
@@ -295,11 +302,10 @@ namespace UHPostalService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressID");
+                    b.HasIndex("AddressID")
+                        .IsUnique();
 
-                    b.HasIndex("SupID")
-                        .IsUnique()
-                        .HasFilter("[SupID] IS NOT NULL");
+                    b.HasIndex("SupID");
 
                     b.ToTable("Stores");
                 });
@@ -348,7 +354,8 @@ namespace UHPostalService.Migrations
                 {
                     b.HasOne("UHPostalService.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressID");
+                        .HasForeignKey("AddressID")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Address");
                 });
@@ -364,7 +371,7 @@ namespace UHPostalService.Migrations
                     b.HasOne("UHPostalService.Models.Store", "Store")
                         .WithMany()
                         .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Address");
 
@@ -382,14 +389,12 @@ namespace UHPostalService.Migrations
                     b.HasOne("UHPostalService.Models.Customer", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("UHPostalService.Models.Customer", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Destination");
 
@@ -400,11 +405,17 @@ namespace UHPostalService.Migrations
 
             modelBuilder.Entity("UHPostalService.Models.Sale", b =>
                 {
+                    b.HasOne("UHPostalService.Models.Customer", "Buyer")
+                        .WithMany()
+                        .HasForeignKey("BuyerID")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("UHPostalService.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Buyer");
 
                     b.Navigation("Product");
                 });
@@ -412,14 +423,13 @@ namespace UHPostalService.Migrations
             modelBuilder.Entity("UHPostalService.Models.Store", b =>
                 {
                     b.HasOne("UHPostalService.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithOne()
+                        .HasForeignKey("UHPostalService.Models.Store", "AddressID")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("UHPostalService.Models.Employee", "Supervisor")
-                        .WithOne()
-                        .HasForeignKey("UHPostalService.Models.Store", "SupID")
+                        .WithMany()
+                        .HasForeignKey("SupID")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Address");
@@ -431,11 +441,13 @@ namespace UHPostalService.Migrations
                 {
                     b.HasOne("UHPostalService.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("Destination");
+                        .HasForeignKey("Destination")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("UHPostalService.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("UHPostalService.Models.Store", "Store")
                         .WithMany()
