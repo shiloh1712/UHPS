@@ -19,11 +19,11 @@ namespace UHPostalService.Models
         [Key]
         public int Id { get; set; }
         [Display(Name ="From")]
-        public int SenderID { get; set; } 
+        public int ? SenderID { get; set; } 
         [ForeignKey("SenderID")]
         public Customer Sender { get; set; }
         [Display(Name ="To")]
-        public int ReceiverID { get; set; } 
+        public int ? ReceiverID { get; set; } 
         [ForeignKey("ReceiverID")]
         public Customer Receiver { get; set; }
         [Display(Name ="Destination")]
@@ -35,12 +35,13 @@ namespace UHPostalService.Models
         [DefaultValue(Status.InStore)]
         public Status Status { get; set; }
         public float Weight { get; set; }
-        [DefaultValue(false)]
-        public bool Express { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
         public float Depth { get; set; }
-
+        [DefaultValue(false)]
+        public bool Express { get; set; }
+        public int ClassID { get; set; }
+        public ShipmentClass Type { get; set; }
         [DataType(DataType.Currency)]
         public float? ShipCost { get; set; }
     }

@@ -6,7 +6,7 @@ using UHPostalService.Models;
 
 namespace UHPostalService.Migrations
 {
-    public partial class firstmigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,6 +27,7 @@ namespace UHPostalService.Migrations
                 });
             //HEADQUARTER
             migrationBuilder.Sql("INSERT INTO Addresses (StreetAddress, City, State, Zipcode) VALUES ('4800 Calhoun Rd', 'Houston', 'TX', '77024')");
+
 
             migrationBuilder.CreateTable(
                 name: "Products",
@@ -84,65 +85,76 @@ namespace UHPostalService.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sales",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Total = table.Column<float>(type: "real", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sales", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Sales_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Packages",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SenderID = table.Column<int>(type: "int", nullable: false),
-                    ReceiverID = table.Column<int>(type: "int", nullable: false),
+                    SenderID = table.Column<int>(type: "int", nullable: true),
+                    ReceiverID = table.Column<int>(type: "int", nullable: true),
                     AddressID = table.Column<int>(type: "int", nullable: false),
-                    AddrToID = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Weight = table.Column<float>(type: "real", nullable: false),
+                    Width = table.Column<float>(type: "real", nullable: false),
+                    Height = table.Column<float>(type: "real", nullable: false),
+                    Depth = table.Column<float>(type: "real", nullable: false),
                     Express = table.Column<bool>(type: "bit", nullable: false),
+                    ClassID = table.Column<int>(type: "int", nullable: false),
                     ShipCost = table.Column<float>(type: "real", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Packages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Packages_Addresses_AddrToID",
+                        name: "FK_Packages_Addresses_AddressID",
                         column: x => x.AddressID,
                         principalTable: "Addresses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Packages_Customers_ReceiverID",
                         column: x => x.ReceiverID,
                         principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Packages_Customers_SenderID",
                         column: x => x.SenderID,
                         principalTable: "Customers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Packages_ShipmentClasses_ClassID",
+                        column: x => x.ClassID,
+                        principalTable: "ShipmentClasses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction,
-                        onUpdate: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sales",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductID = table.Column<int>(type: "int", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BuyerID = table.Column<int>(type: "int", nullable: true),
+                    Total = table.Column<float>(type: "real", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sales", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Sales_Customers_BuyerID",
+                        column: x => x.BuyerID,
+                        principalTable: "Customers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Sales_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -157,7 +169,7 @@ namespace UHPostalService.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressID = table.Column<int>(type: "int", nullable: false),
                     StoreID = table.Column<int>(type: "int", nullable: true),
-                    Role = table.Column<int>(type: "int", nullable: false)
+                    Role = table.Column<int>(type: "int", nullable: false, defaultValue: 2)
                 },
                 constraints: table =>
                 {
@@ -173,6 +185,7 @@ namespace UHPostalService.Migrations
             migrationBuilder.Sql(@"INSERT INTO Employees (Name, PhoneNumber, Email, Password, AddressID, Role)
                                     VALUES ('Admin', '7777777777', 'admin@uhps.com', 'password', (SELECT TOP 1 Id FROM Addresses)," + $"{(int)Role.Admin})");
 
+
             migrationBuilder.CreateTable(
                 name: "Stores",
                 columns: table => new
@@ -180,8 +193,8 @@ namespace UHPostalService.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SupID = table.Column<int>(type: "int", nullable: false),
-                    AddressID = table.Column<int>(type: "int", nullable: false)
+                    SupID = table.Column<int>(type: "int", nullable: true),
+                    AddressID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -190,18 +203,16 @@ namespace UHPostalService.Migrations
                         name: "FK_Stores_Addresses_AddressID",
                         column: x => x.AddressID,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Stores_Employees_SupID",
                         column: x => x.SupID,
                         principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
-            
             //FIRST STORE
             migrationBuilder.Sql(@"INSERT INTO Stores (PhoneNumber, SupID, AddressID) VALUES('1234567890', (SELECT Top 1 Id FROM Employees), 1)");
+
 
             migrationBuilder.CreateTable(
                 name: "TrackingRecords",
@@ -228,8 +239,7 @@ namespace UHPostalService.Migrations
                         name: "FK_TrackingRecords_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TrackingRecords_Packages_TrackNum",
                         column: x => x.TrackNum,
@@ -286,7 +296,48 @@ namespace UHPostalService.Migrations
                                             update trackingrecords set trackingrecords.TimeOut = getdate() where trackingrecords.Id=@ident;
                                         end
                                     end");
-           
+            //trigger: automatically set the cost of a package
+            migrationBuilder.Sql(@"		drop trigger if exists cost
+		                            go
+		                            create trigger cost on packages
+		                            after insert
+		                            as begin
+			                            declare @total float;
+			                            declare @W float;
+			                            declare @exp int;
+			                            declare @ident int;
+										declare @depth float;
+										declare @width float;
+										declare @height float;
+			                            select @ident=Id from inserted;
+			                            select @W = packages.Weight, @exp = packages.Express, @depth = packages.Depth, @width = packages.Width, @height = packages.Height from packages where packages.Id =@ident;
+										declare @bound int;
+										select @bound = Id from ShipmentClasses where ExpressCost >= 0;
+											if @exp = 1
+											begin
+											set @total = (select min(ShipmentClasses.ExpressCost) from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength);
+
+											end
+
+											if @exp = 0
+											begin
+											set @total = (select min(ShipmentClasses.GroundCost) from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength);
+											end
+										if @total is null
+										begin
+											if @exp = 1
+											begin
+											set @total = (select max(ExpressCost) from ShipmentClasses);
+											end
+											else
+											begin
+											set @total = (select max(GroundCost) from ShipmentClasses);
+											end
+										end
+										set @total = (@total * @W);	
+			                            update packages set packages.ShipCost = @total where packages.Id = @ident;
+		                            end
+");
 
 
             migrationBuilder.CreateIndex(
@@ -329,9 +380,14 @@ namespace UHPostalService.Migrations
                 column: "StoreID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Packages_AddrToID",
+                name: "IX_Packages_AddressID",
                 table: "Packages",
-                column: "AddrToID");
+                column: "AddressID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Packages_ClassID",
+                table: "Packages",
+                column: "ClassID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Packages_ReceiverID",
@@ -344,6 +400,11 @@ namespace UHPostalService.Migrations
                 column: "SenderID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sales_BuyerID",
+                table: "Sales",
+                column: "BuyerID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sales_ProductID",
                 table: "Sales",
                 column: "ProductID");
@@ -351,13 +412,14 @@ namespace UHPostalService.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Stores_AddressID",
                 table: "Stores",
-                column: "AddressID");
+                column: "AddressID",
+                unique: true,
+                filter: "[AddressID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stores_SupID",
                 table: "Stores",
-                column: "SupID"/*,
-                unique: true*/);
+                column: "SupID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrackingRecords_Destination",
@@ -405,9 +467,6 @@ namespace UHPostalService.Migrations
                 name: "Sales");
 
             migrationBuilder.DropTable(
-                name: "ShipmentClasses");
-
-            migrationBuilder.DropTable(
                 name: "TrackingRecords");
 
             migrationBuilder.DropTable(
@@ -418,6 +477,9 @@ namespace UHPostalService.Migrations
 
             migrationBuilder.DropTable(
                 name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "ShipmentClasses");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
