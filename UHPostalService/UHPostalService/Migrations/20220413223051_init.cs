@@ -341,7 +341,7 @@ namespace UHPostalService.Migrations
             migrationBuilder.Sql(@"drop trigger if exists NewSale
                                     go
                                     create trigger NewSale on sales
-                                    after insert, update
+                                    after insert
                                     as begin
                                         declare @ident int;
 										declare @quant int;
@@ -354,6 +354,37 @@ namespace UHPostalService.Migrations
 										update sales set sales.Total = @tot where sales.ID=@ident;
 										update products set products.Stock = (products.Stock-@quant) where products.Id = @pid;
                                     end
+
+");
+            migrationBuilder.Sql(@"drop trigger if exists UpdateSale
+							go
+							create trigger UpdateSale on sales
+							after update
+							as begin
+								declare @newQuant int;
+								declare @oldQuant int;
+								declare @newPID int;
+								declare @oldPID int;
+								declare @ident int;
+								declare @tot float;
+								declare @cost float;
+								select @ident=Id, @newQuant=Quantity, @newPID=ProductID from inserted;
+								select @oldPID=ProductID, @oldQuant=Quantity from deleted;
+								select @cost=UnitCost from products where products.ID = @newPID;
+								if ((@oldQuant != @newQuant) and (@newPID = @oldPID))
+									begin
+									update products set products.Stock = (products.Stock+(@oldQuant-@newQuant)) where products.Id = @newPID;
+									end
+								if (@newPID != @oldPID)
+									begin
+									update products set products.Stock = (products.Stock+@oldQuant) where products.Id = @oldPID;
+									update products set products.Stock = (products.Stock-@newQuant) where products.Id = @newPID;
+									end
+								set @tot = @newQuant*@cost;
+								update sales set sales.Total = @tot where sales.ID = @ident;
+								update sales set sales.PurchaseDate=getdate() where sales.ID = @ident;
+
+							end
 ");
 
 

@@ -5,11 +5,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Sales</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Buyer:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -23,10 +33,14 @@
                 @Html.DisplayNameFor(model => model.Sale[0].Quantity)
             </th>
             <th>
-               Purchase Date
+               <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                Purchase Date
+                </a>
             </th>
             <th>
-               Total Price
+               <a asp-page="./Index" asp-route-sortOrder="@Model.TotalSort">
+                Total Price
+                </a>
             </th>
             <th></th>
         </tr>

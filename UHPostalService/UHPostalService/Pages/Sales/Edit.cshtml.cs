@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
 
-namespace UHPostalService.Pages.Sales
+namespace UHPostalService.Pages.temp
 {
     public class EditModel : PageModel
     {
@@ -32,13 +32,15 @@ namespace UHPostalService.Pages.Sales
             }
 
             Sale = await _context.Sales
+                .Include(s => s.Buyer)
                 .Include(s => s.Product).FirstOrDefaultAsync(m => m.ID == id);
 
             if (Sale == null)
             {
                 return NotFound();
             }
-           ViewData["ProductID"] = new SelectList(_context.Products, "Id", "Id");
+            ViewData["BuyerID"] = new SelectList(_context.Customers, "Id", "Email");
+            ViewData["ProductID"] = new SelectList(_context.Products, "Id", "Desc");
             return Page();
         }
 
