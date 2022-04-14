@@ -51,3 +51,5 @@
       Son: add accessdenied page; 
 
 4/13: Josh: Did create,details page for sales, redirected tracking record create link, made NewSale trigger, Finished Shop page
+
+4/14: Josh: made UpdateSale trigger, finished sales page
