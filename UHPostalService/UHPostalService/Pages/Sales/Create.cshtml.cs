@@ -15,6 +15,11 @@ namespace UHPostalService.Pages.Sales
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
 
+        public class InputModel {
+            public int Quantity { get; set; }
+            public int ProductID { get; set; }
+
+            };
         public CreateModel(UHPostalService.Data.ApplicationDbContext context)
         {
             _context = context;
@@ -22,22 +27,38 @@ namespace UHPostalService.Pages.Sales
 
         public IActionResult OnGet()
         {
-        ViewData["ProductID"] = new SelectList(_context.Products, "Id", "Id");
+        ViewData["ProductID"] = new SelectList(_context.Products, "Id", "Desc");
             return Page();
         }
 
         [BindProperty]
-        public Sale Sale { get; set; }
+        public InputModel Sale { get; set; }
+        [BindProperty]
+        public Customer Customer { get; set; }
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            DateTime temp = DateTime.Now;
+            //Sale.PurchaseDate = temp;
+            //Sale.Total = 0;
+            var prod = _context.Products.Where(f => (f.Id == Sale.ProductID)).FirstOrDefault();
+            var cust = _context.Customers.Where(f => (f.Email == Customer.Email)).FirstOrDefault();
+            if (cust == null)
+            {
+                _context.Customers.Add(Customer);
+                await _context.SaveChangesAsync();
+                cust = Customer;
+            }
+            //Sale.Product = prod;
+            Sale NewSale = new Models.Sale { PurchaseDate = DateTime.Now, Product = prod, ProductID = Sale.ProductID, Quantity = Sale.Quantity, Total = 0, Buyer = cust };
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Sales.Add(Sale);
+            _context.Sales.Add(NewSale);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

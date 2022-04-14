@@ -21,11 +21,11 @@ namespace UHPostalService.Models
         [Display(Name ="From")]
         public int ? SenderID { get; set; } 
         [ForeignKey("SenderID")]
-        public Customer Sender { get; set; }
+        public Customer? Sender { get; set; }
         [Display(Name ="To")]
         public int ? ReceiverID { get; set; } 
         [ForeignKey("ReceiverID")]
-        public Customer Receiver { get; set; }
+        public Customer? Receiver { get; set; }
         [Display(Name ="Destination")]
         public int AddressID { get; set; } 
         [ForeignKey("AddressID")]

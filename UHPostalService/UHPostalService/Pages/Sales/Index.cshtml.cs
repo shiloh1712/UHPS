@@ -25,7 +25,7 @@ namespace UHPostalService.Pages.Sales
         public async Task OnGetAsync()
         {
             Sale = await _context.Sales
-                .Include(s => s.Product).ToListAsync();
+                .Include(s => s.Product).Include(s=> s.Buyer).ToListAsync();
         }
     }
 }

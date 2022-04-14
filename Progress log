@@ -41,9 +41,13 @@
       
 4/8: Son: combine employee/customer registrationconfirmation/logout pages; add package dimensions to package table; edit trigger autostat
       Josh: edit new package page; edit trigger date changing; add auto cost trigger
-      Andy: edit new store page
 
 4/9: Josh: Changed cost trigger to work with ShippingClass, fixed address create page to work when a duplicate address is added
       Son: Made changes to Package Index
       
 4/10: Josh: Added sorting and filtering by state to the store index
+
+4/11: Andy: edit new store page
+      Son: add accessdenied page; 
+
+4/13: Josh: Did create,details page for sales, redirected tracking record create link, made NewSale trigger, Finished Shop page

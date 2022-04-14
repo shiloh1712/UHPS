@@ -26,7 +26,7 @@ namespace UHPostalService.Models
 		//store working at: initially not assigned a store
 		[Display(Name = "Work Place")]
 		public int ? StoreID { get; set; }
-		public Store Store { get; set; }
+		public Store? Store { get; set; }
 		public Role Role { get; set; }
 
 	}

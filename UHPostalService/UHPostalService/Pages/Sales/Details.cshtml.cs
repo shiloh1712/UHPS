@@ -29,7 +29,7 @@ namespace UHPostalService.Pages.Sales
                 return NotFound();
             }
 
-            Sale = await _context.Sales
+            Sale = await _context.Sales.Include(s=>s.Buyer)
                 .Include(s => s.Product).FirstOrDefaultAsync(m => m.ID == id);
 
             if (Sale == null)

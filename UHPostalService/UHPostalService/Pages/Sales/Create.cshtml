@@ -14,7 +14,8 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Sale.ProductID" class="control-label"></label>
+                <!--<label asp-for="Sale.ProductID" class="control-label"></label>-->
+                <label>Product</label>
                 <select asp-for="Sale.ProductID" class ="form-control" asp-items="ViewBag.ProductID"></select>
             </div>
             <div class="form-group">
@@ -22,6 +23,7 @@
                 <input asp-for="Sale.Quantity" class="form-control" />
                 <span asp-validation-for="Sale.Quantity" class="text-danger"></span>
             </div>
+            <!--
             <div class="form-group">
                 <label asp-for="Sale.PurchaseDate" class="control-label"></label>
                 <input asp-for="Sale.PurchaseDate" class="form-control" />
@@ -31,6 +33,16 @@
                 <label asp-for="Sale.Total" class="control-label"></label>
                 <input asp-for="Sale.Total" class="form-control" />
                 <span asp-validation-for="Sale.Total" class="text-danger"></span>
+            </div>-->
+            <div class="form-group">
+                <label asp-for="Customer.Name" class="control-label"></label>
+                <input asp-for="Customer.Name" class="form-control" />
+                <span asp-validation-for="Customer.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.Email" class="control-label"></label>
+                <input asp-for="Customer.Email" class="form-control" />
+                <span asp-validation-for="Customer.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
