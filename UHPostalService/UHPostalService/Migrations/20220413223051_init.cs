@@ -338,6 +338,23 @@ namespace UHPostalService.Migrations
 			                            update packages set packages.ShipCost = @total where packages.Id = @ident;
 		                            end
 ");
+            migrationBuilder.Sql(@"drop trigger if exists NewSale
+                                    go
+                                    create trigger NewSale on sales
+                                    after insert, update
+                                    as begin
+                                        declare @ident int;
+										declare @quant int;
+										declare @pid int;
+										declare @tot float;
+                                        select @ident=Id, @quant = Quantity, @pid = ProductID from inserted;
+										select @tot = products.UnitCost from products where products.Id = @pid;
+										set @tot = @tot*@quant;
+                                        update sales set sales.PurchaseDate = getdate() where sales.ID=@ident;
+										update sales set sales.Total = @tot where sales.ID=@ident;
+										update products set products.Stock = (products.Stock-@quant) where products.Id = @pid;
+                                    end
+");
 
 
             migrationBuilder.CreateIndex(

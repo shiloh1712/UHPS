@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th>
+                Buyer
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Sale[0].Product)
             </th>
             <th>
@@ -31,6 +34,17 @@
     <tbody>
 @foreach (var item in Model.Sale ) {
         <tr>
+            <td>
+                    @if (item.Buyer == null)
+                    {
+                        <p>(Anonymous)</p>
+
+                    }
+                    else {
+                    @Html.DisplayFor(modelItem => item.Buyer.Name)
+                    }
+                    
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Desc)
             </td>

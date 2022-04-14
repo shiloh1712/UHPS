@@ -12,10 +12,23 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sale.Buyer)
+        </dt>
+        <dd class="col-sm-10">
+            @if (@Html.DisplayFor(model => model.Sale.Buyer.Name) == null) // this doesnt work right now idk why - josh
+                    {
+                        <p>(Anonymous)</p>
+
+                    }
+                    else {
+                    @Html.DisplayFor(model => model.Sale.Buyer.Name)
+                    }
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Sale.Product)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Sale.Product.Id)
+            @Html.DisplayFor(model => model.Sale.Product.Desc)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Sale.Quantity)

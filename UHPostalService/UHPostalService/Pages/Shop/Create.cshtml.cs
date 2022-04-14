@@ -31,13 +31,30 @@ namespace UHPostalService.Pages.Shop
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+
+            var prod = _context.Products.Where(f => (f.Desc == Product.Desc)).FirstOrDefault();
+            if (prod == null)
+            {
+                _context.Products.Add(Product);
+                await _context.SaveChangesAsync();
+                
+            }
+            else
+            {
+                prod.Stock += Product.Stock;
+                await _context.SaveChangesAsync();
+
+            }
+
+
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Products.Add(Product);
-            await _context.SaveChangesAsync();
+            /*_context.Products.Add(Product);
+            await _context.SaveChangesAsync();*/
 
             return RedirectToPage("./Index");
         }

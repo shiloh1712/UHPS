@@ -33,6 +33,9 @@ namespace UHPostalService.Pages.Sales
 
         [BindProperty]
         public InputModel Sale { get; set; }
+        [BindProperty]
+        public Customer Customer { get; set; }
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -41,9 +44,15 @@ namespace UHPostalService.Pages.Sales
             //Sale.PurchaseDate = temp;
             //Sale.Total = 0;
             var prod = _context.Products.Where(f => (f.Id == Sale.ProductID)).FirstOrDefault();
-
+            var cust = _context.Customers.Where(f => (f.Email == Customer.Email)).FirstOrDefault();
+            if (cust == null)
+            {
+                _context.Customers.Add(Customer);
+                await _context.SaveChangesAsync();
+                cust = Customer;
+            }
             //Sale.Product = prod;
-            Sale NewSale = new Models.Sale { PurchaseDate = DateTime.Now, Product = prod, ProductID = Sale.ProductID, Quantity = Sale.Quantity, Total = 0 };
+            Sale NewSale = new Models.Sale { PurchaseDate = DateTime.Now, Product = prod, ProductID = Sale.ProductID, Quantity = Sale.Quantity, Total = 0, Buyer = cust };
             if (!ModelState.IsValid)
             {
                 return Page();
