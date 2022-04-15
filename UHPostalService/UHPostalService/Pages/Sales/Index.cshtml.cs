@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace UHPostalService.Pages.Sales
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
+
     public class IndexModel : PageModel
     {
+
         private readonly UHPostalService.Data.ApplicationDbContext _context;
 
         public IndexModel(UHPostalService.Data.ApplicationDbContext context)
@@ -24,14 +27,25 @@ namespace UHPostalService.Pages.Sales
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
         public IList<Sale> Sale { get;set; }
+        [BindProperty]
 
-        public async Task OnGetAsync(string sortOrder, string searchString)
+        public DateTime From { get; set; }
+        [BindProperty]
+        public DateTime To { get; set; }
+
+        public DateTime Default;
+
+        public decimal? CurrTotal;
+        public async Task OnGetAsync(string sortOrder, string searchString, DateTime start, DateTime end)
         {
             // using System;
             DateSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             TotalSort = sortOrder == "Date" ? "date_desc" : "Date";
 
             CurrentFilter = searchString;
+            From = start;
+            To = end;
+            
             IQueryable<Sale> SaleIdent = from s in _context.Sales
                                                select s;
             /*IQueryable<Store> AddressIdent = from s in _context.Addresses
@@ -43,7 +57,20 @@ namespace UHPostalService.Pages.Sales
 
                                        /*|| s.FirstMidName.Contains(searchString)*/);
             }
+            
+                
+                if (From != Default && To != Default)
+            {
+                SaleIdent = SaleIdent.Where(s => s.PurchaseDate >= From && s.PurchaseDate <= To);
+            }
 
+            CurrTotal = (decimal?)SaleIdent.Sum(s => s.Total);
+            if (CurrTotal == null)
+                CurrTotal = 0;
+            else
+                CurrTotal = decimal.Round((decimal)CurrTotal, 2);
+                //CurrTotal = Math.Round(CurrTotal, 2);
+            
             switch (sortOrder)
             {
                 case "name_desc":

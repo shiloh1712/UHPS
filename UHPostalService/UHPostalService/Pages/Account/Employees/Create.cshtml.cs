@@ -62,6 +62,12 @@ namespace UHPostalService.Pages.Account.Employees
                 ModelState.AddModelError(string.Empty, user.Email + " Alrready exists");
                 return Page();
             }
+            var user2 = _context.Employees.Where(f => f.PhoneNumber == Employee.PhoneNumber).FirstOrDefault();
+            if (user2 != null)
+            {
+                ModelState.AddModelError(string.Empty, user2.PhoneNumber + " Alrready exists");
+                return Page();
+            }
 
             var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress
             && f.City == Address.City

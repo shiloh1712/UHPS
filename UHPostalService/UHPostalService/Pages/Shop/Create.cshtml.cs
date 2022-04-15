@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UHPostalService.Data;
 using UHPostalService.Models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace UHPostalService.Pages.Shop
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
+
     public class CreateModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
