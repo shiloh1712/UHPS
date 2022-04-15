@@ -23,8 +23,8 @@ namespace UHPostalService.Pages.Stores
 
         [BindProperty]
         public Store Store { get; set; }
-        [BindProperty]
-        public Address Address { get; set; }
+        //[BindProperty]
+        //public Address Address { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -42,7 +42,7 @@ namespace UHPostalService.Pages.Stores
                 return NotFound();
             }
            ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "Id");
-           ViewData["SupID"] = new SelectList(_context.Employees, "Id", "Id");
+            ViewData["SupID"] = new SelectList(_context.Employees.Where(e => (e.Role == Role.Supervisor || e.Role == Role.Admin)), "Id", "Name");
             return Page();
         }
 
@@ -55,7 +55,7 @@ namespace UHPostalService.Pages.Stores
                 return Page();
             }
 
-            _context.Attach(Store).State = EntityState.Modified;
+            _context.Update(Store).State = EntityState.Modified;
 
             try
             {
