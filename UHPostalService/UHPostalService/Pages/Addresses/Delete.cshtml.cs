@@ -50,7 +50,9 @@ namespace UHPostalService.Pages.Addresses
 
             if (Address != null)
             {
-                _context.Addresses.Remove(Address);
+                //_context.Addresses.Remove(Address);
+                Address.Deleted = true;
+
                 await _context.SaveChangesAsync();
             }
 

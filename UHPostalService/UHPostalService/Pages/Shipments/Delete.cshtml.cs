@@ -53,7 +53,8 @@ namespace UHPostalService.Pages.Shipments
 
             if (Package != null)
             {
-                _context.Packages.Remove(Package);
+                // _context.Packages.Remove(Package);
+                Package.Deleted = true;
                 await _context.SaveChangesAsync();
             }
 

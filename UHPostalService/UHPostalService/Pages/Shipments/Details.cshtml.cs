@@ -21,7 +21,7 @@ namespace UHPostalService.Pages.Shipments
         }
 
         public Package Package { get; set; }
-
+        public IList<TrackingRecord> TrackingRecord { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -37,6 +37,22 @@ namespace UHPostalService.Pages.Shipments
             if (Package == null)
             {
                 return NotFound();
+            }
+            if (id != null)
+            {
+                TrackingRecord = await _context.TrackingRecords
+                .Include(t => t.Address)
+                .Include(t => t.Employee)
+                .Include(t => t.Package)
+                .Include(t => t.Store).Where(f => f.TrackNum == id).ToListAsync();
+            }
+            else
+            {
+                TrackingRecord = await _context.TrackingRecords
+                    .Include(t => t.Address)
+                    .Include(t => t.Employee)
+                    .Include(t => t.Package)
+                    .Include(t => t.Store).ToListAsync();
             }
             return Page();
         }

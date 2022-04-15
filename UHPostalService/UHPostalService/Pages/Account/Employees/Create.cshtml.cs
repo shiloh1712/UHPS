@@ -82,16 +82,26 @@ namespace UHPostalService.Pages.Account.Employees
             }
             Employee newemp = new Models.Employee { Name = Employee.Name, PhoneNumber = Employee.PhoneNumber, Email = Employee.Email, Password = Employee.Password, AddressID = addr.Id, Role = Role.Employee };
             //Employee.AddressID = Address.Id;
-
+            var check = _context.Employees.Where(f => (f.AddressID == newemp.AddressID
+            && f.Email == newemp.Email
+            && f.PhoneNumber == newemp.PhoneNumber
+            && f.Deleted == true)).FirstOrDefault();
             if (!ModelState.IsValid)
             {
                 return Page();
             }
             else
             {
-
-                _context.Employees.Add(newemp);
-                await _context.SaveChangesAsync();
+                if (check != null)
+                {
+                    check.Deleted = false;
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    _context.Employees.Add(newemp);
+                    await _context.SaveChangesAsync();
+                }
 
                 HttpContext.Session.SetString("userID", newemp.Id.ToString());
                 HttpContext.Session.SetString("role", "Employee");

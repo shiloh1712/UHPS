@@ -68,16 +68,19 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Sale ) {
-        <tr>
-            <td>
-                    @if (item.Buyer == null)
-                    {
-                        <p>(Anonymous)</p>
+            if (!item.Deleted)
+            {
+                <tr>
+                    <td>
+                        @if (item.Buyer == null)
+                        {
+                            <p>(Anonymous)</p>
 
-                    }
-                    else {
-                    @Html.DisplayFor(modelItem => item.Buyer.Name)
-                    }
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Buyer.Name)
+                        }
                     
             </td>
             <td>
@@ -97,7 +100,7 @@
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
-        </tr>
+        </tr>}
 }
     </tbody>
 </table>

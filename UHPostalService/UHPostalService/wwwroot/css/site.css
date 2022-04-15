@@ -64,3 +64,11 @@ body {
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
+
+.background {
+    background-color: red;
+}
+
+.text {
+    color: white;
+}

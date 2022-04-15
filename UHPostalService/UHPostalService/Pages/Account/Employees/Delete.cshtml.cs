@@ -52,7 +52,8 @@ namespace UHPostalService.Pages.Account.Employees
 
             if (Employee != null)
             {
-                _context.Employees.Remove(Employee);
+                //_context.Employees.Remove(Employee);
+                Employee.Deleted = true;
                 await _context.SaveChangesAsync();
             }
 

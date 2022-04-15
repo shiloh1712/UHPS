@@ -41,6 +41,12 @@ namespace UHPostalService.Pages.Shop
                 await _context.SaveChangesAsync();
                 
             }
+            else if(prod.Deleted == true)
+            {
+                prod.Deleted = false;
+                prod.Stock = Product.Stock;
+                await _context.SaveChangesAsync();
+            }
             else
             {
                 prod.Stock += Product.Stock;

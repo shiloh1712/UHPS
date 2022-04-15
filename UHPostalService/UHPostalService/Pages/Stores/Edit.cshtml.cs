@@ -45,7 +45,7 @@ namespace UHPostalService.Pages.Stores
                 return NotFound();
             }
            ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "Id");
-            ViewData["SupID"] = new SelectList(_context.Employees.Where(e => (e.Role == Role.Supervisor || e.Role == Role.Admin)), "Id", "Name");
+            ViewData["SupID"] = new SelectList(_context.Employees.Where(e => ((e.Role == Role.Supervisor || e.Role == Role.Admin) && e.Deleted == false)), "Id", "Name");
             return Page();
         }
 

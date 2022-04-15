@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UHPostalService.Models
@@ -19,6 +20,8 @@ namespace UHPostalService.Models
         [Display(Name = "Home Address")]
         public int? AddressID { get; set; }
         //[ForeignKey("AddressID")]
-        public Address? Address { get; set; }
+        public Address Address { get; set; }
+        [DefaultValue(false)]
+        public bool Deleted { get; set; }
     }
 }

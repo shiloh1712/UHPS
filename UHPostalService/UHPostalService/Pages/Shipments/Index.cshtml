@@ -51,8 +51,10 @@
     </thead>
     <tbody>
         @foreach (var item in Model.Package) {
-            <tr>
-                <td>
+            if (!item.Deleted)
+            {
+                <tr>
+                    <td>
                     @Html.DisplayFor(modelItem => item.Sender.Name)
                 </td>
                 <td>
@@ -81,7 +83,7 @@
                     <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
-            </tr>
+            </tr>}
         }
     </tbody>
 </table>
