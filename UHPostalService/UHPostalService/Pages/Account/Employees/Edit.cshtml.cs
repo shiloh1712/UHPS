@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace UHPostalService.Pages.Account.Employees
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Admin,Supervisor")]
+
     public class EditModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
@@ -39,8 +41,8 @@ namespace UHPostalService.Pages.Account.Employees
             {
                 return NotFound();
             }
-           ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "Id");
-           ViewData["StoreID"] = new SelectList(_context.Stores, "Id", "Id");
+           ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "StreetAddress");
+           ViewData["StoreID"] = new SelectList(_context.Stores, "Id", "Address.StreetAddress");
             return Page();
         }
 

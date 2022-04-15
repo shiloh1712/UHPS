@@ -5,12 +5,33 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Sales</h1>
+<h1>Sales - Current Total: @Model.CurrTotal</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
-</p>
+</p><!--
 <form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Buyer:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>-->
+<form asp-page="./Index" method="get">
+<div class="col-md-4">
+<div class="form-group">
+                <label asp-for="From" class="control-label"></label>
+                <input type="date" name="start" value="@Model.From" class="form-control" />
+                <span asp-validation-for="From" class="text-danger"></span>
+            
+                <label asp-for="To" class="control-label"></label>
+                <input type="date" name="end" value="@Model.To" class="form-control" />
+                <span asp-validation-for="To" class="text-danger"></span>   
+            </div>
+            </div>
     <div class="form-actions no-color">
         <p>
             Find by Buyer:

@@ -9,9 +9,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UHPostalService.Pages.Stores
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
+
     public class EditModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
