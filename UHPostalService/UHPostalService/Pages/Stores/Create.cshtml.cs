@@ -61,14 +61,24 @@ namespace UHPostalService.Pages.Stores
                 addr = Address;
             }
             Store newstore = new Models.Store { PhoneNumber = Store.PhoneNumber, AddressID = addr.Id, Address = addr, SupID = Store.SupID };
-
+            var check = _context.Stores.Where(f=>(f.PhoneNumber == Store.PhoneNumber
+            && f.Address == addr
+            && f.Deleted == true)).FirstOrDefault();
             if (!ModelState.IsValid)
             {
                 return Page();
             }
             else
             {
-                _context.Stores.Add(newstore);
+                if(check != null)
+                {
+                    check.Deleted = false;
+                }
+                else
+                {
+                    _context.Stores.Add(newstore);
+                }
+                
                 await _context.SaveChangesAsync();
 
                 return RedirectToPage("./Index");

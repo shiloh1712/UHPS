@@ -51,7 +51,9 @@ namespace UHPostalService.Pages.Sales
 
             if (Sale != null)
             {
-                _context.Sales.Remove(Sale);
+                //_context.Sales.Remove(Sale);
+                Sale.Deleted = true;
+                Sale.Product.Stock += Sale.Quantity;
                 await _context.SaveChangesAsync();
             }
 

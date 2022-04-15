@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace UHPostalService.Models
@@ -18,6 +19,8 @@ namespace UHPostalService.Models
         public string State { get; set; }
         [StringLength(5)]
         public string Zipcode { get; set; }
+        [DefaultValue(false)]
+        public bool Deleted { get; set; }
 
         public override string ToString()
         {

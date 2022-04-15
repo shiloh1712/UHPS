@@ -52,6 +52,12 @@ namespace UHPostalService.Pages.Account.Customers
                 ModelState.AddModelError(string.Empty, user.Email + " Alrready exists");
                 return Page();
             }
+            var user2 = _context.Customers.Where(f => f.PhoneNumber == Customer.PhoneNumber).FirstOrDefault();
+            if (user2 != null)
+            {
+                ModelState.AddModelError(string.Empty, user2.PhoneNumber + " alrready exists");
+                return Page();
+            }
 
             var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress 
             && f.City == Address.City
@@ -66,17 +72,26 @@ namespace UHPostalService.Pages.Account.Customers
 
             }
             Customer.AddressID = addr.Id;
-            
+            var check = _context.Customers.Where(f => (f.AddressID == Customer.AddressID
+            && f.Email == Customer.Email
+            && f.PhoneNumber == Customer.PhoneNumber
+            && f.Deleted == true)).FirstOrDefault();
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            
             else
             {
+                if (check != null && check.Deleted == true)
+                {
+                    Customer = check;
+                    Customer.Deleted = false;
 
-                _context.Customers.Add(Customer);
+                }
+                else
+                {
+                    _context.Customers.Add(Customer);
+                }
                 await _context.SaveChangesAsync();
                 
                 HttpContext.Session.SetString("userID", Customer.Id.ToString());

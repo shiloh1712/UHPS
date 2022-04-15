@@ -54,7 +54,8 @@ namespace UHPostalService.Pages.Tracking
 
             if (TrackingRecord != null)
             {
-                _context.TrackingRecords.Remove(TrackingRecord);
+                //_context.TrackingRecords.Remove(TrackingRecord);
+                TrackingRecord.Deleted = true;
                 await _context.SaveChangesAsync();
             }
 
