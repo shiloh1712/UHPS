@@ -12,34 +12,17 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <!--<div class="form-group">
-                <label asp-for="TrackingRecord.EmployeeId" class="control-label"></label>
-                <select asp-for="TrackingRecord.EmployeeId" class ="form-control" asp-items="ViewBag.EmployeeId"></select>
-            </div>-->
+            
             <div class="form-group">
                 <label asp-for="TrNums" class="control-label">Tracking Numbers</label>
                 <input asp-for="TrNums" class="form-control" />
                 <span asp-validation-for="TrNums" class="text-danger"></span>
-            <</div><div class="form-group">
+            </div>
+            <div class="form-group">
                 <label asp-for="nextstop" class="control-label"></label>
-                <select asp-for="nextstop" class ="form-control" asp-items="ViewBag.Destination"></select>
+                <select asp-for="nextstop" class ="form-control" asp-items="ViewBag.NextStops">ab</select>
             </div>
 
-           <!--<div class="form-group">
-                <label asp-for="TrackingRecord.StoreId" class="control-label"></label>
-                <select asp-for="TrackingRecord.StoreId" class ="form-control" asp-items="ViewBag.StoreId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="TrackingRecord.TimeIn" class="control-label"></label>
-                <input asp-for="TrackingRecord.TimeIn" class="form-control" />
-                <span asp-validation-for="TrackingRecord.TimeIn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TrackingRecord.TimeOut" class="control-label"></label>
-                <input asp-for="TrackingRecord.TimeOut" class="form-control" />
-                <span asp-validation-for="TrackingRecord.TimeOut" class="text-danger"></span>
-            </div>
-            -->
             <div class="form-group">
                 <input type="submit" value="Check In" class="btn btn-primary" />
             </div>
@@ -48,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="/Shipments/Index">Back to List</a>
 </div>
 
 @section Scripts {
