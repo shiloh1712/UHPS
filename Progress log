@@ -51,7 +51,7 @@
       Son: add accessdenied page; 
 
 4/13: Josh: Did create,details page for sales, redirected tracking record create link, made NewSale trigger, Finished Shop page
-      Son: add checkin page
+      Son: add checkin page; add adminreplacesupervisor trigger
 
 4/14: Josh: made UpdateSale trigger, finished sales page
       Son: fix publishing issues
