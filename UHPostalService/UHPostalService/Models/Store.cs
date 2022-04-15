@@ -15,5 +15,9 @@ namespace UHPostalService.Models
         public int ? AddressID { get; set; }
         public Address? Address { get; set; }
 
+        public override string ToString()
+        {
+            return $"Store {Id}: {Address.ToString()}";
+        }
     }
 }

@@ -26,12 +26,36 @@ namespace UHPostalService.Pages.Tracking
         public string TrNums { get; set; }
         [BindProperty]
         public int nextstop { get; set; }
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync(int? trnum)
         {
-            string query = "SELECT Addresses.ID as ID, StreetAddress + City as Text  FROM Addresses, Stores WHERE Stores.AddressID = Addresses.ID";
-            ViewData["Destination"] = new SelectList(_context.Addresses.FromSqlRaw(query).ToList(), "Id", "Text");
-            var testlist = new SelectList(_context.Employees.Where(e => (e.Role == Role.Supervisor || e.Role == Role.Admin)), "Id", "Name");
+            if (trnum == null)
+            {
+                return NotFound();
+            }
+            int CurrentStore = 1;
+            //int CurrentStore = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+
+            var TrackingRecord = _context.TrackingRecords.Where(m => m.TrackNum == trnum && m.TimeOut == null && m.StoreId == CurrentStore)
+                .Include(t => t.Address)
+                .Include(t => t.Employee)
+                .Include(t => t.Package)
+                .Include(t => t.Store);
             
+            if (TrackingRecord == null)
+            {
+                return NotFound();
+            }
+            int destAddrID = _context.Packages.Select(p=>p.AddressID).FirstOrDefault();
+            SelectListItem destination = new SelectListItem() { Value = destAddrID.ToString(), Text="Destination"};
+
+            var NextStops = new SelectList(_context.Stores.Where(s => s.Id != CurrentStore).Include(s=>s.Address).Select(s => new
+            {
+                AddressID = s.AddressID,
+                Text = $"Store #{s.Id}: {s.Address.ToString()}"
+            }), "AddressID", "Text").Append(destination);
+
+            ViewData["NextStops"] = NextStops;
+
             return Page();
         }
         
