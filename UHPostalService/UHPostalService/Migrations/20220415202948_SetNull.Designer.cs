@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UHPostalService.Data;
 
@@ -11,9 +12,10 @@ using UHPostalService.Data;
 namespace UHPostalService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220415202948_SetNull")]
+    partial class SetNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,9 +36,6 @@ namespace UHPostalService.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("State")
                         .IsRequired()
@@ -72,9 +71,6 @@ namespace UHPostalService.Migrations
                     b.Property<int?>("AddressID")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -109,9 +105,6 @@ namespace UHPostalService.Migrations
 
                     b.Property<int>("AddressID")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -166,9 +159,6 @@ namespace UHPostalService.Migrations
                     b.Property<int>("ClassID")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<float>("Depth")
                         .HasColumnType("real");
 
@@ -220,9 +210,6 @@ namespace UHPostalService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Desc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -248,9 +235,6 @@ namespace UHPostalService.Migrations
 
                     b.Property<int?>("BuyerID")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("ProductID")
                         .HasColumnType("int");
@@ -280,9 +264,6 @@ namespace UHPostalService.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Desc")
                         .IsRequired()
@@ -319,9 +300,6 @@ namespace UHPostalService.Migrations
                     b.Property<int?>("AddressID")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -347,9 +325,6 @@ namespace UHPostalService.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("Destination")
                         .HasColumnType("int");
@@ -387,8 +362,7 @@ namespace UHPostalService.Migrations
                 {
                     b.HasOne("UHPostalService.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("AddressID");
 
                     b.Navigation("Address");
                 });
@@ -403,8 +377,7 @@ namespace UHPostalService.Migrations
 
                     b.HasOne("UHPostalService.Models.Store", "Store")
                         .WithMany()
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("StoreID");
 
                     b.Navigation("Address");
 
@@ -427,13 +400,12 @@ namespace UHPostalService.Migrations
 
                     b.HasOne("UHPostalService.Models.Customer", "Receiver")
                         .WithMany()
-                        .HasForeignKey("ReceiverID")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("ReceiverID");
 
                     b.HasOne("UHPostalService.Models.Customer", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderID")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Destination");
 
@@ -448,13 +420,11 @@ namespace UHPostalService.Migrations
                 {
                     b.HasOne("UHPostalService.Models.Customer", "Buyer")
                         .WithMany()
-                        .HasForeignKey("BuyerID")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("BuyerID");
 
                     b.HasOne("UHPostalService.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("ProductID");
 
                     b.Navigation("Buyer");
 
@@ -465,13 +435,11 @@ namespace UHPostalService.Migrations
                 {
                     b.HasOne("UHPostalService.Models.Address", "Address")
                         .WithOne()
-                        .HasForeignKey("UHPostalService.Models.Store", "AddressID")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("UHPostalService.Models.Store", "AddressID");
 
                     b.HasOne("UHPostalService.Models.Employee", "Supervisor")
                         .WithMany()
-                        .HasForeignKey("SupID")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("SupID");
 
                     b.Navigation("Address");
 
@@ -482,13 +450,11 @@ namespace UHPostalService.Migrations
                 {
                     b.HasOne("UHPostalService.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("Destination")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("Destination");
 
                     b.HasOne("UHPostalService.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("UHPostalService.Models.Store", "Store")
                         .WithMany()

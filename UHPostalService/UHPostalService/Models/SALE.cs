@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace UHPostalService.Models
 {
@@ -7,7 +8,7 @@ namespace UHPostalService.Models
         [Key]
         public int ID { get; set; }
         public int ?ProductID { get; set; }
-        public Product? Product { get; set; }
+        public Product Product { get; set; }
         [Range(1,100)]
         public int Quantity { get; set; }
         public DateTime PurchaseDate { get; set; }
@@ -15,5 +16,7 @@ namespace UHPostalService.Models
         public Customer? Buyer { get; set; }
         [DataType(DataType.Currency)]
         public float? Total { get; set; }
+        [DefaultValue(false)]
+        public bool Deleted { get; set; }
     }
 }

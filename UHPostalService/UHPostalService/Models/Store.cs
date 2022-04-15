@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UHPostalService.Models
@@ -11,9 +12,11 @@ namespace UHPostalService.Models
         public string PhoneNumber { get; set; }
         [Display(Name = "Supervisor")]
         public int? SupID { get; set; } 
-        public Employee? Supervisor { get; set; }
+        public Employee Supervisor { get; set; }
         public int ? AddressID { get; set; }
-        public Address? Address { get; set; }
+        public Address Address { get; set; }
+        [DefaultValue(false)]
+        public bool Deleted { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace UHPostalService.Models
 {
@@ -14,6 +15,8 @@ namespace UHPostalService.Models
         public float GroundCost { get; set; }
         [DataType(DataType.Currency)]
         public float ExpressCost { get; set; }
+        [DefaultValue(false)]
+        public bool Deleted { get; set; }
 
     }
 }

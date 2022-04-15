@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace UHPostalService.Models
 {
@@ -13,5 +14,7 @@ namespace UHPostalService.Models
         public float UnitCost { get; set; }
         [Range(0, 1000)]
         public int Stock { get; set; }
+        [DefaultValue(false)]
+        public bool Deleted { get; set; }
     }
 }

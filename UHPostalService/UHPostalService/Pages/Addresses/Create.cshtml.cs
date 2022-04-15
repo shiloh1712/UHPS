@@ -43,6 +43,11 @@ namespace UHPostalService.Pages.Addresses
                 addr = Address;
 
             }
+            else if(addr.Deleted == true)
+            {
+                addr.Deleted = false;
+                await _context.SaveChangesAsync();
+            }
 
             if (!ModelState.IsValid)
             {

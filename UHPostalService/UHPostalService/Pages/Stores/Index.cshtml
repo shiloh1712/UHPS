@@ -60,8 +60,10 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Store) {
-        <tr>
-            <td>
+            if (!item.Deleted)
+            {
+                <tr>
+                    <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
@@ -84,7 +86,7 @@
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
-        </tr>
+        </tr>}
 }
     </tbody>
 </table>

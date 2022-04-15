@@ -51,7 +51,8 @@ namespace UHPostalService.Pages.Account.Customers
 
             if (Customer != null)
             {
-                _context.Customers.Remove(Customer);
+                //_context.Customers.Remove(Customer);
+                Customer.Deleted = true;
                 await _context.SaveChangesAsync();
             }
 

@@ -55,7 +55,8 @@ namespace UHPostalService.Pages.Stores
 
             if (Store != null)
             {
-                _context.Stores.Remove(Store);
+                //_context.Stores.Remove(Store);
+                Store.Deleted = true;
                 await _context.SaveChangesAsync();
             }
 

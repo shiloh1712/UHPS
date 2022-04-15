@@ -52,7 +52,9 @@ namespace UHPostalService.Pages.Shop
 
             if (Product != null)
             {
-                _context.Products.Remove(Product);
+                //_context.Products.Remove(Product);
+                Product.Deleted = true;
+                Product.Stock = 0;
                 await _context.SaveChangesAsync();
             }
 
