@@ -53,3 +53,5 @@
 4/13: Josh: Did create,details page for sales, redirected tracking record create link, made NewSale trigger, Finished Shop page
 
 4/14: Josh: made UpdateSale trigger, finished sales page
+
+4/15: Josh: Made multi choice filter on store page, added authentication to create,edit,delete on shop and store pages, added authetication to Employee and Sales index page
