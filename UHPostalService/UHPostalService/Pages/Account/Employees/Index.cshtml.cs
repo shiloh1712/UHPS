@@ -21,14 +21,64 @@ namespace UHPostalService.Pages.Account.Employees
         {
             _context = context;
         }
+        public string NameSort { get; set; }
+        public string EmailSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
         public IList<Employee> Employee { get;set; }
+        public int test { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder, string searchString, int filterby)
         {
-            Employee = await _context.Employees
-                .Include(e => e.Address)
-                .Include(e => e.Store).ToListAsync();
+            // using System;
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            EmailSort = sortOrder == "Date" ? "date_desc" : "Date";
+            test = filterby;
+            CurrentFilter = searchString;
+            IQueryable<Employee> EmployeeIdent = from s in _context.Employees
+                                                 select s;
+            /*IQueryable<Store> AddressIdent = from s in _context.Addresses
+                                           select s;*/
+
+            if (!String.IsNullOrEmpty(searchString) && test == 2)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.Email.Contains(searchString)
+
+                                       /*|| s.FirstMidName.Contains(searchString)*/);
+            }
+            if (!String.IsNullOrEmpty(searchString) && test == 1)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.Name.Contains(searchString)
+
+                                       /*|| s.FirstMidName.Contains(searchString)*/);
+            }
+            if (!String.IsNullOrEmpty(searchString) && test == 3)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.PhoneNumber.Contains(searchString)
+
+                                       /*|| s.FirstMidName.Contains(searchString)*/);
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Email);
+                    break;
+                case "date_desc":
+                    EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.Email);
+                    break;
+                default:
+                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Name);
+                    break;
+            }
+
+            Employee = await EmployeeIdent.
+                Include(s=>s.Address).
+                Include(s=>s.Store).ToListAsync();
         }
     }
 }
