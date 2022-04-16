@@ -14,7 +14,9 @@ namespace UHPostalService.Models
         public Package Package { get; set; }
         public int? StoreId { get; set; }
         public Store Store { get; set; }
+        [Display(Name = "From")]
         public DateTime? TimeIn { get; set; }
+        [Display(Name = "To")]
         public DateTime? TimeOut { get; set; } 
         public int? Destination { get; set; }
         public Address Address { get; set; }
