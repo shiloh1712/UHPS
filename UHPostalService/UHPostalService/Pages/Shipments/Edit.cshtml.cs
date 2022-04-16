@@ -139,18 +139,12 @@ namespace UHPostalService.Pages.Shipments
                 }
                 pkgToUpdate.AddressID = addr.Id;
             }
-            if (!pkgToUpdate.Description.Equals(modifiedPkg.Description))
-                pkgToUpdate.Description = modifiedPkg.Description;
-            if (pkgToUpdate.Weight != modifiedPkg.Weight)
-                pkgToUpdate.Weight = modifiedPkg.Weight;
-            if (pkgToUpdate.Height != modifiedPkg.Height)
-                pkgToUpdate.Height = modifiedPkg.Height;
-            if (pkgToUpdate.Width != modifiedPkg.Width)
-                pkgToUpdate.Width = modifiedPkg.Width;
-            if (pkgToUpdate.Depth != modifiedPkg.Depth)
-                pkgToUpdate.Depth = modifiedPkg.Depth;
-            if (pkgToUpdate.Express != modifiedPkg.Express)
-                pkgToUpdate.Express = modifiedPkg.Express;
+            pkgToUpdate.Description = modifiedPkg.Description;
+            pkgToUpdate.Weight = modifiedPkg.Weight;
+            pkgToUpdate.Height = modifiedPkg.Height;
+            pkgToUpdate.Width = modifiedPkg.Width;
+            pkgToUpdate.Depth = modifiedPkg.Depth;
+            pkgToUpdate.Express = modifiedPkg.Express;
 
 
             _context.Attach(pkgToUpdate).State = EntityState.Modified;

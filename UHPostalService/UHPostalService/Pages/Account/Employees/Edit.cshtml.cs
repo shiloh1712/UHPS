@@ -50,6 +50,7 @@ namespace UHPostalService.Pages.Account.Employees
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            Employee.Address = _context.Addresses.Where(e=>e.Id == Employee.AddressID).FirstOrDefault();
             if (!ModelState.IsValid)
             {
                 return Page();

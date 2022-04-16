@@ -10,18 +10,40 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by 
+                <!--<label asp-for="test" class="control-label"></label>-->
+                <!--<input asp-for="Address.State" class="form-control" />-->
+                <select asp-for="test" name="filterby" value="@Model.test" class ="form-group">
+					<option value="1">Name</option>
+					<option value="2">Email</option>
+                    <option value="3">Phone Number</option>
+				</select>
+				<span asp-validation-for="test" class="text-danger"></span>
+
+            
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
                 @Html.DisplayNameFor(model => model.Customer[0].Name)
-            </th>
+                </a>            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Customer[0].PhoneNumber)
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
                 @Html.DisplayNameFor(model => model.Customer[0].Email)
-            </th>
+                </a>            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Customer[0].Address)
             </th>
