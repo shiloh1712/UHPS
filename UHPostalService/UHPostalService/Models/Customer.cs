@@ -28,5 +28,12 @@ namespace UHPostalService.Models
         {
             return Name.Equals(target.Name) && PhoneNumber.Equals(target.PhoneNumber) && Email.Equals(target.Email) && AddressID == target.AddressID;
         }
+        public void Copy(Customer source)
+        {
+            Name = source.Name;
+            PhoneNumber = source.PhoneNumber;
+            AddressID = source.AddressID;
+            Address = source.Address;
+        }
     }
 }
