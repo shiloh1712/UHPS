@@ -33,13 +33,13 @@ namespace UHPostalService.Pages.Shipments
             public float Height { get; set; }
             public float Depth { get; set; }
         }
-        public IActionResult OnGet()
+        /*public IActionResult OnGet()
         {
         ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "Id");
         ViewData["ReceiverID"] = new SelectList(_context.Customers, "Id", "Id");
         ViewData["SenderID"] = new SelectList(_context.Customers, "Id", "Id");
             return Page();
-        }
+        }*/
 
         [BindProperty]
         public InputModel Package { get; set; }

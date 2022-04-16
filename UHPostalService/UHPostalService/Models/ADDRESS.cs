@@ -26,6 +26,9 @@ namespace UHPostalService.Models
         {
             return $"{StreetAddress}, {City}, {State}, {Zipcode}";
         }
-
+        public bool Equals(Address target)
+        {
+            return StreetAddress.Equals(target.StreetAddress) && City.Equals(target.City) && State.Equals(target.State) && Zipcode.Equals(target.Zipcode) ;
+        }
     }
 }
