@@ -58,3 +58,5 @@
 
 4/15: Josh: Made multi choice filter on store page, added authentication to create,edit,delete on shop and store pages, added authetication to Employee and Sales index page, added delete features, changed edit pages (not yet working), added sorting and filtering to employees and customers
       Son: add checkout page
+
+4/16: Son: edit shipment; fix bug create sale 
