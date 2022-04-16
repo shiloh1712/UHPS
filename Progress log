@@ -56,5 +56,5 @@
 4/14: Josh: made UpdateSale trigger, finished sales page
       Son: fix publishing issues
 
-4/15: Josh: Made multi choice filter on store page, added authentication to create,edit,delete on shop and store pages, added authetication to Employee and Sales index page, added delete features
+4/15: Josh: Made multi choice filter on store page, added authentication to create,edit,delete on shop and store pages, added authetication to Employee and Sales index page, added delete features, changed edit pages (not yet working), added sorting and filtering to employees and customers
       Son: add checkout page

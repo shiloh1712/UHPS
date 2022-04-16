@@ -11,30 +11,21 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <!--<form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Package.Id" />
+            
             <div class="form-group">
-                <label asp-for="Package.SenderID" class="control-label"></label>
-                <select asp-for="Package.SenderID" class="form-control" asp-items="ViewBag.SenderID"></select>
-                <span asp-validation-for="Package.SenderID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Package.ReceiverID" class="control-label"></label>
-                <select asp-for="Package.ReceiverID" class="form-control" asp-items="ViewBag.ReceiverID"></select>
-                <span asp-validation-for="Package.ReceiverID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Package.AddressID" class="control-label"></label>
-                <select asp-for="Package.AddressID" class="form-control" asp-items="ViewBag.AddressID"></select>
-                <span asp-validation-for="Package.AddressID" class="text-danger"></span>
+                <label asp-for="Package.ClassID" class="control-label"></label>
+                <select asp-for="Package.ClassID" class="form-control" asp-items="ViewBag.ClassID"></select>
+                <span asp-validation-for="Package.ClassID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Package.Description" class="control-label"></label>
                 <input asp-for="Package.Description" class="form-control" />
                 <span asp-validation-for="Package.Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div hidden class="form-group">
                 <label asp-for="Package.Status" class="control-label"></label>
                 <select asp-for="Package.Status" class="form-control"></select>
                 <span asp-validation-for="Package.Status" class="text-danger"></span>
@@ -44,18 +35,154 @@
                 <input asp-for="Package.Weight" class="form-control" />
                 <span asp-validation-for="Package.Weight" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Package.Express" /> @Html.DisplayNameFor(model => model.Package.Express)
-                </label>
+            <div class="form-group">
+                <label asp-for="Package.Width" class="control-label"></label>
+                <input asp-for="Package.Width" class="form-control" />
+                <span asp-validation-for="Package.Width" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Package.Height" class="control-label"></label>
+                <input asp-for="Package.Height" class="form-control" />
+                <span asp-validation-for="Package.Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Package.Depth" class="control-label"></label>
+                <input asp-for="Package.Depth" class="form-control" />
+                <span asp-validation-for="Package.Depth" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Package.Express" /> //Html.DisplayNameFor(model => model.Package.Express)
+                </label>
+            </div>
+            <div hidden class="form-group">-->
+            <!--<div class="form-group">
                 <label asp-for="Package.ShipCost" class="control-label"></label>
                 <input asp-for="Package.ShipCost" class="form-control" />
                 <span asp-validation-for="Package.ShipCost" class="text-danger"></span>
+            </div>-->
+            <!--<div class="form-group">
+                <label asp-for="Package.SenderID" class="control-label"></label>
+                <select asp-for="Package.SenderID" class="form-control" asp-items="ViewBag.SenderID"></select>
+                <span asp-validation-for="Package.SenderID" class="text-danger"></span>
+            </div>-->
+            <!--<div>
+                <a asp-page="/Account/Customers/Edit" asp-route-id="Model.Package.SenderID">Edit Sender</a>
+            </div>
+            <div class="form-group">
+                <label asp-for="Package.ReceiverID" class="control-label"></label>
+                <select asp-for="Package.ReceiverID" class="form-control" asp-items="ViewBag.ReceiverID"></select>
+                <span asp-validation-for="Package.ReceiverID" class="text-danger"></span>
+            </div>
+            <div>
+                <a asp-page="/Account/Customers/Edit" asp-route-id="Model.Package.ReceiverID">Edit Receiver</a>
+            </div>
+            <div class="form-group">
+                <label asp-for="Package.AddressID" class="control-label"></label>
+                <select asp-for="Package.AddressID" class="form-control" asp-items="ViewBag.AddressID"></select>
+                <span asp-validation-for="Package.AddressID" class="text-danger"></span>
+            </div>-->
+            <!--<div>
+                <a asp-page="/Addresses/Edit" asp-route-id="Model.Package.AddressID">Edit Address</a>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>-->
+        <form method="post">   
+            <input asp-for="modifiedPkg.Id" type="hidden"/>
+            <h2>Sender</h2>
+            <div class="form-group">
+                <label asp-for="From.Name" class="control-label"></label>
+                <input asp-for="From.Name" class="form-control" />
+                <span asp-validation-for="From.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="From.PhoneNumber" class="control-label"></label>
+                <input asp-for="From.PhoneNumber" class="form-control" />
+                <span asp-validation-for="From.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="From.Email" class="control-label"></label>
+                <input asp-for="From.Email" class="form-control" />
+                <span asp-validation-for="From.Email" class="text-danger"></span>
+            </div>
+            <hr />
+            <h2>Receiver</h2>
+            <div class="form-group">
+                <label asp-for="To.Name" class="control-label"></label>
+                <input asp-for="To.Name" class="form-control" />
+                <span asp-validation-for="To.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="To.PhoneNumber" class="control-label"></label>
+                <input asp-for="To.PhoneNumber" class="form-control" />
+                <span asp-validation-for="To.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="To.Email" class="control-label"></label>
+                <input asp-for="To.Email" class="form-control" />
+                <span asp-validation-for="To.Email" class="text-danger"></span>
+            </div>
+            <hr />
+            <h2>Destination</h2>
+            <div class="form-group">
+                <label asp-for="Address.StreetAddress" class="control-label"></label>
+                <input asp-for="Address.StreetAddress" class="form-control" />
+                <span asp-validation-for="Address.StreetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.City" class="control-label"></label>
+                <input asp-for="Address.City" class="form-control" />
+                <span asp-validation-for="Address.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.State" class="control-label"></label>
+                <input asp-for="Address.State" class="form-control" />
+                <span asp-validation-for="Address.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.Zipcode" class="control-label"></label>
+                <input asp-for="Address.Zipcode" class="form-control" />
+                <span asp-validation-for="Address.Zipcode" class="text-danger"></span>
+            </div>
+            <hr />
+           <h2>Package Details</h2>
+           
+            <div class="form-group">
+                <label asp-for="modifiedPkg.Description" class="control-label"></label>
+                <input asp-for="modifiedPkg.Description" class="form-control" />
+                <span asp-validation-for="modifiedPkg.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="modifiedPkg.Weight" class="control-label"></label>
+                <input asp-for="modifiedPkg.Weight" class="form-control" />
+                <span asp-validation-for="modifiedPkg.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="modifiedPkg.Height" class="control-label"></label>
+                <input asp-for="modifiedPkg.Height" class="form-control" />
+                <span asp-validation-for="modifiedPkg.Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="modifiedPkg.Width" class="control-label"></label>
+                <input asp-for="modifiedPkg.Width" class="form-control" />
+                <span asp-validation-for="modifiedPkg.Width" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="modifiedPkg.Depth" class="control-label"></label>
+                <input asp-for="modifiedPkg.Depth" class="form-control" />
+                <span asp-validation-for="modifiedPkg.Depth" class="text-danger"></span>
+            </div>
+           
+            
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="modifiedPkg.Express" /> @Html.DisplayNameFor(model => model.modifiedPkg.Express)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
             </div>
         </form>
     </div>

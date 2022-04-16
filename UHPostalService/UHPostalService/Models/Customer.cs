@@ -23,5 +23,10 @@ namespace UHPostalService.Models
         public Address Address { get; set; }
         [DefaultValue(false)]
         public bool Deleted { get; set; }
+
+        public bool Equals(Customer target)
+        {
+            return Name.Equals(target.Name) && PhoneNumber.Equals(target.PhoneNumber) && Email.Equals(target.Email) && AddressID == target.AddressID;
+        }
     }
 }
