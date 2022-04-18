@@ -1,0 +1,133 @@
+drop trigger if exists autostatus
+go
+create trigger autostatus on trackingrecords
+after insert, update
+as begin
+        declare @tracknum int;
+        declare @dest int;
+        declare @out int;
+        declare @stat int;
+        select @tracknum=tracknum, @out=destination, @dest=addressid from inserted,Packages where Packages.Id = inserted.TrackNum;
+        if @out is null
+            select @stat = 0
+        else
+            begin
+                if @out = @dest
+                    select @stat = 2
+                else
+                    select @stat = 1
+            end
+        update Packages set status = @stat where Id=@tracknum
+end
+
+--trigger: auto update timein/timeout of package when check in/out
+drop trigger if exists datechange
+go
+create trigger datechange on trackingrecords
+after insert, update
+as begin
+    declare @tin DateTime;
+    declare @tout DateTime;
+    declare @ident int;
+    select @ident=Id from inserted;
+    select @tin=trackingrecords.TimeIn, @tout=trackingrecords.TimeOut from inserted,trackingrecords where trackingrecords.Id=@ident;
+    if @tin is NULL
+    begin
+        update trackingrecords set trackingrecords.TimeIn = getdate() where trackingrecords.Id=@ident;
+    end
+    else
+    begin
+        update trackingrecords set trackingrecords.TimeOut = getdate() where trackingrecords.Id=@ident;
+    end
+end
+
+--trigger: automatically set the cost of a package
+drop trigger if exists cost
+	go
+	create trigger cost on packages
+	after insert
+	as begin
+		declare @total float;
+		declare @W float;
+		declare @exp int;
+		declare @ident int;
+		declare @depth float;
+		declare @width float;
+		declare @height float;
+		select @ident=Id from inserted;
+		select @W = packages.Weight, @exp = packages.Express, @depth = packages.Depth, @width = packages.Width, @height = packages.Height from packages where packages.Id =@ident;
+		declare @bound int;
+		select @bound = Id from ShipmentClasses where ExpressCost >= 0;
+			if @exp = 1
+			begin
+			set @total = (select min(ShipmentClasses.ExpressCost) from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength);
+
+			end
+
+			if @exp = 0
+			begin
+			set @total = (select min(ShipmentClasses.GroundCost) from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength);
+			end
+		if @total is null
+		begin
+			if @exp = 1
+			begin
+			set @total = (select max(ExpressCost) from ShipmentClasses);
+			end
+			else
+			begin
+			set @total = (select max(GroundCost) from ShipmentClasses);
+			end
+		end
+		set @total = (@total * @W);	
+		update packages set packages.ShipCost = @total where packages.Id = @ident;
+	end
+            
+
+drop trigger if exists NewSale
+go
+create trigger NewSale on sales
+after insert
+as begin
+    declare @ident int;
+	declare @quant int;
+	declare @pid int;
+	declare @tot float;
+    select @ident=Id, @quant = Quantity, @pid = ProductID from inserted;
+	select @tot = products.UnitCost from products where products.Id = @pid;
+	set @tot = @tot*@quant;
+    update sales set sales.PurchaseDate = getdate() where sales.ID=@ident;
+	update sales set sales.Total = @tot where sales.ID=@ident;
+	update products set products.Stock = (products.Stock-@quant) where products.Id = @pid;
+end
+
+--update sale
+drop trigger if exists UpdateSale
+go
+create trigger UpdateSale on sales
+after update
+as begin
+declare @newQuant int;
+declare @oldQuant int;
+declare @newPID int;
+declare @oldPID int;
+declare @ident int;
+declare @tot float;
+declare @cost float;
+select @ident=Id, @newQuant=Quantity, @newPID=ProductID from inserted;
+select @oldPID=ProductID, @oldQuant=Quantity from deleted;
+select @cost=UnitCost from products where products.ID = @newPID;
+if ((@oldQuant != @newQuant) and (@newPID = @oldPID))
+	begin
+	update products set products.Stock = (products.Stock+(@oldQuant-@newQuant)) where products.Id = @newPID;
+	end
+if (@newPID != @oldPID)
+	begin
+	update products set products.Stock = (products.Stock+@oldQuant) where products.Id = @oldPID;
+	update products set products.Stock = (products.Stock-@newQuant) where products.Id = @newPID;
+	end
+set @tot = @newQuant*@cost;
+update sales set sales.Total = @tot where sales.ID = @ident;
+update sales set sales.PurchaseDate=getdate() where sales.ID = @ident;
+
+end
