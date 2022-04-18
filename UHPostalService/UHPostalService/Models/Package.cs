@@ -46,5 +46,15 @@ namespace UHPostalService.Models
         public float? ShipCost { get; set; }
         [DefaultValue(false)]
         public bool Deleted { get; set; }
+
+        public void Copy(float weight, float height, float width, float depth, bool exp, string desc)
+        {
+            Description = desc;
+            Weight = weight;
+            Height = height;
+            Width = width;
+            Depth = depth;
+            Express = exp;
+        }
     }
 }
