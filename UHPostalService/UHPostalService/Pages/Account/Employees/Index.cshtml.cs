@@ -78,7 +78,8 @@ namespace UHPostalService.Pages.Account.Employees
 
             Employee = await EmployeeIdent.
                 Include(s=>s.Address).
-                Include(s=>s.Store).ToListAsync();
+                Include(s=>s.Store)
+                .Include(s=>s.Store.Address).ToListAsync();
         }
     }
 }
