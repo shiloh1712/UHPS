@@ -339,7 +339,7 @@ namespace UHPostalService.Migrations
 			                            update packages set packages.ShipCost = @total where packages.Id = @ident;
 		                            end
 ");
-            */
+            
 
             migrationBuilder.Sql(@"drop trigger if exists NewSale
                                     go
@@ -389,6 +389,7 @@ namespace UHPostalService.Migrations
 
 							end
 ");
+            */
 
 
             migrationBuilder.CreateIndex(

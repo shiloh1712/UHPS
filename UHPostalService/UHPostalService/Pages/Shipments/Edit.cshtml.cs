@@ -23,7 +23,6 @@ namespace UHPostalService.Pages.Shipments
         }
         public class InputModel
         {
-
             public int Id { get; set; }
             public string? Description { get; set; }
             [DefaultValue(Status.InStore)]
