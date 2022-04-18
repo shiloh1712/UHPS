@@ -34,8 +34,7 @@ namespace UHPostalService.Pages.Account.Employees
             Employee = await _context.Employees
                 .Include(e => e.Address)
                 .Include(e => e.Store)
-                .Include(e => e.Store.Address).FirstOrDefaultAsync(m => m.Id == id);
-                
+
 
             if (Employee == null)
             {

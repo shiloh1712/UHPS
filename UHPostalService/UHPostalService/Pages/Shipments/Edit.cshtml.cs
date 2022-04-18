@@ -23,16 +23,7 @@ namespace UHPostalService.Pages.Shipments
         }
         public class InputModel
         {
-            /*public InputModel( float weight, float width, float height, float depth, bool expr, int id, string desc = null)
-            {
-                Id = id;
-                Description = desc;
-                Weight = weight;
-                Width = width;
-                Height = height;
-                Depth = depth;
-                Express = expr;
-            }*/
+
             public int Id { get; set; }
             public string? Description { get; set; }
             [DefaultValue(Status.InStore)]
@@ -84,10 +75,10 @@ namespace UHPostalService.Pages.Shipments
         public async Task<IActionResult> OnPostAsync()
         {
 
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return Page();
-            }*/
+                //return Page();
+            }
 
             Package pkgToUpdate = _context.Packages
                 .Include(p=>p.Sender)
@@ -96,33 +87,65 @@ namespace UHPostalService.Pages.Shipments
                 .Where(p => p.Id == modifiedPkg.Id).FirstOrDefault();
             if(pkgToUpdate == null)
                 return NotFound();
+            //check if sender info is changed
             if (!From.Equals(pkgToUpdate.Sender))
             {
-                var cust2 = _context.Customers.Where(f => (f.Name == From.Name
-                && f.PhoneNumber == From.PhoneNumber
-                && f.Email == From.Email)).FirstOrDefault();
-
-                if (cust2 == null)
+                //update senderid if already existed in db
+                var existed = _context.Customers.Where(c => c.Email == From.Email).FirstOrDefault();
+                if (existed != null && From.Equals(existed))
+                {
+                    pkgToUpdate.SenderID = existed.Id;
+                }
+                //check if sender email has not changed
+                else if (From.Email.Equals(pkgToUpdate.Sender.Email))
+                {
+                    //change customer details
+                    pkgToUpdate.Sender.Copy(From);
+                    _context.Attach(pkgToUpdate.Sender).State = EntityState.Modified;
+                }
+                else if (existed != null && From.Email.Equals(existed.Email))
+                {
+                    ModelState.AddModelError(string.Empty, $"{From.Email} is already registered");
+                    //OnGetAsync(modifiedPkg.Id);
+                    return Page();
+                }
+                //email changed: create new customer
+                else
                 {
                     _context.Customers.Add(From);
                     await _context.SaveChangesAsync();
-                    cust2 = From;
+                    pkgToUpdate.SenderID = From.Id;
                 }
-                pkgToUpdate.SenderID = cust2.Id;
             }
+            //update receiver: similar to sender
             if (!To.Equals(pkgToUpdate.Receiver))
             {
-                var cust = _context.Customers.Where(f => (f.Name == To.Name
-                && f.PhoneNumber == To.PhoneNumber
-                && f.Email == To.Email)).FirstOrDefault();
-
-                if (cust == null)
+                //update senderid if already existed in db
+                var existed = _context.Customers.Where(c => c.Email == To.Email).FirstOrDefault();
+                if (existed != null && To.Equals(existed))
                 {
-                    _context.Customers.Add(From);
-                    await _context.SaveChangesAsync();
-                    cust = To;
+                    pkgToUpdate.ReceiverID = existed.Id;
                 }
-                pkgToUpdate.ReceiverID = To.Id;
+                //check if receiver email has not changed
+                else if (To.Email.Equals(pkgToUpdate.Receiver.Email))
+                {
+                    //change customer details
+                    pkgToUpdate.Receiver.Copy(To);
+                    _context.Attach(pkgToUpdate.Receiver).State = EntityState.Modified;
+                }
+                else if (existed != null && To.Email.Equals(existed.Email))
+                {
+                    ModelState.AddModelError(string.Empty, $"{To.Email} is already registered");
+                    //OnGetAsync(modifiedPkg.Id);
+                    return Page();
+                }
+                //email changed: create new customer
+                else
+                {
+                    _context.Customers.Add(To);
+                    await _context.SaveChangesAsync();
+                    pkgToUpdate.ReceiverID = To.Id;
+                }
             }
             if (!Address.Equals(pkgToUpdate.Destination))
             {
@@ -139,13 +162,7 @@ namespace UHPostalService.Pages.Shipments
                 }
                 pkgToUpdate.AddressID = addr.Id;
             }
-            pkgToUpdate.Description = modifiedPkg.Description;
-            pkgToUpdate.Weight = modifiedPkg.Weight;
-            pkgToUpdate.Height = modifiedPkg.Height;
-            pkgToUpdate.Width = modifiedPkg.Width;
-            pkgToUpdate.Depth = modifiedPkg.Depth;
-            pkgToUpdate.Express = modifiedPkg.Express;
-
+            pkgToUpdate.Copy(modifiedPkg.Weight, modifiedPkg.Height, modifiedPkg.Width, modifiedPkg.Depth, modifiedPkg.Express, modifiedPkg.Description);
 
             _context.Attach(pkgToUpdate).State = EntityState.Modified;
 
@@ -165,22 +182,6 @@ namespace UHPostalService.Pages.Shipments
                 }
             }
             
-            /*if (id == null)
-                return NotFound();
-            var pkgToUpdate = await _context.Packages.Where(p => p.Id == id).FirstOrDefaultAsync();
-            if (pkgToUpdate == null)
-                return NotFound();
-            bool sucess = await TryUpdateModelAsync<Package>(
-                 pkgToUpdate,
-                 "Package",   // Prefix for form value.
-                   c => c.SenderID, c => c.ReceiverID, c => c.AddressID, c => c.Description, c => c.Weight, c => c.Width, c => c.Height, c => c.Depth, c => c.Express);
-            if (sucess)
-            {
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
-            }
-
-            */
 
             return RedirectToPage("./Index");
         }
