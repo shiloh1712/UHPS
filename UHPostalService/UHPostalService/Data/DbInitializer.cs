@@ -1,4 +1,5 @@
-﻿using UHPostalService.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using UHPostalService.Models;
 
 namespace UHPostalService.Data
 {
@@ -6,7 +7,8 @@ namespace UHPostalService.Data
     {
         public static void Initialize(ApplicationDbContext context)
         {
-            // Look for any students./*
+
+            // Look for any customer./*
             if (context.Customers.Any())
             {
                 return;   // DB has been seeded
@@ -36,7 +38,7 @@ namespace UHPostalService.Data
 
             var emps = new Employee[]
             {
-                new Employee { Name= "Son", PhoneNumber ="1234567890", Email ="son@uhps.com", Password ="son", AddressID =1, StoreID = 1, Role = Role.Employee},
+                new Employee { Name= "Son", PhoneNumber ="1234567890", Email ="son@uhps.com", Password ="son", AddressID =1, StoreID = 1},
                 new Employee { Name= "Josh", PhoneNumber ="2345678901", Email ="josh@uhps.com", Password ="josh", AddressID =2, StoreID = 1},
             };
             context.Employees.AddRange(emps);
@@ -69,8 +71,8 @@ namespace UHPostalService.Data
 
             var sales = new Sale[]
             {
-                new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2010-09-01")},
-                new Sale { ProductID= 2, Quantity =10, PurchaseDate =DateTime.Parse("2015-07-24"), BuyerID=1},
+                new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2010-09-01"), Total = 30.0f},
+                new Sale { ProductID= 2, Quantity =10, PurchaseDate =DateTime.Parse("2015-07-24"), BuyerID=1, Total = 20.5f},
             };
             context.Sales.AddRange(sales);
             context.SaveChanges();

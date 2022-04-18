@@ -212,6 +212,7 @@ namespace UHPostalService.Migrations
                 });
             //FIRST STORE
             migrationBuilder.Sql(@"INSERT INTO Stores (PhoneNumber, SupID, AddressID) VALUES('1234567890', (SELECT Top 1 Id FROM Employees), 1)");
+            migrationBuilder.Sql(@"UPDATE Employees set StoreID =1 where name='admin'");
 
 
             migrationBuilder.CreateTable(

@@ -87,10 +87,10 @@ namespace UHPostalService.Pages.Shipments
                 await _context.SaveChangesAsync();
                 cust2 = From;
             }
-            Package newPack = new Models.Package { SenderID = cust2.Id, ReceiverID = cust.Id, AddressID = addr.Id, Description = Package.Description, Status = Package.Status, Weight = Package.Weight, Express = Package.Express, ShipCost = 0, Height = Package.Height, Width = Package.Width, Depth = Package.Depth };
+            Package newPack = new Models.Package { SenderID = cust2.Id, ReceiverID = cust.Id, AddressID = addr.Id, Description = Package.Description, Status = Package.Status, Weight = Package.Weight, Express = Package.Express, ShipCost = 0, Height = Package.Height, Width = Package.Width, Depth = Package.Depth, ClassID=1 };
             if (!ModelState.IsValid)
             {
-                return Page();
+                //return Page();
             }
 
             _context.Packages.Add(newPack);

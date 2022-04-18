@@ -22,8 +22,7 @@ namespace UHPostalService.Pages.Tracking
             _context = context;
         }
 
-        [BindProperty]
-        public string TrNums { get; set; }
+        
         [BindProperty]
         public int nextstop { get; set; }
         public async Task<IActionResult> OnGetAsync(int? trnum)
@@ -63,13 +62,17 @@ namespace UHPostalService.Pages.Tracking
         public TrackingRecord TrackingRecord { get; set; }
         */
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? trnum)
         {
             if (!ModelState.IsValid)
             {
                 //return Page();
             }
-            int num = Int32.Parse(TrNums);
+            //int num = Int32.Parse(TrNums);
+            if (trnum == null)
+                return NotFound();
+
+            int num = (int)trnum;
             //var claims = ClaimsPrincipal.Current.Identities.FirstOrDefault().Claims.ToList();
             //string employeeid = claims?.FirstOrDefault(x => x.Type.Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))?.Value;
             //var principal = System.Security.Claims.ClaimsPrincipal.Current;
@@ -77,17 +80,30 @@ namespace UHPostalService.Pages.Tracking
             int employee = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
 
-            TrackingRecord newrecord = new TrackingRecord
+            TrackingRecord record = _context.TrackingRecords.Where(r=>r.TrackNum==num && r.Destination == null).FirstOrDefault();
+            if (record == null)
+                return NotFound();
+            record.Destination = nextstop;
+
+            _context.Attach(record).State = EntityState.Modified;
+
+            try
             {
-                TrackNum = num,
-                EmployeeId = employee,
-                StoreId = store
-            };
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (_context.TrackingRecords.Where(r => r.TrackNum == num).FirstOrDefault() == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            _context.TrackingRecords.Add(newrecord);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Shipments/Index");
         }
     }
 }

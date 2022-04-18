@@ -14,17 +14,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
             <div class="form-group">
-                <label asp-for="TrNums" class="control-label">Tracking Numbers</label>
-                <input asp-for="TrNums" class="form-control" />
-                <span asp-validation-for="TrNums" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="nextstop" class="control-label"></label>
                 <select asp-for="nextstop" class ="form-control" asp-items="ViewBag.NextStops">ab</select>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Check In" class="btn btn-primary" />
+                <input type="submit" value="Check Out" class="btn btn-primary" />
             </div>
         </form>
     </div>

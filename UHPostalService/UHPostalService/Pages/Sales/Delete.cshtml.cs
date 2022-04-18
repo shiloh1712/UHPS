@@ -47,14 +47,33 @@ namespace UHPostalService.Pages.Sales
                 return NotFound();
             }
 
-            Sale = await _context.Sales.FindAsync(id);
+            Sale thisSale = _context.Sales.Where(s=>s.ID ==id).Include(s => s.Product).FirstOrDefault();
 
-            if (Sale != null)
+            if (thisSale != null)
             {
                 //_context.Sales.Remove(Sale);
-                Sale.Deleted = true;
-                Sale.Product.Stock += Sale.Quantity;
-                await _context.SaveChangesAsync();
+                thisSale.Deleted = true;
+                thisSale.Product.Stock += Sale.Quantity;
+                _context.Attach(thisSale.Product).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (_context.Products.Where(p=>p.Id == thisSale.ProductID).FirstOrDefault() == null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+
+                //await _context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");
