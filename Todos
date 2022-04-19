@@ -5,7 +5,15 @@ Layout:
 /Account/Customers:
   Login:
     1. add "Employee Log In"
+    2. create not working (refer )
+  Index:
+    1. only employees can see
+    2. remove address
+  Create:
+    1. "Create" --> "Register"
     
+  Edit:
+    1. edit address on site (refer to shipments/edit )
 
 /Account/Employees:
   Index:
@@ -34,4 +42,37 @@ Layout:
     1. UnitCost --> "Unit Cost"
     2. "Create Product" --> "New Product"
     3. "Create" --> "Add"
+    
+    
+/Stores:
+  Index:
+    1. Create --> "New Store"
+    2. only admin can see/access "New Store" and edit, delete
+    3. seed more meaningful data (different states, zipcode)
+    4. move id to the left (top of html), change it to "#" (meaning store number)
+  Edit:
+    1. Edit Address on site, no reference (refer to edit shipment as example)
   
+/Shipments:
+  Index:  
+    1. only employees can "New Shupment"
+    2. hide edit/delete from customers/anonymous
+    3. remove weight
+    4. more filter: sender, receiver, zipcode, city, state, status, express,  
+    5. shipcost --> Cost
+    6. more meaningful seeds
+  Create:
+    1. fix trigger auto cost/shipping classes
+    2. 
+  Edit:
+    1. Title: Edit Shipment
+    2. edit trigger autodate for new tracking
+    3. remove tracking details
+    4. only edit destination
+/tracking
+  remove create, details, index
+  only employee can delete
+  
+/sales: only employees can see button
+  details: show "anonymous" if no buyer info
+
