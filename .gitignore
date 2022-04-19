@@ -12,6 +12,7 @@
 *.dll
 *.DS_Store
 /.vscode/
+appsettings.json
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)

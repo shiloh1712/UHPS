@@ -30,7 +30,7 @@ namespace UHPostalService.Data
 
             var custs = new Customer[]
             {
-                new Customer { Name= "Bader", PhoneNumber ="1234567890", Email ="bader@email.com", Password ="Bader"},
+                new Customer { Name= "Bader", PhoneNumber ="1234567890", Email ="bader@email.com", Password ="Bader", AddressID=4},
                 new Customer { Name= "Morrison", PhoneNumber ="0987654321", Email ="morrison@email.com", Password ="Morrison"},
             };
             context.Customers.AddRange(custs);
@@ -38,8 +38,8 @@ namespace UHPostalService.Data
 
             var emps = new Employee[]
             {
-                new Employee { Name= "Son", PhoneNumber ="1234567890", Email ="son@uhps.com", Password ="son", AddressID =1, StoreID = 1},
-                new Employee { Name= "Josh", PhoneNumber ="2345678901", Email ="josh@uhps.com", Password ="josh", AddressID =2, StoreID = 1},
+                new Employee { Name= "Son", PhoneNumber ="1234567890", Email ="son@uhps.com", Password ="son", AddressID =4, StoreID = 1},
+                new Employee { Name= "Josh", PhoneNumber ="2345678901", Email ="josh@uhps.com", Password ="josh", AddressID =5, StoreID = 1},
             };
             context.Employees.AddRange(emps);
             context.SaveChanges();
