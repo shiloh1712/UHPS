@@ -20,7 +20,16 @@ namespace UHPostalService.Pages.Account.Customers
         {
             _context = context;
         }
-
+        public class InputModel
+        {
+            public int Id { get; set; }
+            public string StreetAddress { get; set; }
+            public string City { get; set; }
+            public string State { get; set; }
+            public string Zipcode { get; set; }
+        }
+        [BindProperty]
+        public InputModel modifiedPkg { get; set; }
         [BindProperty]
         public Customer Customer { get; set; }
 
@@ -31,15 +40,17 @@ namespace UHPostalService.Pages.Account.Customers
                 return NotFound();
             }
 
-            Customer = await _context.Customers
-                .Include(c => c.Address).FirstOrDefaultAsync(m => m.Id == id);
+            Customer editpkg = await _context.Customers.AsNoTracking()
+               .Include(p => p.Address).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Customer == null)
+            if (editpkg == null)
             {
                 return NotFound();
             }
 
             //ViewData["Address.City"] = new SelectList(_context.Addresses, "Id", "City");
+            Address = _context.Addresses.Where(a => a.Id == editpkg.AddressID).FirstOrDefault();
+            modifiedPkg = new InputModel { StreetAddress = editpkg.StreetAddress, City = editpkg.City, State = editpkg.State, Zipcode = editpkg.Zipcode};
             return Page();
         }
 
@@ -52,6 +63,10 @@ namespace UHPostalService.Pages.Account.Customers
             {
                 return Page();
             }
+            Customer pkgToUpdate = _context.Customers
+                .Include(p => p.AddressID).Where(p => p.Id == modifiedPkg.Id).FirstOrDefault();
+            if (pkgToUpdate == null)
+                return NotFound();
 
             _context.Attach(Customer).State = EntityState.Modified;
 
@@ -70,18 +85,24 @@ namespace UHPostalService.Pages.Account.Customers
                     throw;
                 }
             }
-            var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress
-            && f.City == Address.City
-            && f.State == Address.State
-            && f.Zipcode == Address.Zipcode)).FirstOrDefault();
-
-            if (addr == null)
+            if (!Address.Equals(pkgToUpdate.AddressID))
             {
-                _context.Addresses.Add(Address);
-                await _context.SaveChangesAsync();
-                addr = Address;
+                var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress
+               && f.City == Address.City
+               && f.State == Address.State
+               && f.Zipcode == Address.Zipcode)).FirstOrDefault();
 
+                if (addr == null)
+                {
+                    _context.Addresses.Add(Address);
+                    await _context.SaveChangesAsync();
+                    addr = Address;
+                }
+                pkgToUpdate.AddressID = addr.Id;
             }
+            pkgToUpdate.Copy(modifiedPkg.StreetAddress, modifiedPkg.City, modifiedPkg.State, modifiedPkg.Zipcode);
+
+            _context.Attach(pkgToUpdate).State = EntityState.Modified;
 
             if (!ModelState.IsValid)
             {
