@@ -55,7 +55,7 @@ namespace UHPostalService.Data
 
             var packs = new Package[]
             {
-                new Package { SenderID= 1, ReceiverID =1, Description="luxury", AddressID =3, ShipCost =2.89F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=3.4F, ClassID=1, Express=true},
+                new Package { SenderID= 1, ReceiverID =2, Description="luxury", AddressID =3, ShipCost =2.89F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=3.4F, ClassID=1, Express=true},
                 new Package { SenderID= 2, ReceiverID =1, AddressID =4, ShipCost =3.50F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=1.5f, ClassID=2},
             };
             context.Packages.AddRange(packs);
