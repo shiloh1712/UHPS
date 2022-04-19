@@ -1,19 +1,37 @@
-La, Son : 
-draw+upload basic web pages layout
-
-Fowlks, Morris:
-
-Nguyen, Andy:
-
-Opie, Josh:
-
-Salem, Bader:
-- Implement UI: write HTML/CSS
-
-
 Work to do:
-//- Document what the team discusses; make visuals/presentation
+Layout:
+  1. add "customers" button
+  
+/Account/Customers:
+  Login:
+    1. add "Employee Log In"
+    
 
-- semantic constraints: >1 triggers
-- refine models: add foreign keys, change attribute names to for consistency
-- seed the db 
+/Account/Employees:
+  Index:
+    1. add search by store, role, 
+    2. remove address 
+    3. change Index heading to "All Employees"
+    4. remove "create new" 
+    5. regular employee: only see employees in their own store, no edit/details/delete buttons (unauthorized), can do those tasks on their own account
+    6. supervisor: only edit/details/delete employees in their own store
+    7. admin: access rights to all employees
+  Edit: 
+    1. refer to edit shipment to change address
+    2. supervisors need assign a new employee to a store
+  Details:
+    1. show full address 
+    2. show "Role Admin" instead of just Admin
+
+
+/Shop:
+  Remove details (and links from all pages)
+  Index:
+    1. Filter by stock, price (range)
+    2. "Create New" --> "New Products"
+    3. Anonymous (including customers): only see products, no edit/delete
+  Create:
+    1. UnitCost --> "Unit Cost"
+    2. "Create Product" --> "New Product"
+    3. "Create" --> "Add"
+  
