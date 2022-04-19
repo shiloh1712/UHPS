@@ -25,7 +25,7 @@ Layout:
     6. supervisor: only edit/details/delete employees in their own store
     7. admin: access rights to all employees
   Edit: 
-    1. refer to edit shipment to change address
+    1. refer to edit shipment to change address ✓ - Bader
     2. supervisors need assign a new employee to a store
   Details:
     1. show full address ✓ - Josh
