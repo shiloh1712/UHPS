@@ -38,9 +38,6 @@
                 </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Package[0].Weight)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Package[0].Express)
             </th>
             <th>
@@ -70,13 +67,10 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Weight)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Express)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ShipCost)
+                    Cost
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

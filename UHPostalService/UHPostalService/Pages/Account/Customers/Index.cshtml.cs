@@ -8,9 +8,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace UHPostalService.Pages.Account.Customers
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
+
     public class IndexModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
