@@ -10,6 +10,7 @@
 *.userosscache
 *.sln.docstates
 *.dll
+*.DS_Store
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -17,7 +18,7 @@
 
 # Mono auto generated files
 mono_crash.*
-
+appsettings.json
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
