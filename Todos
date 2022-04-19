@@ -1,16 +1,16 @@
 Work to do:
 Layout:
-  1. add "customers" button ✓
+  1. add "customers" button ✓ - Josh
   
 /Account/Customers:
   Login:
-    1. add "Employee Log In" ✓
+    1. add "Employee Log In" ✓ - Josh
     2. create not working (refer to employee)
   Index:
-    1. only employees can see ✓
-    2. remove address ✓
+    1. only employees can see ✓ - Josh
+    2. remove address ✓ - Josh
   Create:
-    1. "Create" --> "Register" ✓
+    1. "Create" --> "Register" ✓ - Josh
     
   Edit:
     1. edit address on site (refer to shipments/edit )
@@ -19,7 +19,7 @@ Layout:
   Index:
     1. add search by store, role, 
     2. remove address 
-    3. change Index heading to "All Employees" ✓
+    3. change Index heading to "All Employees" ✓ - Josh
     4. remove "create new" 
     5. regular employee: only see employees in their own store, no edit/details/delete buttons (unauthorized), can do those tasks on their own account
     6. supervisor: only edit/details/delete employees in their own store
@@ -28,25 +28,25 @@ Layout:
     1. refer to edit shipment to change address
     2. supervisors need assign a new employee to a store
   Details:
-    1. show full address ✓
-    2. show "Role Admin" instead of just Admin ✓
+    1. show full address ✓ - Josh
+    2. show "Role Admin" instead of just Admin ✓ - Josh
 
 
 /Shop:
   Remove details (and links from all pages)
   Index:
     1. Filter by stock, price (range)
-    2. "Create New" --> "New Products" ✓
+    2. "Create New" --> "New Products" ✓ - Josh
     3. Anonymous (including customers): only see products, no edit/delete
   Create:
-    1. UnitCost --> "Unit Cost" ✓
-    2. "Create Product" --> "New Product" ✓
-    3. "Create" --> "Add" ✓
+    1. UnitCost --> "Unit Cost" ✓ - Josh
+    2. "Create Product" --> "New Product" ✓ - Josh
+    3. "Create" --> "Add" ✓ - Josh
     
     
 /Stores:
   Index:
-    1. Create --> "New Store" ✓
+    1. Create --> "New Store" ✓ - Josh
     2. only admin can see/access "New Store" and edit, delete
     3. seed more meaningful data (different states, zipcode)
     4. move id to the left (top of html), change it to "#" (meaning store number)
@@ -55,17 +55,17 @@ Layout:
   
 /Shipments:
   Index:  
-    1. only employees can "New Shupment" ✓
+    1. only employees can "New Shupment" ✓ - Josh
     2. hide edit/delete from customers/anonymous
-    3. remove weight ✓
+    3. remove weight ✓ - Josh
     4. more filter: sender, receiver, zipcode, city, state, status, express,  
-    5. shipcost --> Cost ✓
+    5. shipcost --> Cost ✓ - Josh
     6. more meaningful seeds
   Create:
     1. fix trigger auto cost/shipping classes
     2. 
   Edit:
-    1. Title: Edit Shipment ✓
+    1. Title: Edit Shipment ✓ - Josh
     2. edit trigger autodate for new tracking
     3. remove tracking details
     4. only edit destination
