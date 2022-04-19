@@ -5,7 +5,7 @@ Layout:
 /Account/Customers:
   Login:
     1. add "Employee Log In"
-    2. create not working (refer )
+    2. create not working (refer to employee)
   Index:
     1. only employees can see
     2. remove address
