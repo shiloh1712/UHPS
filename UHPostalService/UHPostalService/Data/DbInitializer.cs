@@ -62,7 +62,7 @@ namespace UHPostalService.Data
             var emps = new Employee[]
             {
                 new Employee { Name= "Son", PhoneNumber ="1234567890", Email ="son@uhps.com", Password ="son", AddressID =4, StoreID = 1},
-                new Employee { Name= "Josh", PhoneNumber ="2345678901", Email ="josh@uhps.com", Password ="josh", AddressID =5, StoreID = 1},
+                new Employee { Name= "Josh", PhoneNumber ="2345678901", Email ="josh@uhps.com", Password ="josh", AddressID =5, StoreID = 1, Role=Role.Supervisor},
                 new Employee { Name= "Danny", PhoneNumber ="4561239856", Email ="dan@uhps.com", Password ="dan", AddressID =6},
                 new Employee { Name= "Dahlia", PhoneNumber ="5687451209", Email ="dah@uhps.com", Password ="dah", AddressID =7},
                 new Employee { Name= "Gia", PhoneNumber ="6124578912", Email ="gia@uhps.com", Password ="gia", AddressID =8},
@@ -98,6 +98,9 @@ namespace UHPostalService.Data
             {
                 new Product { Desc= "Stamp", UnitCost =5.99F, Stock =100},
                 new Product { Desc= "Envelope", UnitCost =10.99F, Stock =50},
+                new Product { Desc= "Box", UnitCost =4.99F, Stock =150},
+                new Product { Desc= "Tape", UnitCost =3.99F, Stock =65},
+                new Product { Desc= "Pens", UnitCost =12.99F, Stock =45},
             };
             context.Products.AddRange(prods);
             context.SaveChanges();
