@@ -46,17 +46,17 @@ Layout:
     
 /Stores:
   Index:
-    1. Create --> "New Store" ✓ - Josh
-    2. only admin can see/access "New Store" and edit, delete
+    1. Create --> "New Store" ✓ - Andy
+    2. only admin can see/access "New Store" and edit, delete ✓ - Andy
     3. seed more meaningful data (different states, zipcode) ✓ Morrison
-    4. move id to the left (top of html), change it to "#" (meaning store number)
+    4. move id to the left (top of html), change it to "#" (meaning store number) ✓ - Andy
   Edit:
     1. Edit Address on site, no reference (refer to edit shipment as example) 
   
 /Shipments:
   Index:  
     1. only employees can "New Shupment" ✓ - Josh
-    2. hide edit/delete from customers/anonymous
+    2. hide edit/delete from customers/anonymous ✓ - Andy
     3. remove weight ✓ - Josh
     4. more filter: sender, receiver, zipcode, city, state, status, express, ✓ - Josh 
     5. shipcost --> Cost ✓ - Josh
@@ -70,9 +70,9 @@ Layout:
     3. remove tracking details
     4. only edit destination
 /tracking
-  remove create, details, index
-  only employee can delete
+  remove create, details, index ✓ - Andy (i hid them not remove)
+  only employee can delete ✓ - Andy
   
-/sales: only employees can see button
-  details: show "anonymous" if no buyer info
+/sales: only employees can see button ✓ - Andy
+  details: show "anonymous" if no buyer info ✓ - Not Andy
 
