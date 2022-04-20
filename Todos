@@ -33,7 +33,7 @@ Layout:
 
  
 /Shop:
-  Remove details (and links from all pages)
+  1.Remove details (and links from all pages)
   Index:
     1. Filter by stock, price (range) ✓ - Not Andy
     2. "Create New" --> "New Products" ✓ - Josh
@@ -68,12 +68,13 @@ Layout:
     2. 
   Edit:
     1. Title: Edit Shipment ✓ - Josh
-    2. edit trigger autodate for new tracking
-    3. remove tracking details
-    4. only edit destination
+    2. edit trigger autodate for new tracking  ✓ - Son
+    
 /tracking
   remove create, details, index ✓ - Andy (i hid them not remove)
   only employee can delete ✓ - Andy
+  3. remove tracking details
+  4. only edit destination
   
 /sales: only employees can see button ✓ - Andy
   details: show "anonymous" if no buyer info ✓ - Josh
