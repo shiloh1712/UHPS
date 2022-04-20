@@ -98,7 +98,7 @@
 
                 @if (User.IsInRole("Admin"))
                 {
-                    <text>|</text> <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 }
             </td>
         </tr>}
