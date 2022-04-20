@@ -35,9 +35,9 @@ Layout:
 /Shop:
   Remove details (and links from all pages)
   Index:
-    1. Filter by stock, price (range)
+    1. Filter by stock, price (range) ✓ - Not Andy
     2. "Create New" --> "New Products" ✓ - Josh
-    3. Anonymous (including customers): only see products, no edit/delete
+    3. Anonymous (including customers): only see products, no edit/delete ✓ - Andy
   Create:
     1. UnitCost --> "Unit Cost" ✓ - Josh
     2. "Create Product" --> "New Product" ✓ - Josh
