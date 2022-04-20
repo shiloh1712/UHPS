@@ -68,6 +68,9 @@ namespace UHPostalService.Pages.Account.Employees
                 case "Date":
                     EmployeeIdent = EmployeeIdent.OrderBy(s => s.Email);
                     break;
+                case "Store":
+                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Store);
+                    break;
                 case "date_desc":
                     EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.Email);
                     break;

@@ -20,6 +20,7 @@
 					<option value="1">Name</option>
 					<option value="2">Email</option>
                     <option value="3">Phone Number</option>
+                    <!--<option value="4">Store</option>/>-->
 				</select>
 				<span asp-validation-for="test" class="text-danger"></span>
 
@@ -52,7 +53,9 @@
                 @Html.DisplayNameFor(model => model.Employee[0].Address)
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
                 @Html.DisplayNameFor(model => model.Employee[0].Store)
+                </a>            </th>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Role)
