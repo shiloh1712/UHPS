@@ -100,7 +100,7 @@ namespace UHPostalService.Pages.Shipments
 
             await _context.SaveChangesAsync();
             Console.WriteLine(newPack.Id);
-            TrackingRecord trackingRecord = new TrackingRecord { EmployeeId = employee, StoreId = store, TrackNum = 1 };
+            TrackingRecord trackingRecord = new TrackingRecord { EmployeeId = employee, StoreId = store, TrackNum = newPack.Id };
             _context.TrackingRecords.Add(trackingRecord);
             await _context.SaveChangesAsync();
 

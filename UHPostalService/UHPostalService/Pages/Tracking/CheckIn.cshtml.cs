@@ -40,11 +40,12 @@ namespace UHPostalService.Pages.Tracking
             {
                 //return Page();
             }
-            if(TrNums == null && urltrnum == null)
+            if(urltrnum == null)
             {
                 return Page();
             }
             int num = Int32.Parse(TrNums);
+            //int num = (int)urltrnum;
             //var claims = ClaimsPrincipal.Current.Identities.FirstOrDefault().Claims.ToList();
             //string employeeid = claims?.FirstOrDefault(x => x.Type.Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))?.Value;
             //var principal = System.Security.Claims.ClaimsPrincipal.Current;
