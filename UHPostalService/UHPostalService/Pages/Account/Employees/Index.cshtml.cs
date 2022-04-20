@@ -59,6 +59,12 @@ namespace UHPostalService.Pages.Account.Employees
 
                                        /*|| s.FirstMidName.Contains(searchString)*/);
             }
+            /*if (!String.IsNullOrEmpty(searchString) && test == 4)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.StoreID.Equals((int)searchString)
+
+                                       );
+            }*/
 
             switch (sortOrder)
             {
