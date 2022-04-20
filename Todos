@@ -58,7 +58,7 @@ Layout:
     1. only employees can "New Shupment" ✓ - Josh
     2. hide edit/delete from customers/anonymous
     3. remove weight ✓ - Josh
-    4. more filter: sender, receiver, zipcode, city, state, status, express,  
+    4. more filter: sender, receiver, zipcode, city, state, status, express, ✓ - Josh 
     5. shipcost --> Cost ✓ - Josh
     6. more meaningful seeds
   Create:
