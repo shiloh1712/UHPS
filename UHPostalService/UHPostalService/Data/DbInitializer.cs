@@ -20,8 +20,6 @@ namespace UHPostalService.Data
                 new Address { StreetAddress = "4373 Cougar Village Dr", City = "Houston", State = "TX", Zipcode = "77204" },
                 new Address { StreetAddress = "UH Entrance 14", City = "Houston", State = "TX", Zipcode = "77004" },
                 new Address { StreetAddress = "4455 University Dr", City = "Houston", State = "TX", Zipcode = "77204" },
-                new Address { StreetAddress = "another address", City = "Cypress", State = "TX", Zipcode = "77433" },
-                new Address { StreetAddress = "one other address", City = "Austin", State = "TX", Zipcode = "73301" },
                 new Address { StreetAddress = "4166 Yorkie Lane", City = "Cypress", State = "TX", Zipcode = "77433" },
                 new Address { StreetAddress = "5516 Tori Lane", City = "Ogden", State = "UT", Zipcode = "84401" },
                 new Address { StreetAddress = "4392 Isaacs Creek Road", City = "Decatur", State = "IL", Zipcode = "62522" },
@@ -52,7 +50,7 @@ namespace UHPostalService.Data
                 new Customer { Name= "Morrison", PhoneNumber ="0987654321", Email ="morrison@email.com", Password ="Morrison"},
                 new Customer { Name= "Maverick", PhoneNumber ="5554562148", Email ="helloyes@email.com", Password ="Mav", AddressID=3},
                 new Customer { Name= "Boris", PhoneNumber ="4567891345", Email ="jimbo@email.com", Password ="bori", AddressID=2},
-                new Customer { Name= "Jon", PhoneNumber ="4531687169", Email ="yaboy@email.com", Password ="jonny", AddressID=1},
+                new Customer { Name= "Jon", PhoneNumber ="4531687169", Email ="yaboy@email.com", Password ="jonny", AddressID=4},
                 new Customer { Name= "Susan", PhoneNumber ="1984561023", Email ="sus@email.com", Password ="susamongus"},
                 new Customer { Name= "Jenny", PhoneNumber ="4561238951", Email ="jay12@email.com", Password ="jay"},
                 new Customer { Name= "Stephen", PhoneNumber ="4678923541", Email ="scargat@email.com", Password ="scar", AddressID=6},
@@ -65,10 +63,10 @@ namespace UHPostalService.Data
             {
                 new Employee { Name= "Son", PhoneNumber ="1234567890", Email ="son@uhps.com", Password ="son", AddressID =4, StoreID = 1},
                 new Employee { Name= "Josh", PhoneNumber ="2345678901", Email ="josh@uhps.com", Password ="josh", AddressID =5, StoreID = 1},
-                new Employee { Name= "Danny", PhoneNumber ="4561239856", Email ="dan@uhps.com", Password ="dan", AddressID =6, StoreID = 1},
-                new Employee { Name= "Dahlia", PhoneNumber ="5687451209", Email ="dah@uhps.com", Password ="dah", AddressID =7, StoreID = 2},
-                new Employee { Name= "Gia", PhoneNumber ="6124578912", Email ="gia@uhps.com", Password ="gia", AddressID =8, StoreID = 2},
-                new Employee { Name= "Abdullah", PhoneNumber ="7895216489", Email ="abd@uhps.com", Password ="abd", AddressID =9, StoreID = 1},
+                new Employee { Name= "Danny", PhoneNumber ="4561239856", Email ="dan@uhps.com", Password ="dan", AddressID =6},
+                new Employee { Name= "Dahlia", PhoneNumber ="5687451209", Email ="dah@uhps.com", Password ="dah", AddressID =7},
+                new Employee { Name= "Gia", PhoneNumber ="6124578912", Email ="gia@uhps.com", Password ="gia", AddressID =8},
+                new Employee { Name= "Abdullah", PhoneNumber ="7895216489", Email ="abd@uhps.com", Password ="abd", AddressID =9},
 
             };
             context.Employees.AddRange(emps);
@@ -76,22 +74,22 @@ namespace UHPostalService.Data
 
             var ships = new ShipmentClass[]
             {
-                new ShipmentClass { Desc= "Letter", MaxLength =11.50f, MaxHeight =6.20f, MaxWidth= 0.25f, GroundCost =1.50f, ExpressCost =9.00f},
-                new ShipmentClass { Desc= "Large Envelope", MaxLength =15.00f, MaxHeight =12.00f, MaxWidth= 0.75f, GroundCost =2.00f, ExpressCost =10.00f},
-                new ShipmentClass { Desc= "Box", MaxLength =90.00f, MaxHeight =90.00f, MaxWidth= 90.00f, GroundCost =4.00f, ExpressCost =15.00f},
+                new ShipmentClass { Desc= "Letter", MaxLength =11.50f, MaxWidth =6.20f, MaxHeight= 0.25f, GroundCost =1.50f, ExpressCost =9.00f},
+                new ShipmentClass { Desc= "Large Envelope", MaxLength =15.00f, MaxWidth =12.00f, MaxHeight= 0.75f, GroundCost =2.00f, ExpressCost =10.00f},
+                new ShipmentClass { Desc= "Box", MaxLength =90.00f, MaxWidth =90.00f, MaxHeight= 90.00f, GroundCost =4.00f, ExpressCost =15.00f},
             };
             context.ShipmentClasses.AddRange(ships);
             context.SaveChanges();
 
             var packs = new Package[]
             {
-                new Package { SenderID= 1, ReceiverID =2, Description="luxury", AddressID =3, ShipCost =2.89F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=3.4F, ClassID=1, Express=true},
-                new Package { SenderID= 2, ReceiverID =1, AddressID =4, ShipCost =3.50F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=1.5f, ClassID=2},
-                new Package { SenderID= 3, ReceiverID =1, AddressID =5, ShipCost =5.50F, Width=2.2F, Depth=2.3F, Height=5.5F, Weight=3.0f, ClassID=2, Express=true},
-                new Package { SenderID= 4, ReceiverID =3, AddressID =6, ShipCost =3.25F, Width=1.1F, Depth=2.3F, Height=4.4F, Weight=1.4f, ClassID=2},
-                new Package { SenderID= 5, ReceiverID =4, AddressID =7, ShipCost =2.75F, Width=1.1F, Depth=2.2F, Height=4.4F, Weight=3.3F, ClassID=1, Express=true},
-                new Package { SenderID= 6, ReceiverID =5, AddressID =8, ShipCost =2.92F, Width=1.3F, Depth=2.4F, Height=4.5F, Weight=3.6F, ClassID=1},
-                new Package { SenderID= 7, ReceiverID =6, AddressID =9, ShipCost =3.51F, Width=1.2F, Depth=2.4F, Height=4.5F, Weight=1.5f, ClassID=2},
+                new Package { SenderID= 1, ReceiverID =2, Description="luxury", AddressID =3, ShipCost =51F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=3.4F, ClassID=3, Express=true},
+                new Package { SenderID= 2, ReceiverID =1, AddressID =4, ShipCost =2.25F, Width=4.5, Depth=2.3F, Height=0.15F, Weight=1.5f, ClassID=1},
+                new Package { SenderID= 3, ReceiverID =1, AddressID =5, ShipCost =27.0F, Width=12.2F, Depth=2.3F, Height=0.5F, Weight=3.0f, ClassID=2, Express=true},
+                new Package { SenderID= 4, ReceiverID =3, AddressID =6, ShipCost =2.8F, Width=1.1F, Depth=2.3F, Height=0.4F, Weight=1.4f, ClassID=2},
+                new Package { SenderID= 5, ReceiverID =4, AddressID =7, ShipCost =49.5F, Width=1.1F, Depth=2.2F, Height=4.4F, Weight=3.3F, ClassID=3, Express=true},
+                new Package { SenderID= 6, ReceiverID =5, AddressID =8, ShipCost =5.4F, Width=1.3F, Depth=2.4F, Height=.15F, Weight=3.6F, ClassID=1},
+                new Package { SenderID= 7, ReceiverID =6, AddressID =9, ShipCost =3.0F, Width=1.2F, Depth=2.4F, Height=0.5F, Weight=1.5f, ClassID=2},
 
             };
             context.Packages.AddRange(packs);
@@ -107,12 +105,12 @@ namespace UHPostalService.Data
 
             var sales = new Sale[]
             {
-                new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2010-09-01"), Total = 30.0f},
-                new Sale { ProductID= 2, Quantity =10, PurchaseDate =DateTime.Parse("2015-07-24"), BuyerID=1, Total = 20.5f},
-                new Sale { ProductID= 2, Quantity =4, PurchaseDate =DateTime.Parse("2011-08-02"), Total = 8.20f},
-                new Sale { ProductID= 1, Quantity =2, PurchaseDate =DateTime.Parse("2016-09-15"), Total = 12.0f},
-                new Sale { ProductID= 1, Quantity =3, PurchaseDate =DateTime.Parse("2020-11-01"), Total = 18.0f},
-                new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2009-09-09"), Total = 30.0f},
+                new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2010-09-01"), Total = 29.95f},
+                new Sale { ProductID= 2, Quantity =10, PurchaseDate =DateTime.Parse("2015-07-24"), BuyerID=1, Total = 109.9f},
+                new Sale { ProductID= 2, Quantity =4, PurchaseDate =DateTime.Parse("2011-08-02"), Total = 43.96f},
+                new Sale { ProductID= 1, Quantity =2, PurchaseDate =DateTime.Parse("2016-09-15"), BuyerID=4,Total = 11.98f},
+                new Sale { ProductID= 1, Quantity =3, PurchaseDate =DateTime.Parse("2020-11-01"), BuyerID=6, Total = 17.97f},
+                new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2009-09-09"), BuyerID=5,Total = 29.95f},
             };
             context.Sales.AddRange(sales);
             context.SaveChanges();
@@ -120,20 +118,20 @@ namespace UHPostalService.Data
             
              var stores = new Store[]
             {
-                new Store { SupID= 3, PhoneNumber ="135794680", AddressID =3},
-                new Store { SupID= 2, PhoneNumber ="246813579", AddressID =2},
-                new Store { SupID= 4, PhoneNumber ="9456123658", AddressID =6},
-                new Store { SupID= 5, PhoneNumber ="8964512359", AddressID =7},
+                new Store { SupID= 3, PhoneNumber ="135794680", AddressID =2},
+                new Store { SupID= 2, PhoneNumber ="246813579", AddressID =3},
+                new Store { SupID= 4, PhoneNumber ="9456123658", AddressID =4},
+                new Store { SupID= 5, PhoneNumber ="8964512359", AddressID =5},
             };
             context.Stores.AddRange(stores);
             context.SaveChanges();
 
              var tracks = new TrackingRecord[]
             {
-                new TrackingRecord { EmployeeId= 1, TrackNum =1, StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =2},
-                new TrackingRecord { EmployeeId= 2, TrackNum =1, StoreId =2, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28")},
+                new TrackingRecord { EmployeeId= 4, TrackNum =1, StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =2},
+                new TrackingRecord { EmployeeId= 2, TrackNum =1, StoreId =1, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28")},
                 new TrackingRecord { EmployeeId= 3, TrackNum =3, StoreId =1, TimeIn= DateTime.Parse("2011-05-11"), TimeOut =DateTime.Parse("2011-06-19"), Destination =2},
-                new TrackingRecord { EmployeeId= 4, TrackNum =4, StoreId =2, TimeIn= DateTime.Parse("2017-04-21"), TimeOut =DateTime.Parse("2017-05-22")},
+                new TrackingRecord { EmployeeId= 4, TrackNum =4, StoreId =1, TimeIn= DateTime.Parse("2017-04-21"), TimeOut =DateTime.Parse("2017-05-22")},
                 new TrackingRecord { EmployeeId= 5, TrackNum =5, StoreId =1, TimeIn= DateTime.Parse("2020-07-20"), TimeOut =DateTime.Parse("2020-08-22")},
             };
             context.TrackingRecords.AddRange(tracks);
