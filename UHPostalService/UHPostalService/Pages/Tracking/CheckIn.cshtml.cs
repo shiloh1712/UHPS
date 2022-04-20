@@ -42,7 +42,7 @@ namespace UHPostalService.Pages.Tracking
             }
             if(urltrnum == null)
             {
-                return Page();
+                //return Page();
             }
             int num = Int32.Parse(TrNums);
             //int num = (int)urltrnum;
