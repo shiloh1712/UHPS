@@ -8,7 +8,10 @@
 <h1>Stores</h1>
 
 <p>
-    <a asp-page="Create">New Store</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-page="Create">New Store</a>
+    }
 </p>
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
@@ -34,13 +37,18 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Store[0].PhoneNumber)
+                #
             </th>
+
+           
             <th>
                 @Html.DisplayNameFor(model => model.Store[0].Supervisor)
             </th>
             <th>
                 Address
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Store[0].PhoneNumber)
             </th>
             <!--</th>-->
             <th>
@@ -53,9 +61,7 @@
                 @Html.DisplayNameFor(model => model.Store[0].Address.Zipcode)
                 </a>
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Store[0].Id)
-            </th>
+            
         </tr>
     </thead>
     <tbody>
@@ -64,8 +70,9 @@
             {
                 <tr>
                     <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
+                    
             <td>
                 @Html.DisplayFor(modelItem => item.Supervisor.Name)
             </td>
@@ -73,18 +80,27 @@
                 @Html.DisplayFor(modelItem => item.Address.StreetAddress)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Address.State)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address.Zipcode)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> <text>|</text>
+                }
+
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <text>|</text> <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                }
             </td>
         </tr>}
 }
