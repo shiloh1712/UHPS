@@ -101,9 +101,17 @@
                     @Html.DisplayFor(modelItem=>item.ShipCost)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @if (User.IsInRole("Admin") || (User.IsInRole("Supervisor")) || (User.IsInRole("Employee")))
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> <text>|</text>
+                }
+
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
+
+                @if (User.IsInRole("Admin") || (User.IsInRole("Supervisor")) || (User.IsInRole("Employee")))
+                {
+                    <text>|</text> <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                }
                 </td>
             </tr>}
         }
