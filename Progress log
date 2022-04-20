@@ -71,3 +71,5 @@
 
 4/19: Josh: made a bunch of visual changes, added sorting and filtering to shipments page, added customers button on header
       Son: add link to employee login on customer login page; fix costtrigger
+      Morrison: Worked on edit address of customer, linked create page to correct page for employee, added another sorting to employee, and did many meanginful seeds. 
+
