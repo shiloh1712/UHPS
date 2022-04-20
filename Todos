@@ -74,5 +74,5 @@ Layout:
   only employee can delete ✓ - Andy
   
 /sales: only employees can see button ✓ - Andy
-  details: show "anonymous" if no buyer info ✓ - Not Andy
+  details: show "anonymous" if no buyer info ✓ - Josh
 
