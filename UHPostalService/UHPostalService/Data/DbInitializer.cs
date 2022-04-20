@@ -132,10 +132,10 @@ namespace UHPostalService.Data
              var tracks = new TrackingRecord[]
             {
                 new TrackingRecord { EmployeeId= 4, TrackNum =1, StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =2},
-                new TrackingRecord { EmployeeId= 2, TrackNum =1, StoreId =2, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28")},
+                new TrackingRecord { EmployeeId= 2, TrackNum =1, StoreId =2, TimeIn= DateTime.Parse("2016-03-22")},
                 new TrackingRecord { EmployeeId= 3, TrackNum =3, StoreId =1, TimeIn= DateTime.Parse("2011-05-11"), TimeOut =DateTime.Parse("2011-06-19"), Destination =2},
-                new TrackingRecord { EmployeeId= 4, TrackNum =4, StoreId =1, TimeIn= DateTime.Parse("2017-04-21"), TimeOut =DateTime.Parse("2017-05-22")},
-                new TrackingRecord { EmployeeId= 5, TrackNum =5, StoreId =1, TimeIn= DateTime.Parse("2020-07-20"), TimeOut =DateTime.Parse("2020-08-22")},
+                new TrackingRecord { EmployeeId= 4, TrackNum =4, StoreId =1, TimeIn= DateTime.Parse("2017-04-21")},
+                new TrackingRecord { EmployeeId= 5, TrackNum =5, StoreId =1, TimeIn= DateTime.Parse("2020-07-20")},
             };
             context.TrackingRecords.AddRange(tracks);
             context.SaveChanges();
