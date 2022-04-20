@@ -76,10 +76,10 @@ namespace UHPostalService.Pages.Account.Employees
                     break;
             }
 
-            Employee = await EmployeeIdent.
-                Include(s=>s.Address).
-                Include(s=>s.Store)
-                .Include(s=>s.Store.Address).ToListAsync();
+            Employee = await EmployeeIdent
+                .Include(s=>s.Address)
+                .Include(s=>s.Store)
+                .ToListAsync();
         }
     }
 }

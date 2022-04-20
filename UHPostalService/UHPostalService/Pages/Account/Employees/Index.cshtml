@@ -75,9 +75,9 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Address.Id)
-            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.StreetAddress), @Html.DisplayFor(modelItem => item.Address.City), @Html.DisplayFor(modelItem => item.Address.State), @Html.DisplayFor(modelItem => item.Address.Zipcode)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Store.Id)
             </td>
