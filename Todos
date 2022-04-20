@@ -50,6 +50,8 @@ Layout:
     2. only admin can see/access "New Store" and edit, delete ✓ - Andy
     3. seed more meaningful data (different states, zipcode) ✓ Morrison
     4. move id to the left (top of html), change it to "#" (meaning store number) ✓ - Andy
+  Details:
+    1. (Optional) Add filtered list of employees for specific store
   Edit:
     1. Edit Address on site, no reference (refer to edit shipment as example) 
   
