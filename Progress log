@@ -47,7 +47,7 @@
       
 4/10: Josh: Added sorting and filtering by state to the store index
 
-4/11: Andy: edit new store page
+4/11: Andy: create and edit new store page
       Son: add accessdenied page; 
 
 4/13: Josh: Did create,details page for sales, redirected tracking record create link, made NewSale trigger, Finished Shop page
@@ -72,4 +72,4 @@
 4/19: Josh: made a bunch of visual changes, added sorting and filtering to shipments page, added customers button on header
       Son: add link to employee login on customer login page; fix costtrigger
       Morrison: Worked on edit address of customer, linked create page to correct page for employee, added another sorting to employee, and did many meanginful seeds. 
-
+      Andy: Prohibit customers from having access to admin/employee/supervisor pages in Sales, Tracking, Shipment, and Stores. Visual changes.
