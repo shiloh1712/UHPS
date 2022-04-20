@@ -56,7 +56,7 @@ namespace UHPostalService.Data
             var packs = new Package[]
             {
                 new Package { SenderID= 1, ReceiverID =2, Description="luxury", AddressID =3, ShipCost =2.89F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=3.4F, ClassID=1, Express=true},
-                new Package { SenderID= 2, ReceiverID =1, AddressID =4, ShipCost =3.50F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=1.5f, ClassID=2},
+                new Package { SenderID= 2, ReceiverID =1, Description="Pillow", AddressID =4, ShipCost =3.50F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=1.5f, ClassID=2},
             };
             context.Packages.AddRange(packs);
             context.SaveChanges();
@@ -71,8 +71,8 @@ namespace UHPostalService.Data
 
             var sales = new Sale[]
             {
-                new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2010-09-01"), Total = 30.0f},
-                new Sale { ProductID= 2, Quantity =10, PurchaseDate =DateTime.Parse("2015-07-24"), BuyerID=1, Total = 20.5f},
+                new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2010-09-01"), Total = 29.95f},
+                new Sale { ProductID= 2, Quantity =10, PurchaseDate =DateTime.Parse("2015-07-24"), BuyerID=1, Total = 109.90f},
             };
             context.Sales.AddRange(sales);
             context.SaveChanges();
