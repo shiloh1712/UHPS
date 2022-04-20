@@ -31,13 +31,13 @@ namespace UHPostalService.Data
                 new Address { StreetAddress = "369 Armbrester Drive", City = "El Segundo", State = "CA", Zipcode = "90245" },
                 new Address { StreetAddress = "2581 Hiney Road", City = "Las Vegas", State = "NV", Zipcode = "89102" },
                 new Address { StreetAddress = "1155 Sycamore Circle", City = "Dallas", State = "TX", Zipcode = "75204" },
-                new Address { StreetAddress = "337 Hide A Way Road", City = "Winter Park", State = "FL", Zipcode = "32789" },
+                new Address { StreetAddress = "337 Hide A Way Road", City = "Destin", State = "FL", Zipcode = "32789" },
                 new Address { StreetAddress = "1740 Pyramid Valley Road", City = "Fort Madison", State = "IA", Zipcode = "52627" },
                 new Address { StreetAddress = "1216 Poplar Avenue", City = "San Diego", State = "CA", Zipcode = "92105" },
                 new Address { StreetAddress = "2218 Seneca Drive", City = "Salem", State = "OR", Zipcode = "97301" },
                 new Address { StreetAddress = "1438 Kenwood Place", City = "Tamarac", State = "FL", Zipcode = "33321" },
                 new Address { StreetAddress = "1588 Whiteman Street", City = "Somers Point", State = "NJ", Zipcode = "08244" },
-                new Address { StreetAddress = "1752 Hickory Heights Drive", City = "Linthicum Heights", State = "MD", Zipcode = "21090" },
+                new Address { StreetAddress = "1752 Hickory Heights Drive", City = "Linthicum", State = "MD", Zipcode = "21090" },
 
 
             };
@@ -84,7 +84,7 @@ namespace UHPostalService.Data
             var packs = new Package[]
             {
                 new Package { SenderID= 1, ReceiverID =2, Description="luxury", AddressID =3, ShipCost =51F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=3.4F, ClassID=3, Express=true},
-                new Package { SenderID= 2, ReceiverID =1,Description="Pillow", AddressID =4, ShipCost =2.25F, Width=4.5, Depth=2.3F, Height=0.15F, Weight=1.5f, ClassID=1},
+                new Package { SenderID= 2, ReceiverID =1,Description="Pillow", AddressID =4, ShipCost =2.25F, Width=4.5f, Depth=2.3F, Height=0.15F, Weight=1.5f, ClassID=1},
                 new Package { SenderID= 3, ReceiverID =1,Description="wedding ring", AddressID =5, ShipCost =27.0F, Width=12.2F, Depth=2.3F, Height=0.5F, Weight=3.0f, ClassID=2, Express=true},
                 new Package { SenderID= 4, ReceiverID =3, AddressID =6, ShipCost =2.8F, Width=1.1F, Depth=2.3F, Height=0.4F, Weight=1.4f, ClassID=2},
                 new Package { SenderID= 5, ReceiverID =4,Description="chocolate", AddressID =7, ShipCost =49.5F, Width=1.1F, Depth=2.2F, Height=4.4F, Weight=3.3F, ClassID=3, Express=true},
@@ -118,10 +118,10 @@ namespace UHPostalService.Data
             
              var stores = new Store[]
             {
-                new Store { SupID= 3, PhoneNumber ="135794680", AddressID =2},
-                new Store { SupID= 2, PhoneNumber ="246813579", AddressID =3},
-                new Store { SupID= 4, PhoneNumber ="9456123658", AddressID =4},
-                new Store { SupID= 5, PhoneNumber ="8964512359", AddressID =5},
+                new Store { SupID= 3, PhoneNumber ="135794680", AddressID =12},
+                new Store { SupID= 2, PhoneNumber ="246813579", AddressID =13},
+                new Store { SupID= 4, PhoneNumber ="9456123658", AddressID =14},
+                new Store { SupID= 5, PhoneNumber ="8964512359", AddressID =15},
             };
             context.Stores.AddRange(stores);
             context.SaveChanges();
@@ -129,7 +129,7 @@ namespace UHPostalService.Data
              var tracks = new TrackingRecord[]
             {
                 new TrackingRecord { EmployeeId= 4, TrackNum =1, StoreId =1, TimeIn= DateTime.Parse("2012-04-12"), TimeOut =DateTime.Parse("2012-04-18"), Destination =2},
-                new TrackingRecord { EmployeeId= 2, TrackNum =1, StoreId =1, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28")},
+                new TrackingRecord { EmployeeId= 2, TrackNum =1, StoreId =2, TimeIn= DateTime.Parse("2016-03-22"), TimeOut =DateTime.Parse("2016-03-28")},
                 new TrackingRecord { EmployeeId= 3, TrackNum =3, StoreId =1, TimeIn= DateTime.Parse("2011-05-11"), TimeOut =DateTime.Parse("2011-06-19"), Destination =2},
                 new TrackingRecord { EmployeeId= 4, TrackNum =4, StoreId =1, TimeIn= DateTime.Parse("2017-04-21"), TimeOut =DateTime.Parse("2017-05-22")},
                 new TrackingRecord { EmployeeId= 5, TrackNum =5, StoreId =1, TimeIn= DateTime.Parse("2020-07-20"), TimeOut =DateTime.Parse("2020-08-22")},

@@ -17,7 +17,7 @@ namespace UHPostalService.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StreetAddress = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     State = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
                     Zipcode = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false)
                 },
@@ -254,7 +254,7 @@ namespace UHPostalService.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-            /*
+            
             //trigger: if package is sent to destination instead of another store, package status is updated to out-for-delivery
             migrationBuilder.Sql(@"drop trigger if exists autostatus
                                     go
@@ -287,8 +287,7 @@ namespace UHPostalService.Migrations
                                         declare @tin DateTime;
                                         declare @tout DateTime;
                                         declare @ident int;
-                                        select @ident=Id from inserted;
-                                        select @tin=trackingrecords.TimeIn, @tout=trackingrecords.TimeOut from inserted,trackingrecords where trackingrecords.Id=@ident;
+                                        select @ident=Id, @tin=TimeIn, @tout=TimeOut from inserted;
                                         if @tin is NULL
                                         begin
                                             update trackingrecords set trackingrecords.TimeIn = getdate() where trackingrecords.Id=@ident;
@@ -299,48 +298,42 @@ namespace UHPostalService.Migrations
                                         end
                                     end");
             //trigger: automatically set the cost of a package
-            migrationBuilder.Sql(@"		drop trigger if exists cost
-		                            go
-		                            create trigger cost on packages
-		                            after insert
-		                            as begin
-			                            declare @total float;
-			                            declare @W float;
-			                            declare @exp int;
-			                            declare @ident int;
-										declare @depth float;
-										declare @width float;
-										declare @height float;
-			                            select @ident=Id from inserted;
-			                            select @W = packages.Weight, @exp = packages.Express, @depth = packages.Depth, @width = packages.Width, @height = packages.Height from packages where packages.Id =@ident;
-										declare @bound int;
-										select @bound = Id from ShipmentClasses where ExpressCost >= 0;
-											if @exp = 1
-											begin
-											set @total = (select min(ShipmentClasses.ExpressCost) from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength);
+            migrationBuilder.Sql(@"drop trigger if exists cost
+            go
+            create trigger cost on packages
+            after insert
+            as begin
+                declare @total float;
+                declare @W float;
+                declare @exp int;
+                declare @ident int;
+                declare @depth float;
+                declare @width float;
+                declare @height float;
+                declare @shipclass int;
+                select @ident=Id from inserted;
+                select @W = packages.Weight, @exp = packages.Express, @depth = packages.Depth, @width = packages.Width, @height = packages.Height from packages where packages.Id =@ident;
+                declare @bound int;
+                select @bound = Id from ShipmentClasses where ExpressCost >= 0;
+                select @shipclass = (select top 1 id from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength order by GroundCost)
+                if @shipclass is null
+                select @shipclass=(select top 1 id from ShipmentClasses order by GroundCost desc)
 
-											end
+                    if @exp = 1
+                    begin
+                    select @total = ShipmentClasses.ExpressCost from ShipmentClasses where id=@shipclass;
 
-											if @exp = 0
-											begin
-											set @total = (select min(ShipmentClasses.GroundCost) from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength);
-											end
-										if @total is null
-										begin
-											if @exp = 1
-											begin
-											set @total = (select max(ExpressCost) from ShipmentClasses);
-											end
-											else
-											begin
-											set @total = (select max(GroundCost) from ShipmentClasses);
-											end
-										end
-										set @total = (@total * @W);	
-			                            update packages set packages.ShipCost = @total where packages.Id = @ident;
-		                            end
-");
-            
+                    end
+
+                    if @exp = 0
+                    begin
+                    select @total = ShipmentClasses.GroundCost from ShipmentClasses where id=@shipclass;
+                    end
+
+                set @total = (@total * @W);	
+                update packages set packages.ShipCost = @total, packages.classid=@shipclass where packages.Id = @ident;
+            end");
+
 
             migrationBuilder.Sql(@"drop trigger if exists NewSale
                                     go
@@ -390,7 +383,7 @@ namespace UHPostalService.Migrations
 
 							end
 ");
-            */
+            
 
 
             migrationBuilder.CreateIndex(

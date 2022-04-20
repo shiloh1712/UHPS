@@ -53,7 +53,7 @@ namespace UHPostalService.Pages.Account.Employees
             Employee.Address = _context.Addresses.Where(e=>e.Id == Employee.AddressID).FirstOrDefault();
             if (!ModelState.IsValid)
             {
-                return Page();
+                //return Page();
             }
 
             _context.Attach(Employee).State = EntityState.Modified;
