@@ -34,13 +34,13 @@ namespace UHPostalService.Pages.Tracking
         public TrackingRecord TrackingRecord { get; set; }
         */
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? urltrnum)
         {
             if (!ModelState.IsValid)
             {
                 //return Page();
             }
-            if(TrNums == null)
+            if(TrNums == null && urltrnum == null)
             {
                 return Page();
             }
