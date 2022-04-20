@@ -84,13 +84,12 @@ namespace UHPostalService.Data
             var packs = new Package[]
             {
                 new Package { SenderID= 1, ReceiverID =2, Description="luxury", AddressID =3, ShipCost =51F, Width=1.2F, Depth=2.3F, Height=4.5F, Weight=3.4F, ClassID=3, Express=true},
-                new Package { SenderID= 2, ReceiverID =1, AddressID =4, ShipCost =2.25F, Width=4.5, Depth=2.3F, Height=0.15F, Weight=1.5f, ClassID=1},
-                new Package { SenderID= 3, ReceiverID =1, AddressID =5, ShipCost =27.0F, Width=12.2F, Depth=2.3F, Height=0.5F, Weight=3.0f, ClassID=2, Express=true},
+                new Package { SenderID= 2, ReceiverID =1,Description="Pillow", AddressID =4, ShipCost =2.25F, Width=4.5, Depth=2.3F, Height=0.15F, Weight=1.5f, ClassID=1},
+                new Package { SenderID= 3, ReceiverID =1,Description="wedding ring", AddressID =5, ShipCost =27.0F, Width=12.2F, Depth=2.3F, Height=0.5F, Weight=3.0f, ClassID=2, Express=true},
                 new Package { SenderID= 4, ReceiverID =3, AddressID =6, ShipCost =2.8F, Width=1.1F, Depth=2.3F, Height=0.4F, Weight=1.4f, ClassID=2},
-                new Package { SenderID= 5, ReceiverID =4, AddressID =7, ShipCost =49.5F, Width=1.1F, Depth=2.2F, Height=4.4F, Weight=3.3F, ClassID=3, Express=true},
-                new Package { SenderID= 6, ReceiverID =5, AddressID =8, ShipCost =5.4F, Width=1.3F, Depth=2.4F, Height=.15F, Weight=3.6F, ClassID=1},
+                new Package { SenderID= 5, ReceiverID =4,Description="chocolate", AddressID =7, ShipCost =49.5F, Width=1.1F, Depth=2.2F, Height=4.4F, Weight=3.3F, ClassID=3, Express=true},
+                new Package { SenderID= 6, ReceiverID =5,Description="cash", AddressID =8, ShipCost =5.4F, Width=1.3F, Depth=2.4F, Height=.15F, Weight=3.6F, ClassID=1},
                 new Package { SenderID= 7, ReceiverID =6, AddressID =9, ShipCost =3.0F, Width=1.2F, Depth=2.4F, Height=0.5F, Weight=1.5f, ClassID=2},
-
             };
             context.Packages.AddRange(packs);
             context.SaveChanges();
@@ -111,6 +110,7 @@ namespace UHPostalService.Data
                 new Sale { ProductID= 1, Quantity =2, PurchaseDate =DateTime.Parse("2016-09-15"), BuyerID=4,Total = 11.98f},
                 new Sale { ProductID= 1, Quantity =3, PurchaseDate =DateTime.Parse("2020-11-01"), BuyerID=6, Total = 17.97f},
                 new Sale { ProductID= 1, Quantity =5, PurchaseDate =DateTime.Parse("2009-09-09"), BuyerID=5,Total = 29.95f},
+                new Sale { ProductID= 2, Quantity =10, PurchaseDate =DateTime.Parse("2015-07-24"), BuyerID=1, Total = 109.90f},
             };
             context.Sales.AddRange(sales);
             context.SaveChanges();
