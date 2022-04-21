@@ -41,8 +41,8 @@ namespace UHPostalService.Pages.Account.Employees
             {
                 return NotFound();
             }
-           ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "StreetAddress");
-           ViewData["StoreID"] = new SelectList(_context.Stores, "Id", "Address.StreetAddress");
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "StreetAddress");
+            ViewData["StoreID"] = new SelectList(_context.Stores, "Id", "Address.StreetAddress");
             return Page();
         }
 
@@ -50,11 +50,12 @@ namespace UHPostalService.Pages.Account.Employees
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            Employee.Address = _context.Addresses.Where(e=>e.Id == Employee.AddressID).FirstOrDefault();
+            Employee.Address = _context.Addresses.Where(e => e.Id == Employee.AddressID).FirstOrDefault();
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
 
             _context.Attach(Employee).State = EntityState.Modified;
 
@@ -82,4 +83,6 @@ namespace UHPostalService.Pages.Account.Employees
             return _context.Employees.Any(e => e.Id == id);
         }
     }
+
 }
+

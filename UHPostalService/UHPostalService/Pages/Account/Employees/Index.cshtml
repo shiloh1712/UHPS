@@ -7,23 +7,29 @@
 
 <h1>All Employees</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+@if (Convert.ToString(Model.Employee[0].Role) == "Admin")
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+}
+
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by 
-                <!--<label asp-for="test" class="control-label"></label>-->
-                <!--<input asp-for="Address.State" class="form-control" />-->
-                <select asp-for="test" name="filterby" value="@Model.test" class ="form-group">
-					<option value="1">Name</option>
-					<option value="2">Email</option>
-                    <option value="3">Phone Number</option>
-				</select>
-				<span asp-validation-for="test" class="text-danger"></span>
+            Find by
+            <!--<label asp-for="test" class="control-label"></label>-->
+            <!--<input asp-for="Address.State" class="form-control" />-->
+            <select asp-for="test" name="filterby" value="@Model.test" class="form-group">
+                <option value="1">Name</option>
+                <option value="2">Email</option>
+                <option value="3">Phone Number</option>
+                <option value="4">Store</option>
+                <option value="5">Role</option>
+            </select>
+            <span asp-validation-for="test" class="text-danger"></span>
 
-            
+
             <input type="text" name="SearchString" value="@Model.CurrentFilter" />
             <input type="submit" value="Search" class="btn btn-primary" /> |
             <a asp-page="./Index">Back to full List</a>
@@ -36,21 +42,21 @@
         <tr>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
-                @Html.DisplayNameFor(model => model.Employee[0].Name)
-                </a>            </th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Name)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Employee[0].PhoneNumber)
             </th>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
-                @Html.DisplayNameFor(model => model.Employee[0].Email)
-                </a>            </th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Email)
+                </a>
             </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Address)
-            </th>
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Address)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Store)
             </th>
@@ -60,36 +66,93 @@
             <th></th>
         </tr>
     </thead>
+
+
     <tbody>
-@foreach (var item in Model.Employee) {
+        @foreach (var item in Model.Employee)
+        {
             if (!item.Deleted)
             {
+                if ((Convert.ToString(Model.Employee[0].Role) == "Employee"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Store.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                    </tr>
+                }
+                else if ((Convert.ToString(Model.Employee[0].Role) == "Supervisor"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Store.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+                    else if (Convert.ToString(Model.Employee[0].Role) == "Admin")
+                    {
+                    
                 <tr>
                     <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Address.Id)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Store.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>}
-}
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.Address.Id)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Store.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+                    }
+                }
+            }
     </tbody>
+
+
 </table>
