@@ -33,11 +33,11 @@ Layout:
 
  
 /Shop:
-  1.Remove details (and links from all pages)
+  1.Remove details (and links from all pages) ✓ - Josh
   Index:
-    1. Filter by stock, price (range) ✓ - Not Andy
+    1. Filter by stock, price (range) ✓ - Josh
     2. "Create New" --> "New Products" ✓ - Josh
-    3. Anonymous (including customers): only see products, no edit/delete ✓ - Andy
+    3. Anonymous (including customers): only see products, no edit/delete ✓ - Andy (bruh i did this on 4/20 - josh)
   Create:
     1. UnitCost --> "Unit Cost" ✓ - Josh
     2. "Create Product" --> "New Product" ✓ - Josh
@@ -64,7 +64,7 @@ Layout:
     5. shipcost --> Cost ✓ - Josh
     6. more meaningful seeds ✓ Morrison
   Create:
-    1. fix trigger auto cost/shipping classes
+    1. fix trigger auto cost/shipping classes ✓ - Son
     2. 
   Edit:
     1. Title: Edit Shipment ✓ - Josh
