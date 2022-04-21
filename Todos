@@ -3,6 +3,7 @@ Layout:
   1. add "customers" button ✓ - Josh
   
 /Account/Customers:
+  0. trigger: customer's address cannot == store address (seed "invalid address" in addresses, set to that?)
   Login:
     1. add "Employee Log In" ✓ - Josh
     2. create not working (refer to employee)
