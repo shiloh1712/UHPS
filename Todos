@@ -65,7 +65,7 @@ Layout:
     6. more meaningful seeds ✓ Morrison
   Create:
     1. fix trigger auto cost/shipping classes ✓ - Son
-    2. 
+    2. handle dup address
   Edit:
     1. Title: Edit Shipment ✓ - Josh
     2. edit trigger autodate for new tracking  ✓ - Son
@@ -78,4 +78,5 @@ Layout:
   
 /sales: only employees can see button ✓ - Andy
   details: show "anonymous" if no buyer info ✓ - Josh
+  *: shopping cart (if anyone think they can handle https://learningprogramming.net/net/asp-net-core-razor-pages/build-shopping-cart-with-session-in-asp-net-core-razor-pages/)
 
