@@ -126,12 +126,4 @@ update sales set sales.PurchaseDate=getdate() where sales.ID = @ident;
 
 end
 
-create trigger test on trackingrecords
-instead of insert
-as begin
-	declare @store int;
-	declare @emp int;
-	declare @trnum int;
-	select @store = storeid, @emp = employeeid from inserted;
 
-end
