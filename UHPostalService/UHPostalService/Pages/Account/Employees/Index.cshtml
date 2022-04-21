@@ -7,6 +7,7 @@
 
 <h1>All Employees</h1>
 
+
 @if (Convert.ToString(Model.Employee[0].Role) == "Admin")
 {
     <p>
@@ -28,6 +29,24 @@
                 <option value="5">Role</option>
             </select>
             <span asp-validation-for="test" class="text-danger"></span>
+    </div>
+ </form>
+
+
+<p>
+    <a asp-page="Create">Register New</a>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by 
+                <select asp-for="test" name="filterby" value="@Model.test" class ="form-group">
+					<option value="1">Name</option>
+					<option value="2">Email</option>
+                    <option value="3">Phone Number</option>
+                    <!--<option value="4">Store #</option>/>-->
+				</select>
+				<span asp-validation-for="test" class="text-danger"></span>
 
 
             <input type="text" name="SearchString" value="@Model.CurrentFilter" />
@@ -58,7 +77,9 @@
                     @Html.DisplayNameFor(model => model.Employee[0].Address)
                 </th>*@
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
                 @Html.DisplayNameFor(model => model.Employee[0].Store)
+                </a>            </th>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Employee[0].Role)
@@ -152,6 +173,36 @@
                     }
                 }
             }
+                
+                @*<tr>
+                    <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.StreetAddress), @Html.DisplayFor(modelItem => item.Address.City), @Html.DisplayFor(modelItem => item.Address.State), @Html.DisplayFor(modelItem => item.Address.Zipcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Store.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            @if (User.IsInRole("Admin") || (User.IsInRole("Supervisor")))
+                    {
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>}
+        </tr>}*@
+}
     </tbody>
 
 

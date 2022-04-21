@@ -20,13 +20,18 @@ namespace UHPostalService.Pages.Shipments
         {
             _context = context;
         }
-        public string StatusSort { get; set; }
         public List<Status> StatusOptions { get; set; }
 
         public IList<Package> Package { get;set; }
-        public string StatusFilter { get; set; }
+        public string StatusSort { get; set; }
+        public string NameSort { get; set; }
+        public string ExpressSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
+        public int test { get; set; }
+        public bool expr { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string statusFilter)
+        public async Task OnGetAsync(string sortOrder, string searchString, int filterby, bool exp)
         {
             /*StatusOptions = 
             StatusFilterOptions = _context.Packages.Select(p =>
@@ -36,23 +41,111 @@ namespace UHPostalService.Pages.Shipments
                                       Text = p.Status.ToString()
                                   }).Distinct().ToList();
             ViewData["StatusOptions"] = StatusFilterOptions;*/
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            StatusSort = sortOrder == "Date" ? "date_desc" : "Date";
+            ExpressSort = sortOrder == "Express" ? "express_desc" : "Express";
 
-            StatusSort = String.IsNullOrEmpty(sortOrder) ? "status_desc" : "";
-            IQueryable<Package> packageIQ = from s in _context.Packages
-                                             select s;
+            CurrentFilter = searchString;
+            //expr = exp;
+            IQueryable<Package> PackageIdent = from s in _context.Packages
+                                               select s;
+            int stat =0;
+            test = filterby;
+            /*if(test == 6)
+            {
+                switch (searchString)
+                {
+                    case "In Store":
+                        stat = 0;
+                        break;
+                    case "In Transit":
+                        stat = 1;
+                        break;
+                    case "Out for Delivery":
+                        stat = 2;
+                        break;
+                    case "Delivered":
+                        stat = 3;
+                        break;
+                    case "Returned":
+                        stat = 4;
+                        break;
+                    case "Lost":
+                        stat = 5;
+                        break;
+                    default:
+                        searchString = "";
+                        ModelState.AddModelError(string.Empty, "Invalid Status");
+
+                        break;
+
+                }
+            }*/
+            int tempo = stat;
+            if (!String.IsNullOrEmpty(searchString) && test == 2)
+            {
+                PackageIdent = PackageIdent.Where(s => s.Destination.State.Contains(searchString)
+
+                                       /*|| s.FirstMidName.Contains(searchString)*/);
+            }
+            if (!String.IsNullOrEmpty(searchString) && test == 1)
+            {
+                PackageIdent = PackageIdent.Where(s => s.Destination.Zipcode.Contains(searchString)
+
+                                       /*|| s.FirstMidName.Contains(searchString)*/);
+            }
+            if (!String.IsNullOrEmpty(searchString) && test == 3)
+            {
+                PackageIdent = PackageIdent.Where(s => s.Destination.City.Contains(searchString)
+
+                                       /*|| s.FirstMidName.Contains(searchString)*/);
+            }
+            if (!String.IsNullOrEmpty(searchString) && test == 4)
+            {
+                PackageIdent = PackageIdent.Where(s => s.Sender.Name.Contains(searchString)
+
+                                       /*|| s.FirstMidName.Contains(searchString)*/);
+            }
+            if (!String.IsNullOrEmpty(searchString) && test == 5)
+            {
+                PackageIdent = PackageIdent.Where(s => s.Receiver.Name.Contains(searchString)
+
+                                       /*|| s.FirstMidName.Contains(searchString)*/);
+            }
+            /*if (!String.IsNullOrEmpty(searchString) && test == 6)
+            {
+                PackageIdent = PackageIdent.Where(s => s.Status.Equals(searchString));
+                                       
+            }*/
+            if (exp == true)
+            {
+                PackageIdent = PackageIdent.Where(s => s.Express == true);
+            }
+
             switch (sortOrder)
             {
-                case "status_desc":
-                    packageIQ = packageIQ.OrderByDescending(s => s.Status);
+                case "name_desc":
+                    PackageIdent = PackageIdent.OrderByDescending(s => s.Status);
+                    break;
+                case "Date":
+                    PackageIdent = PackageIdent.OrderBy(s => s.Sender.Name);
+                    break;
+                case "date_desc":
+                    PackageIdent = PackageIdent.OrderByDescending(s => s.Sender.Name);
+                    break;
+                case "Express":
+                    PackageIdent = PackageIdent.OrderBy(s => s.Express);
+                    break;
+                case "express_desc":
+                    PackageIdent = PackageIdent.OrderByDescending(s => s.Express);
                     break;
                 default:
-                    packageIQ = packageIQ.OrderBy(s => s.Status);
+                    PackageIdent = PackageIdent.OrderBy(s => s.Status);
                     break;
             }
-            
-            Package = await packageIQ.AsNoTracking().Include(p => p.Destination)
-                .Include(p => p.Receiver)
-                .Include(p => p.Sender).ToListAsync();
+
+            Package = await PackageIdent
+                .Include(s => s.Sender).Include(s => s.Receiver).Include(s=>s.Destination).ToListAsync();
             /*Package = (IList<Package>)_context.Packages.Select(x => new
             {
                 Sender = x.Sender,

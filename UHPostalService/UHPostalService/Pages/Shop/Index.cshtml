@@ -6,16 +6,22 @@
 }
 
 <h1>Shop</h1>
-
-<p>
-    <a asp-page="Create">New Product</a>
-</p>
+@if (User.IsInRole("Admin") || (User.IsInRole("Supervisor")) || (User.IsInRole("Employee")))
+{
+    <p>
+    <a asp-page="Create">Create New</a>
+</p>}
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <p>
             Find by Description:
             <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <input type="submit" value="Search" class="btn btn-primary" />
+            | Price Range:
+            <input type="text" name="fr" value="@Model.from" />
+            to
+            <input type="text" name="mx" value="@Model.to" />
+            |
             <a asp-page="./Index">Back to full List</a>
         </p>
     </div>
@@ -34,9 +40,10 @@
                 </a>
             </th>
             <th>
+            <a asp-page="./Index" asp-route-sortOrder="@Model.StockSort">
                 @Html.DisplayNameFor(model => model.Product[0].Stock)
+                </a>
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -55,11 +62,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
-            <td>
+            @if (User.IsInRole("Admin") || (User.IsInRole("Supervisor")) || (User.IsInRole("Employee")))
+                    {
+                        <td>
+
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            </td>}
         </tr>}
 }
     </tbody>

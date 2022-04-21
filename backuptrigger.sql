@@ -26,63 +26,57 @@ go
 create trigger datechange on trackingrecords
 after insert, update
 as begin
-    declare @tin DateTime;
-    declare @tout DateTime;
-    declare @ident int;
-    select @ident=Id from inserted;
-    select @tin=trackingrecords.TimeIn, @tout=trackingrecords.TimeOut from inserted,trackingrecords where trackingrecords.Id=@ident;
-    if @tin is NULL
-    begin
-        update trackingrecords set trackingrecords.TimeIn = getdate() where trackingrecords.Id=@ident;
-    end
-    else
-    begin
-        update trackingrecords set trackingrecords.TimeOut = getdate() where trackingrecords.Id=@ident;
-    end
+declare @tin DateTime;
+declare @tout DateTime;
+declare @ident int;
+select @ident=Id, @tin=TimeIn, @tout=TimeOut from inserted;
+if @tin is NULL
+begin
+    update trackingrecords set trackingrecords.TimeIn = getdate() where trackingrecords.Id=@ident;
+end
+else
+begin
+    update trackingrecords set trackingrecords.TimeOut = getdate() where trackingrecords.Id=@ident;
+end
 end
 
 --trigger: automatically set the cost of a package
 drop trigger if exists cost
-	go
-	create trigger cost on packages
-	after insert
-	as begin
-		declare @total float;
-		declare @W float;
-		declare @exp int;
-		declare @ident int;
-		declare @depth float;
-		declare @width float;
-		declare @height float;
-		select @ident=Id from inserted;
-		select @W = packages.Weight, @exp = packages.Express, @depth = packages.Depth, @width = packages.Width, @height = packages.Height from packages where packages.Id =@ident;
-		declare @bound int;
-		select @bound = Id from ShipmentClasses where ExpressCost >= 0;
-			if @exp = 1
-			begin
-			set @total = (select min(ShipmentClasses.ExpressCost) from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength);
+            go
+            create trigger cost on packages
+            after insert
+            as begin
+                declare @total float;
+                declare @W float;
+                declare @exp int;
+                declare @ident int;
+                declare @depth float;
+                declare @width float;
+                declare @height float;
+                declare @shipclass int;
+                select @ident=Id from inserted;
+                select @W = packages.Weight, @exp = packages.Express, @depth = packages.Depth, @width = packages.Width, @height = packages.Height from packages where packages.Id =@ident;
+                declare @bound int;
+                select @bound = Id from ShipmentClasses where ExpressCost >= 0;
+                select @shipclass = (select top 1 id from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength order by GroundCost)
+                if @shipclass is null
+                select @shipclass=(select top 1 id from ShipmentClasses order by GroundCost desc)
 
-			end
+                    if @exp = 1
+                    begin
+                    select @total = ShipmentClasses.ExpressCost from ShipmentClasses where id=@shipclass;
 
-			if @exp = 0
-			begin
-			set @total = (select min(ShipmentClasses.GroundCost) from ShipmentClasses where @height < ShipmentClasses.MaxHeight and @width < ShipmentClasses.MaxWidth and @depth < ShipmentClasses.MaxLength);
-			end
-		if @total is null
-		begin
-			if @exp = 1
-			begin
-			set @total = (select max(ExpressCost) from ShipmentClasses);
-			end
-			else
-			begin
-			set @total = (select max(GroundCost) from ShipmentClasses);
-			end
-		end
-		set @total = (@total * @W);	
-		update packages set packages.ShipCost = @total where packages.Id = @ident;
-	end
-            
+                    end
+
+                    if @exp = 0
+                    begin
+                    select @total = ShipmentClasses.GroundCost from ShipmentClasses where id=@shipclass;
+                    end
+
+                set @total = (@total * @W);	
+                update packages set packages.ShipCost = @total, packages.classid=@shipclass where packages.Id = @ident;
+            end
+      
 
 drop trigger if exists NewSale
 go
@@ -131,3 +125,5 @@ update sales set sales.Total = @tot where sales.ID = @ident;
 update sales set sales.PurchaseDate=getdate() where sales.ID = @ident;
 
 end
+
+

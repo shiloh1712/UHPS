@@ -89,14 +89,21 @@ namespace UHPostalService.Pages.Shipments
                 await _context.SaveChangesAsync();
                 cust2 = From;
             }
-            Package newPack = new Models.Package { SenderID = cust2.Id, ReceiverID = cust.Id, AddressID = addr.Id, Description = Package.Description, Status = Package.Status, Weight = Package.Weight, Express = Package.Express, ShipCost = 0, Height = Package.Height, Width = Package.Width, Depth = Package.Depth, ClassID=1 };
+            Package newPack = new Models.Package { SenderID = cust2.Id, ReceiverID = cust.Id, AddressID = addr.Id, Description = Package.Description, Weight = Package.Weight, Express = Package.Express, ShipCost = 0, Height = Package.Height, Width = Package.Width, Depth = Package.Depth, ClassID=1};
             if (!ModelState.IsValid)
             {
                 //return Page();
             }
-
             _context.Packages.Add(newPack);
+            int employee = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+
             await _context.SaveChangesAsync();
+            Console.WriteLine(newPack.Id);
+            TrackingRecord trackingRecord = new TrackingRecord { EmployeeId = employee, StoreId = store, TrackNum = newPack.Id };
+            _context.TrackingRecords.Add(trackingRecord);
+            await _context.SaveChangesAsync();
+
 
             return RedirectToPage("./Index");
         }

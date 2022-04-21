@@ -34,17 +34,18 @@ namespace UHPostalService.Pages.Tracking
         public TrackingRecord TrackingRecord { get; set; }
         */
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? urltrnum)
         {
             if (!ModelState.IsValid)
             {
                 //return Page();
             }
-            if(TrNums == null)
+            if(urltrnum == null)
             {
-                return Page();
+                //return Page();
             }
             int num = Int32.Parse(TrNums);
+            //int num = (int)urltrnum;
             //var claims = ClaimsPrincipal.Current.Identities.FirstOrDefault().Claims.ToList();
             //string employeeid = claims?.FirstOrDefault(x => x.Type.Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))?.Value;
             //var principal = System.Security.Claims.ClaimsPrincipal.Current;
@@ -59,7 +60,7 @@ namespace UHPostalService.Pages.Tracking
             _context.TrackingRecords.Add(newrecord);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Shipments/Index");
         }
 
     }

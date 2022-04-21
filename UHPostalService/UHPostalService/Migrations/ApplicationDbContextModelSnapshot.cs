@@ -58,7 +58,7 @@ namespace UHPostalService.Migrations
                     b.HasIndex("StreetAddress", "City", "State", "Zipcode")
                         .IsUnique();
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Customer", b =>
@@ -96,7 +96,7 @@ namespace UHPostalService.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Employee", b =>
@@ -149,7 +149,7 @@ namespace UHPostalService.Migrations
 
                     b.HasIndex("StoreID");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Package", b =>
@@ -209,7 +209,7 @@ namespace UHPostalService.Migrations
 
                     b.HasIndex("SenderID");
 
-                    b.ToTable("Packages");
+                    b.ToTable("Packages", (string)null);
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Product", b =>
@@ -235,7 +235,7 @@ namespace UHPostalService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Sale", b =>
@@ -270,7 +270,7 @@ namespace UHPostalService.Migrations
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sales", (string)null);
                 });
 
             modelBuilder.Entity("UHPostalService.Models.ShipmentClass", b =>
@@ -305,7 +305,7 @@ namespace UHPostalService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShipmentClasses");
+                    b.ToTable("ShipmentClasses", (string)null);
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Store", b =>
@@ -337,7 +337,7 @@ namespace UHPostalService.Migrations
 
                     b.HasIndex("SupID");
 
-                    b.ToTable("Stores");
+                    b.ToTable("Stores", (string)null);
                 });
 
             modelBuilder.Entity("UHPostalService.Models.TrackingRecord", b =>
@@ -380,7 +380,7 @@ namespace UHPostalService.Migrations
 
                     b.HasIndex("TrackNum");
 
-                    b.ToTable("TrackingRecords");
+                    b.ToTable("TrackingRecords", (string)null);
                 });
 
             modelBuilder.Entity("UHPostalService.Models.Customer", b =>

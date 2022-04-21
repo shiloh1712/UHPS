@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace UHPostalService.Pages.Account.Employees
 {
@@ -64,6 +66,12 @@ namespace UHPostalService.Pages.Account.Employees
 
                                        /*|| s.FirstMidName.Contains(searchString)*/);
             }
+            /*if (!String.IsNullOrEmpty(searchString) && test == 4)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.StoreID.Equals((int)searchString)
+
+                                       );
+            }*/
 
             //if (!String.IsNullOrEmpty(searchString) && test == 4)
             //{
@@ -87,6 +95,9 @@ namespace UHPostalService.Pages.Account.Employees
                 case "Date":
                     EmployeeIdent = EmployeeIdent.OrderBy(s => s.Email);
                     break;
+                case "Store":
+                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Store);
+                    break;
                 case "date_desc":
                     EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.Email);
                     break;
@@ -94,11 +105,30 @@ namespace UHPostalService.Pages.Account.Employees
                     EmployeeIdent = EmployeeIdent.OrderBy(s => s.Name);
                     break;
             }
+            //int? store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            //int ident = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Id")).Value);
+            //var nme = HttpContext.User.Identity.Name;
+            var flop = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            Employee use = _context.Employees.Where(w => w.Id == flop).FirstOrDefault();
+            var currstore = use.StoreID;
 
-            Employee = await EmployeeIdent.
-                Include(s=>s.Address).
-                Include(s=>s.Store)
-                .Include(s=>s.Store.Address).ToListAsync();
+            if(User.IsInRole("Supervisor") && currstore !=null)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.StoreID == currstore || s.StoreID==null);
+            }
+            else if (currstore != null && User.IsInRole("Employee"))
+            {
+                EmployeeIdent = EmployeeIdent.Where(s=>s.StoreID == currstore);
+            }
+            else if(currstore == null && !User.IsInRole("Admin"))
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.Id == flop);
+            }
+
+            Employee = await EmployeeIdent
+                .Include(s=>s.Address)
+                .Include(s=>s.Store)
+                .ToListAsync();
         }
     }
 }

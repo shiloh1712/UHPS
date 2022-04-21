@@ -95,14 +95,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TimeOut)
             </td>
-            @if (Model.authorization == true)
+            @*@if (Model.authorization == true)
             {
                 <td>
                     <a asp-page="/Tracking/Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-page="/Tracking/Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-page="/Tracking/Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
-            }
+            }*@
         </tr>
 }
     </tbody>

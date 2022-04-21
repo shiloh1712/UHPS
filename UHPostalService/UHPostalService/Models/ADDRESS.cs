@@ -13,7 +13,7 @@ namespace UHPostalService.Models
         [MaxLength(30)]
         [Display(Name="Street Address")]
         public string StreetAddress { get; set; }
-        [MaxLength(10)]
+        [MaxLength(30)]
         public string City { get; set; }
         [StringLength(2)]
         public string State { get; set; }

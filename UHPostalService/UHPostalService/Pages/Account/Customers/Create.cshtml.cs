@@ -20,13 +20,21 @@ namespace UHPostalService.Pages.Account.Customers
         {
             _context = context;
         }
+        public class InputModel
+        {
+            public string Name { get; set; }
+            public string? PhoneNumber { get; set; }
+            public string Email { get; set; }
+            public string Password { get; set; }
+            //store working at: initially not assigned a store
+        };
         [BindProperty]
-        public Customer Customer { get; set; }
+        public InputModel Customer { get; set; }
         [BindProperty]
         public Address Address { get; set; }
         public string ReturnUrl { get; set; }
         
-        /*
+        
         public async Task OnGetAsync(string returnURL = null)
         {
             //customize address dropdown menu
@@ -35,10 +43,10 @@ namespace UHPostalService.Pages.Account.Customers
                 Id = x.Id,
                 FullAddress = x.StreetAddress + " " + x.City
             });
-        ViewData["AddressID"] = new SelectList(AvailAddr, "Id", "FullAddress");
+            ViewData["AddressID"] = new SelectList(AvailAddr, "Id", "FullAddress");
             ReturnUrl = returnURL;
             //return Page();
-        }*/
+        }
 
         
 
@@ -71,10 +79,14 @@ namespace UHPostalService.Pages.Account.Customers
                 addr = Address;
 
             }
-            Customer.AddressID = addr.Id;
-            var check = _context.Customers.Where(f => (f.AddressID == Customer.AddressID
-            && f.Email == Customer.Email
-            && f.PhoneNumber == Customer.PhoneNumber
+            Customer newcust = new Models.Customer { Address = addr , AddressID = addr.Id, Email = Customer.Email, Name = Customer.Name, Password = Customer.Password};
+            if(Customer.PhoneNumber != null)
+            {
+                newcust.PhoneNumber = Customer.PhoneNumber;
+            }
+
+            var check = _context.Customers.Where(f => (f.AddressID == newcust.AddressID
+            && f.Email == newcust.Email
             && f.Deleted == true)).FirstOrDefault();
             if (!ModelState.IsValid)
             {
@@ -84,17 +96,17 @@ namespace UHPostalService.Pages.Account.Customers
             {
                 if (check != null && check.Deleted == true)
                 {
-                    Customer = check;
-                    Customer.Deleted = false;
+                    newcust = check;
+                    newcust.Deleted = false;
 
                 }
                 else
                 {
-                    _context.Customers.Add(Customer);
+                    _context.Customers.Add(newcust);
                 }
                 await _context.SaveChangesAsync();
                 
-                HttpContext.Session.SetString("userID", Customer.Id.ToString());
+                HttpContext.Session.SetString("userID", newcust.Id.ToString());
                 HttpContext.Session.SetString("role", "Customer");
 
 

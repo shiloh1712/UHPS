@@ -59,7 +59,7 @@ namespace UHPostalService.Pages.Tracking
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Shipments/Index");
         }
     }
 }

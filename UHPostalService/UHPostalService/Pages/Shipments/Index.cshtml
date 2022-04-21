@@ -10,19 +10,45 @@
 <p>
     <a asp-page="Create">New Package</a>
 </p>
-<div class="dropdown">
+<!--<div class="dropdown">
 <strong>Status</strong>
     <div class="dropdown-content">
         <!--<a asp-page="./Index" asp-route-statusFilter="@Model.StatusSort"> 
-        <select asp-for="StatusFilterOptions" class="form-control" asp-items="ViewBag.StatusOptions"></select>-->
+        <select asp-for="StatusFilterOptions" class="form-control" asp-items="ViewBag.StatusOptions"></select>
     </div>
-</div>
+</div>-->
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by 
+                <!--<label asp-for="test" class="control-label"></label>-->
+                <!--<input asp-for="Address.State" class="form-control" />-->
+                <select asp-for="test" name="filterby" value="@Model.test" class ="form-group">
+					<option value="1">Zipcode</option>
+					<option value="2">State</option>
+                    <option value="3">City</option>
+                    <option value="4">Sender</option>
+                    <option value="5">Receiver</option>
+                    <!--<option value="6">Status</option>-->
+				</select>
+				<span asp-validation-for="test" class="text-danger"></span>
+
+            
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            
+            |
+            <input type="submit" value="Search" class="btn btn-primary"/>
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
+            <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
                 @Html.DisplayNameFor(model => model.Package[0].Sender)
-            </th>
+                </a> </th>
             <th>
                 @Html.DisplayNameFor(model => model.Package[0].Receiver)
             </th>
@@ -33,15 +59,16 @@
                 @Html.DisplayNameFor(model => model.Package[0].Description)
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.StatusSort">                
-                    @Html.DisplayNameFor(model => model.Package[0].Status)
-                </a>
+               <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                @Html.DisplayNameFor(model => model.Package[0].Status)
+                </a> 
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ExpressSort">
                 @Html.DisplayNameFor(model => model.Package[0].Express)
-            </th>
+                </a>             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Package[0].ShipCost)
+                Cost
             </th>
             <th></th>
         </tr>
@@ -58,7 +85,8 @@
                     @Html.DisplayFor(modelItem => item.Receiver.Name)
                 </td>
                 <td>
-                    @item.Destination.ToString()
+                    @Html.DisplayFor(modelItem => item.Destination.StreetAddress), @Html.DisplayFor(modelItem => item.Destination.City), @Html.DisplayFor(modelItem => item.Destination.State), @Html.DisplayFor(modelItem => item.Destination.Zipcode)
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
@@ -70,12 +98,20 @@
                     @Html.DisplayFor(modelItem => item.Express)
                 </td>
                 <td>
-                    Cost
+                    @Html.DisplayFor(modelItem=>item.ShipCost)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @if (User.IsInRole("Admin") || (User.IsInRole("Supervisor")) || (User.IsInRole("Employee")))
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> <text>|</text>
+                }
+
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
+
+                @if (User.IsInRole("Admin") || (User.IsInRole("Supervisor")) || (User.IsInRole("Employee")))
+                {
+                    <text>|</text> <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                }
                 </td>
             </tr>}
         }
