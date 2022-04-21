@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace UHPostalService.Pages.Account.Employees
 {
@@ -83,6 +85,22 @@ namespace UHPostalService.Pages.Account.Employees
                 default:
                     EmployeeIdent = EmployeeIdent.OrderBy(s => s.Name);
                     break;
+            }
+            //int? store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            //int ident = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Id")).Value);
+            //var nme = HttpContext.User.Identity.Name;
+            var flop = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            Employee use = _context.Employees.Where(w => w.Id == flop).FirstOrDefault();
+            var currstore = use.StoreID;
+
+            
+            if (currstore != null && flop != 1)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s=>s.StoreID == currstore);
+            }
+            if(currstore == null)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.Id == flop);
             }
 
             Employee = await EmployeeIdent
