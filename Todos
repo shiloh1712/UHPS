@@ -76,6 +76,7 @@ Layout:
   3. remove tracking details
   4. only edit destination
   5. can only checkout if (logged in employee == tracking.storeid)
+  6. checkout: datetime.now
   
 /sales: only employees can see button ✓ - Andy
   details: show "anonymous" if no buyer info ✓ - Josh
