@@ -82,4 +82,5 @@ Layout:
 /sales: only employees can see button ✓ - Andy
   details: show "anonymous" if no buyer info ✓ - Josh
   *: shopping cart (if anyone think they can handle https://learningprogramming.net/net/asp-net-core-razor-pages/build-shopping-cart-with-session-in-asp-net-core-razor-pages/)
-
+  
+ 1. add "Get a quote" page: enter shipment details to determine cost
