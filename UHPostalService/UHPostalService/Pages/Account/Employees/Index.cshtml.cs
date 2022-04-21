@@ -93,12 +93,15 @@ namespace UHPostalService.Pages.Account.Employees
             Employee use = _context.Employees.Where(w => w.Id == flop).FirstOrDefault();
             var currstore = use.StoreID;
 
-            
-            if (currstore != null && flop != 1)
+            if(User.IsInRole("Supervisor") && currstore !=null)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.StoreID == currstore || s.StoreID==null);
+            }
+            else if (currstore != null && User.IsInRole("Employee"))
             {
                 EmployeeIdent = EmployeeIdent.Where(s=>s.StoreID == currstore);
             }
-            if(currstore == null)
+            else if(currstore == null && !User.IsInRole("Admin"))
             {
                 EmployeeIdent = EmployeeIdent.Where(s => s.Id == flop);
             }
