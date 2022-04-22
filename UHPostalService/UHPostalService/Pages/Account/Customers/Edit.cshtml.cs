@@ -20,9 +20,19 @@ namespace UHPostalService.Pages.Account.Customers
         {
             _context = context;
         }
-
+        public class InputModel
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string? PhoneNumber { get; set; }
+            public string Email { get; set; }
+            public string Password { get; set; }
+            //store working at: initially not assigned a store
+        };
         [BindProperty]
-        public Customer Customer { get; set; }
+        public InputModel Customer { get; set; }
+        [BindProperty]
+        public Address cusAddress { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,15 +41,17 @@ namespace UHPostalService.Pages.Account.Customers
                 return NotFound();
             }
 
-            Customer = await _context.Customers
-                .Include(c => c.Address).FirstOrDefaultAsync(m => m.Id == id);
+            var editCustomer = await _context.Customers.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Customer == null)
+            if (editCustomer == null)
             {
                 return NotFound();
             }
 
-            //ViewData["Address.City"] = new SelectList(_context.Addresses, "Id", "City");
+            cusAddress = _context.Addresses.FirstOrDefault(a=>a.Id==editCustomer.AddressID);
+            Customer = new InputModel { Id = editCustomer.Id, Name=editCustomer.Name, PhoneNumber=editCustomer.PhoneNumber, Email=editCustomer.Email, Password=""};
+
+
             return Page();
         }
 
@@ -52,8 +64,39 @@ namespace UHPostalService.Pages.Account.Customers
             {
                 return Page();
             }
+            var editCustomer = await _context.Customers.FirstOrDefaultAsync(m => m.Id == Customer.Id);
+            if (editCustomer == null)
+                return NotFound();
 
-            _context.Attach(Customer).State = EntityState.Modified;
+            var existedEmail = _context.Customers.Where(c => c.Email == Customer.Email).FirstOrDefault();
+            if (existedEmail != null && existedEmail.Id != editCustomer.Id)
+            {
+                ModelState.AddModelError(String.Empty, existedEmail.Email + " belongs to another customer");
+                return Page();
+            }
+            var addr = _context.Addresses.Where(f => (f.StreetAddress == cusAddress.StreetAddress
+            && f.City == cusAddress.City
+            && f.State == cusAddress.State
+            && f.Zipcode == cusAddress.Zipcode)).FirstOrDefault();
+
+
+
+            if (addr == null)
+            {
+                _context.Addresses.Add(cusAddress);
+                await _context.SaveChangesAsync();
+                addr = cusAddress;
+
+            }
+    
+            editCustomer.Name = Customer.Name;
+            editCustomer.PhoneNumber = Customer.PhoneNumber;
+            editCustomer.Email = Customer.Email;
+            editCustomer.Password = Customer.Password;
+            editCustomer.AddressID = addr.Id;
+
+            _context.Attach(editCustomer).State = EntityState.Modified;          
+
 
             try
             {
@@ -61,7 +104,7 @@ namespace UHPostalService.Pages.Account.Customers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(Customer.Id))
+                if (!CustomerExists(editCustomer.Id))
                 {
                     return NotFound();
                 }
@@ -70,25 +113,8 @@ namespace UHPostalService.Pages.Account.Customers
                     throw;
                 }
             }
-            var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress
-            && f.City == Address.City
-            && f.State == Address.State
-            && f.Zipcode == Address.Zipcode)).FirstOrDefault();
 
-            if (addr == null)
-            {
-                _context.Addresses.Add(Address);
-                await _context.SaveChangesAsync();
-                addr = Address;
-
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Account/Customers/Details", new {id = editCustomer.Id });
         }
 
         private bool CustomerExists(int id)

@@ -254,7 +254,7 @@ namespace UHPostalService.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-            
+            /*
             //trigger: if package is sent to destination instead of another store, package status is updated to out-for-delivery
             migrationBuilder.Sql(@"drop trigger if exists autostatus
                                     go
@@ -278,26 +278,7 @@ namespace UHPostalService.Migrations
                                             update Packages set status = @stat where Id=@tracknum
                                     end"
             );
-            //trigger: auto update timein/timeout of package when check in/out
-            migrationBuilder.Sql(@"drop trigger if exists datechange
-                                    go
-                                    create trigger datechange on trackingrecords
-                                    after insert, update
-                                    as begin
-                                        declare @tin DateTime;
-                                        declare @tout DateTime;
-                                        declare @ident int;
-                                        select @ident=Id, @tin=TimeIn, @tout=TimeOut from inserted;
-                                        if @tin is NULL
-                                        begin
-                                            update trackingrecords set trackingrecords.TimeIn = getdate() where trackingrecords.Id=@ident;
-                                        end
-                                        else
-                                        begin
-                                            update trackingrecords set trackingrecords.TimeOut = getdate() where trackingrecords.Id=@ident;
-                                        end
-                                    end");
-            //trigger: automatically set the cost of a package
+            //trigger: automatically set the shipment class and cost of a shipment
             migrationBuilder.Sql(@"drop trigger if exists cost
             go
             create trigger cost on packages
@@ -382,7 +363,7 @@ namespace UHPostalService.Migrations
 								update sales set sales.PurchaseDate=getdate() where sales.ID = @ident;
 
 							end
-");
+");*/
             
             
 

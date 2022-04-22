@@ -34,25 +34,51 @@ namespace UHPostalService.Pages.Tracking
         public TrackingRecord TrackingRecord { get; set; }
         */
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync(int? urltrnum)
+        public async Task<IActionResult> OnGetAsync(int? urltrnum)
+        {
+            if (urltrnum == null)
+                return Page();
+            int num = (int)urltrnum;
+            int employee = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            TrackingRecord newrecord = new TrackingRecord
+            {
+                TrackNum = num,
+                EmployeeId = employee,
+                StoreId = store,
+                TimeIn = DateTime.Now
+            };
+
+            _context.TrackingRecords.Add(newrecord);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("/Shipments/Details", new { id = num });
+        }
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 //return Page();
             }
-            if(urltrnum == null)
+            if(TrNums == null)
             {
-                //return Page();
+                return Page();
             }
             int num = Int32.Parse(TrNums);
-            //int num = (int)urltrnum;
             //var claims = ClaimsPrincipal.Current.Identities.FirstOrDefault().Claims.ToList();
             //string employeeid = claims?.FirstOrDefault(x => x.Type.Equals(ClaimTypes.NameIdentifier, StringComparison.OrdinalIgnoreCase))?.Value;
             //var principal = System.Security.Claims.ClaimsPrincipal.Current;
             //string fullname2 = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            int employee = Int32.Parse(User.Claims.FirstOrDefault(c=>c.Type == ClaimTypes.NameIdentifier).Value);
+            return await OnGetAsync(num);
+            
+            
+            
+            /*int employee = Int32.Parse(User.Claims.FirstOrDefault(c=>c.Type == ClaimTypes.NameIdentifier).Value);
             int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
 
+            Package pkg = _context.Packages.FirstOrDefault(p=>p.Id== urltrnum);
+            if (pkg == null)
+                return NotFound();
             TrackingRecord newrecord = new TrackingRecord {
                 TrackNum = num, EmployeeId = employee, StoreId = store
             };
@@ -60,7 +86,7 @@ namespace UHPostalService.Pages.Tracking
             _context.TrackingRecords.Add(newrecord);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Shipments/Index");
+            return RedirectToPage("/Shipments/Index");*/
         }
 
     }

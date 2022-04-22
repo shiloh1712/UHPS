@@ -57,13 +57,13 @@ namespace UHPostalService.Pages.Account.Customers
             var user = _context.Customers.Where(f => f.Email == Customer.Email).FirstOrDefault();
             if (user != null)
             {
-                ModelState.AddModelError(string.Empty, user.Email + " Alrready exists");
+                ModelState.AddModelError(string.Empty, user.Email + " alrready exists");
                 return Page();
             }
             var user2 = _context.Customers.Where(f => f.PhoneNumber == Customer.PhoneNumber).FirstOrDefault();
             if (user2 != null)
             {
-                ModelState.AddModelError(string.Empty, user2.PhoneNumber + " alrready exists");
+                ModelState.AddModelError(string.Empty, user2.PhoneNumber + " already exists");
                 return Page();
             }
 

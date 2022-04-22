@@ -63,7 +63,7 @@
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Package.Id">Edit</a> |
-    <a asp-page="/Tracking/Checkin" >Check In</a> |
+    <a asp-page="/Tracking/Checkin" asp-route-urltrnum="@Model.Package.Id">Check In</a> |
     <a asp-page="/Tracking/Checkout" asp-route-trnum="@Model.Package.Id">Check Out</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

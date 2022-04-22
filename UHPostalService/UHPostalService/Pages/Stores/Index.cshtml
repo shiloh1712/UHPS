@@ -66,8 +66,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Store) {
-            if (!item.Deleted)
-            {
+            
                 <tr>
                     <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -93,15 +92,10 @@
                 @if (User.IsInRole("Admin"))
                 {
                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> <text>|</text>
-                }
-
-
-                @if (User.IsInRole("Admin"))
-                {
                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 }
             </td>
-        </tr>}
+        </tr>
 }
     </tbody>
 </table>
