@@ -20,9 +20,11 @@ namespace UHPostalService.Models
 
         public override string ToString()
         {
+
             if (AddressID != null)
                 return $"Store {Id}: {Address.ToString()}";
             return "";
+
         }
     }
 }

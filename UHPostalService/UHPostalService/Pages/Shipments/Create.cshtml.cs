@@ -94,16 +94,20 @@ namespace UHPostalService.Pages.Shipments
             {
                 //return Page();
             }
+            int trnum = _context.Packages.Select(p => p.Id).Max();
+            return RedirectToPage("/Tracking/CheckIn", new { urltrnum = trnum });
+
             _context.Packages.Add(newPack);
             int employee = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value);
             int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
 
-            await _context.SaveChangesAsync();
-            Console.WriteLine(newPack.Id);
-            TrackingRecord trackingRecord = new TrackingRecord { EmployeeId = employee, StoreId = store, TrackNum = newPack.Id };
+            //await _context.SaveChangesAsync();
+            TrackingRecord trackingRecord = new TrackingRecord { EmployeeId = employee, StoreId = store, TrackNum = trnum };
             _context.TrackingRecords.Add(trackingRecord);
+            
             await _context.SaveChangesAsync();
 
+            return RedirectToPage("/Tracking/CheckIn", new { urltrnum = trnum });
 
             return RedirectToPage("./Index");
         }

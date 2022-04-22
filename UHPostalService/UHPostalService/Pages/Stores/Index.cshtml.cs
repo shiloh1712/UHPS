@@ -75,7 +75,7 @@ namespace UHPostalService.Pages.Stores
                     break;
             }
 
-            Store = await StoreIdent
+            Store = await StoreIdent.OrderBy(s=>s.Id).Where(s=>!s.Deleted)
                 .Include(s => s.Address)
                 .Include(s => s.Supervisor).ToListAsync();
             //Address = await AddressIdent.AsNoTracking().ToListAsync();
