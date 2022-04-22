@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace UHPostalService.Pages.Account.Employees
 {
@@ -23,6 +25,10 @@ namespace UHPostalService.Pages.Account.Employees
         }
         public string NameSort { get; set; }
         public string EmailSort { get; set; }
+
+
+
+
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
@@ -34,6 +40,7 @@ namespace UHPostalService.Pages.Account.Employees
             // using System;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             EmailSort = sortOrder == "Date" ? "date_desc" : "Date";
+       
             test = filterby;
             CurrentFilter = searchString;
             IQueryable<Employee> EmployeeIdent = from s in _context.Employees
@@ -66,6 +73,20 @@ namespace UHPostalService.Pages.Account.Employees
                                        );
             }*/
 
+            //if (!String.IsNullOrEmpty(searchString) && test == 4)
+            //{
+            //    EmployeeIdent = EmployeeIdent.Where(s => s.StoreID.Contains(searchString)
+
+            //                           /*|| s.FirstMidName.Contains(searchString)*/);
+            //}
+
+            //if (!String.IsNullOrEmpty(searchString) && test == 5)
+            //{
+            //    EmployeeIdent = EmployeeIdent.Where(s => s.Role.Contains(searchString)
+
+            //                           /*|| s.FirstMidName.Contains(searchString)*/);
+            //}
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -83,6 +104,25 @@ namespace UHPostalService.Pages.Account.Employees
                 default:
                     EmployeeIdent = EmployeeIdent.OrderBy(s => s.Name);
                     break;
+            }
+            //int? store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            //int ident = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Id")).Value);
+            //var nme = HttpContext.User.Identity.Name;
+            var flop = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            Employee use = _context.Employees.Where(w => w.Id == flop).FirstOrDefault();
+            var currstore = use.StoreID;
+
+            if(User.IsInRole("Supervisor") && currstore !=null)
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.StoreID == currstore || s.StoreID==null);
+            }
+            else if (currstore != null && User.IsInRole("Employee"))
+            {
+                EmployeeIdent = EmployeeIdent.Where(s=>s.StoreID == currstore);
+            }
+            else if(currstore == null && !User.IsInRole("Admin"))
+            {
+                EmployeeIdent = EmployeeIdent.Where(s => s.Id == flop);
             }
 
             Employee = await EmployeeIdent

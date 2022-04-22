@@ -73,3 +73,5 @@
       Son: add link to employee login on customer login page; fix costtrigger
       Morrison: Worked on edit address of customer, linked create page to correct page for employee, added another sorting to employee, and did many meanginful seeds. 
       Andy: Prohibit customers from having access to admin/employee/supervisor pages in Sales, Tracking, Shipment, and Stores. Visual changes.
+
+4/20: Josh: Changed some seeding, made customer create page, changed visibility of shop index buttons, added stock sort to shop, added price range filter to shop
