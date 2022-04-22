@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -22,11 +23,14 @@ namespace UHPostalService.Pages.Account.Customers
         }
         public class InputModel
         {
+            [Required]
             public string Name { get; set; }
             public string? PhoneNumber { get; set; }
+            [Required]
             public string Email { get; set; }
+            [Required]
+            [DataType(DataType.Password)]
             public string Password { get; set; }
-            //store working at: initially not assigned a store
         };
         [BindProperty]
         public InputModel Customer { get; set; }
@@ -53,6 +57,10 @@ namespace UHPostalService.Pages.Account.Customers
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             returnUrl ??= Url.Content("~/");
             var user = _context.Customers.Where(f => f.Email == Customer.Email).FirstOrDefault();
             if (user != null)
@@ -60,13 +68,14 @@ namespace UHPostalService.Pages.Account.Customers
                 ModelState.AddModelError(string.Empty, user.Email + " alrready exists");
                 return Page();
             }
-            var user2 = _context.Customers.Where(f => f.PhoneNumber == Customer.PhoneNumber).FirstOrDefault();
-            if (user2 != null)
-            {
-                ModelState.AddModelError(string.Empty, user2.PhoneNumber + " already exists");
-                return Page();
+            if (Customer.PhoneNumber != null) {
+                var user2 = _context.Customers.Where(f => f.PhoneNumber == Customer.PhoneNumber).FirstOrDefault();
+                if (user2 != null)
+                {
+                    ModelState.AddModelError(string.Empty, user2.PhoneNumber + " already exists");
+                    return Page();
+                }
             }
-
             var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress 
             && f.City == Address.City
             && f.State == Address.State
@@ -88,30 +97,24 @@ namespace UHPostalService.Pages.Account.Customers
             var check = _context.Customers.Where(f => (f.AddressID == newcust.AddressID
             && f.Email == newcust.Email
             && f.Deleted == true)).FirstOrDefault();
-            if (!ModelState.IsValid)
+            if (check != null && check.Deleted == true)
             {
-                return Page();
+                newcust = check;
+                newcust.Deleted = false;
+
             }
             else
             {
-                if (check != null && check.Deleted == true)
-                {
-                    newcust = check;
-                    newcust.Deleted = false;
-
-                }
-                else
-                {
-                    _context.Customers.Add(newcust);
-                }
-                await _context.SaveChangesAsync();
-                
-                HttpContext.Session.SetString("userID", newcust.Id.ToString());
-                HttpContext.Session.SetString("role", "Customer");
-
-
-                return RedirectToPage("../RegisterConfirmation", new { email = Customer.Email });
+                _context.Customers.Add(newcust);
             }
+            await _context.SaveChangesAsync();
+                
+            HttpContext.Session.SetString("userID", newcust.Id.ToString());
+            HttpContext.Session.SetString("role", "Customer");
+
+
+            return RedirectToPage("../RegisterConfirmation", new { email = Customer.Email });
+            
         }
     }
 }

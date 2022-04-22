@@ -16,10 +16,6 @@
 
             <input asp-for="Employee.Id" type="hidden" />
 
-            <input type="hidden" asp-for="Employee.Id" />
-            <input type="hidden" asp-for="Employee.Address" />
-            <input type="hidden" asp-for="Employee.Store" />
-
             <div class="form-group">
                 <label asp-for="Employee.Name" class="control-label"></label>
                 <input asp-for="Employee.Name" class="form-control" />
@@ -67,9 +63,7 @@
                 <input asp-for="Employee.Role" class="form-control" />
                 <span asp-validation-for="Employee.Role" class="text-danger"></span>
             </div>
-            <div>
-                <a asp-page="/Addresses/Edit" asp-route-id="@Model.Employee.AddressID">Edit Address</a>
-            </div>
+            
             <hr />
 
             <div class="form-group">
