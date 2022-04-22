@@ -14,13 +14,13 @@
         <a asp-page="Create">Create New</a>
     </p>
 }
-
+<!--
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <p>
             Find by
             <!--<label asp-for="test" class="control-label"></label>-->
-            <!--<input asp-for="Address.State" class="form-control" />-->
+            <!--<input asp-for="Address.State" class="form-control" />
             <select asp-for="test" name="filterby" value="@Model.test" class="form-group">
                 <option value="1">Name</option>
                 <option value="2">Email</option>
@@ -30,8 +30,7 @@
             </select>
             <span asp-validation-for="test" class="text-danger"></span>
     </div>
- </form>
-
+ </form>-->
 
 <p>
     <a asp-page="Create">Register New</a>
@@ -42,8 +41,10 @@
             Find by 
                 <select asp-for="test" name="filterby" value="@Model.test" class ="form-group">
 					<option value="1">Name</option>
-					<option value="2">Email</option>
+                    <option value="2">Email</option>
                     <option value="3">Phone Number</option>
+                    <option value="4">Store</option>
+                    <option value="5">Role</option>
                     <!--<option value="4">Store #</option>/>-->
 				</select>
 				<span asp-validation-for="test" class="text-danger"></span>
@@ -141,38 +142,37 @@
                         </td>
                     </tr>
                 }
-                    else if (Convert.ToString(Model.Employee[0].Role) == "Admin")
-                    {
+                else if (Convert.ToString(Model.Employee[0].Role) == "Admin")
+                {
                     
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhoneNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
 
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.Address.Id)
-                    </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Store.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Role)
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-                    }
-                }
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Address.Id)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Store.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
             }
+        }
                 
                 @*<tr>
                     <td>
