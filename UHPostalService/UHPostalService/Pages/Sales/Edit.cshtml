@@ -39,8 +39,15 @@
                 <input asp-for="Sale.Total" class="form-control" />
                 <span asp-validation-for="Sale.Total" class="text-danger"></span>
             </div>-->
-            <div>
-                <a asp-page="/Account/Customers/Edit" asp-route-id="@Model.Sale.BuyerID">Edit Buyer</a>
+            <div class="form-group">
+                <label asp-for="Sale.Name" class="control-label"></label>
+                <input asp-for="Sale.Name" class="form-control" />
+                <span asp-validation-for="Sale.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sale.Email" class="control-label"></label>
+                <input asp-for="Sale.Email" class="form-control" />
+                <span asp-validation-for="Sale.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
