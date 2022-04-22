@@ -25,17 +25,18 @@
                 <select asp-for="TrackingRecord.TrackNum" class="form-control" asp-items="ViewBag.TrackNum"></select>
                 <span asp-validation-for="TrackingRecord.TrackNum" class="text-danger"></span>
             </div>
+            <br>
             <!--<div class="form-group">
                 <label asp-for="TrackingRecord.StoreId" class="control-label"></label>
                 <select asp-for="TrackingRecord.StoreId" class="form-control" asp-items="ViewBag.StoreId"></select>
                 <span asp-validation-for="TrackingRecord.StoreId" class="text-danger"></span>
-            </div>-->
+            </div>
             <div>
                 <a asp-page="/Account/Employees/Edit" asp-route-id="@Model.TrackingRecord.EmployeeId">Edit Employee</a>
             </div>
             <div>
                 <a asp-page="/Stores/Edit" asp-route-id="@Model.TrackingRecord.StoreId">Edit Store</a>
-            </div>
+            </div>-->
             <!--
             <div class="form-group">
                 <label asp-for="TrackingRecord.TimeIn" class="control-label"></label>
@@ -54,11 +55,13 @@
                 <span asp-validation-for="TrackingRecord.Destination" class="text-danger"></span>
             </div>-->
             <div>
-                <a asp-page="/Addresses/Edit" asp-route-id="@Model.TrackingRecord">Edit Destination</a>
+                <a asp-page="/Addresses/Edit" asp-route-id="@Model.TrackingRecord.Address">Edit Destination</a>
             </div>
+            <br>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+            <br>
         </form>
     </div>
 </div>
