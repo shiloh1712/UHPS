@@ -20,25 +20,6 @@ as begin
         update Packages set status = @stat where Id=@tracknum
 end
 
---trigger: auto update timein/timeout of package when check in/out
-drop trigger if exists datechange
-go
-create trigger datechange on trackingrecords
-after insert, update
-as begin
-declare @tin DateTime;
-declare @tout DateTime;
-declare @ident int;
-select @ident=Id, @tin=TimeIn, @tout=TimeOut from inserted;
-if @tin is NULL
-begin
-    update trackingrecords set trackingrecords.TimeIn = getdate() where trackingrecords.Id=@ident;
-end
-else
-begin
-    update trackingrecords set trackingrecords.TimeOut = getdate() where trackingrecords.Id=@ident;
-end
-end
 
 --trigger: automatically set the cost of a package
 drop trigger if exists cost
