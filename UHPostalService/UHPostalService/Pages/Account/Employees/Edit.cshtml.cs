@@ -9,11 +9,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
-using Microsoft.AspNetCore.Authorization;
-namespace UHPostalService.Pages.Account.Employees
-{
-    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Admin,Supervisor")]
 
+namespace UHPostalService.Pages.Employees
+{
     public class EditModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
@@ -22,9 +20,21 @@ namespace UHPostalService.Pages.Account.Employees
         {
             _context = context;
         }
+        public class InputModel
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string PhoneNumber { get; set; }
+            public string Email { get; set; }
+            public string Password { get; set; }
+            //store working at: initially not assigned a store
+            public int StoreID { get; set; }
+        };
 
         [BindProperty]
-        public Employee Employee { get; set; }
+        public InputModel Employee { get; set; }
+        [BindProperty]
+        public Address Address { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -32,17 +42,20 @@ namespace UHPostalService.Pages.Account.Employees
             {
                 return NotFound();
             }
+            var editEmployee = await _context.Employees.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
 
-            Employee = await _context.Employees
+            /*Employee = await _context.Employees
                 .Include(e => e.Address)
                 .Include(e => e.Store).FirstOrDefaultAsync(m => m.Id == id);
-
-            if (Employee == null)
+            */
+            if (editEmployee == null)
             {
                 return NotFound();
             }
-            //ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "StreetAddress");
-            //ViewData["StoreID"] = new SelectList(_context.Stores, "Id", "Address.StreetAddress");
+
+            
+            Address = _context.Addresses.FirstOrDefault(a => a.Id == editEmployee.AddressID);
+            Employee = new InputModel { Id = editEmployee.Id, Email = editEmployee.Email, Name = editEmployee.Name, Password = "", PhoneNumber = editEmployee.PhoneNumber };
             return Page();
         }
 
@@ -50,14 +63,40 @@ namespace UHPostalService.Pages.Account.Employees
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            Employee.Address = _context.Addresses.Where(e => e.Id == Employee.AddressID).FirstOrDefault();
             if (!ModelState.IsValid)
             {
-                //return Page();
+                return Page();
             }
+            var editEmployee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == Employee.Id);
+            if (editEmployee == null)
+            {
+                return NotFound();
+            }
+            var existedEmail = _context.Employees.Where(c => c.Email == Employee.Email).FirstOrDefault();
+            if (existedEmail != null && existedEmail.Id != editEmployee.Id)
+            {
+                ModelState.AddModelError(String.Empty, existedEmail.Email + " belongs to another employee");
+                return Page();
+            }
+            var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress
+            && f.City == Address.City
+            && f.State == Address.State
+            && f.Zipcode == Address.Zipcode)).FirstOrDefault();
 
+            if (addr == null)
+            {
+                _context.Addresses.Add(Address);
+                await _context.SaveChangesAsync();
+                addr = Address;
 
-            _context.Attach(Employee).State = EntityState.Modified;
+            }
+            editEmployee.Name = Employee.Name;
+            editEmployee.PhoneNumber = Employee.PhoneNumber;
+            editEmployee.Email = Employee.Email;
+            editEmployee.Password = Employee.Password;
+            editEmployee.AddressID = addr.Id;
+            editEmployee.StoreID = Employee.StoreID;
+            _context.Attach(editEmployee).State = EntityState.Modified;
 
             try
             {
@@ -83,6 +122,4 @@ namespace UHPostalService.Pages.Account.Employees
             return _context.Employees.Any(e => e.Id == id);
         }
     }
-
 }
-

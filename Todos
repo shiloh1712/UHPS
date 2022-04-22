@@ -6,7 +6,7 @@ Layout:
   0. trigger: customer's address cannot == store address (seed "invalid address" in addresses, set to that?)
   Login:
     1. add "Employee Log In" ✓ - Josh
-    2. create not working (refer to employee)
+    2. create not working (refer to employee) ✓ Jsoh
   Index:
     1. only employees can see ✓ - Josh
     2. remove address ✓ - Josh
@@ -23,7 +23,7 @@ Layout:
     3. change Index heading to "All Employees" ✓ - Josh
     4. remove "create new" ✓ - Bader (Morrison Linked to correct page)
     5. regular employee: only see employees in their own store, no edit/details/delete buttons (unauthorized), can do those tasks on their own account ✓ - Bader
-    6. supervisor: only edit/details/delete employees in their own store 
+    6. supervisor: only edit/details/delete employees in their own store - Son
     7. admin: access rights to all employees ✓ - Bader
   Edit: 
     1. refer to edit shipment to change address ✓ - Bader
@@ -54,7 +54,7 @@ Layout:
   Details:
     1. (Optional) Add filtered list of employees for specific store
   Edit:
-    1. Edit Address on site, no reference (refer to edit shipment as example) 
+    1. Edit Address on site, no reference (refer to edit shipment as example)
   
 /Shipments:
   Index:  
@@ -75,7 +75,7 @@ Layout:
   remove create, details, index ✓ - Andy (i hid them not remove)
   only employee can delete ✓ - Andy
   3. remove tracking details ✓ - Josh
-  4. only edit destination
+  4. only edit destination Morrison
   5. can only checkout if (logged in employee == tracking.storeid)
   6. checkout: datetime.now
   
