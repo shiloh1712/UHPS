@@ -54,7 +54,7 @@ Layout:
   Details:
     1. (Optional) Add filtered list of employees for specific store
   Edit:
-    1. Edit Address on site, no reference (refer to edit shipment as example) - Son
+    1. Edit Address on site, no reference (refer to edit shipment as example) - Son ✓
   
 /Shipments:
   Index:  
