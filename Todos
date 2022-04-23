@@ -63,6 +63,7 @@ Layout:
     4. more filter: sender, receiver, zipcode, city, state, status, express, ✓ - Josh 
     5. shipcost --> Cost ✓ - Josh
     6. more meaningful seeds ✓ Morrison
+    7*. separating "in store" and "expecting" shipments: not show ALL shipments - Son
   Create:
     1. fix trigger auto cost/shipping classes ✓ - Son
     2. handle dup address - Son 
