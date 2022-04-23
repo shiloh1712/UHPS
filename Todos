@@ -64,7 +64,7 @@ Layout:
     5. shipcost --> Cost ✓ - Josh
     6. more meaningful seeds ✓ Morrison
     7*. Employee: separating "in store" and "expecting" shipments: not show ALL shipments - Son
-        Customer: separating "Sent" and "Received" by customer
+        Customer: separating "Sent" and "Received" by customer ✓ - Josh
   Create:
     1. fix trigger auto cost/shipping classes ✓ - Son
     2. handle dup address - Son 
@@ -84,4 +84,4 @@ Layout:
   details: show "anonymous" if no buyer info ✓ - Josh
   *: shopping cart (if anyone think they can handle https://learningprogramming.net/net/asp-net-core-razor-pages/build-shopping-cart-with-session-in-asp-net-core-razor-pages/)
   
- 1. add "Get a quote" page: enter shipment details to determine cost - josh
+ 1. add "Get a quote" page: enter shipment details to determine cost ✓ - Josh
