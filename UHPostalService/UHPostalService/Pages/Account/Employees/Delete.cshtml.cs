@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace UHPostalService.Pages.Account.Employees
 {
-    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Admin,Supervisor")]
     public class DeleteModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
@@ -31,17 +31,24 @@ namespace UHPostalService.Pages.Account.Employees
             {
                 return NotFound();
             }
-
+            int cookieEmployee = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            int cookieStore = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            string cookieRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             Employee = await _context.Employees
-                .Include(e => e.Address)
-                .Include(e => e.Store)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
+                            .Include(e => e.Address)
+                            .Include(e => e.Store)
+                            .FirstOrDefaultAsync(m => m.Id == id);
             if (Employee == null)
             {
                 return NotFound();
             }
-            return Page();
+            if (cookieRole == "Admin" ||
+                (cookieRole == "Supervisor" && (Employee.StoreID == null || Employee.StoreID == cookieStore) && Employee.Role == Role.Employee) ||
+                cookieEmployee == (int)id)
+            {
+                return Page();
+            }
+            return RedirectToPage("/Account/AccessDenied");
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
@@ -57,6 +64,8 @@ namespace UHPostalService.Pages.Account.Employees
             {
                 //_context.Employees.Remove(Employee);
                 Employee.Deleted = true;
+                _context.Update(Employee).State = EntityState.Modified;
+
                 await _context.SaveChangesAsync();
             }
 

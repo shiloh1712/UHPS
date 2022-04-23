@@ -24,8 +24,17 @@ namespace UHPostalService.Pages.Stores
             _context = context;
         }
 
+        public class InputModel
+        {
+            public int Id { get; set; }
+            public string PhoneNumber { get; set; }
+            public int ? Supervisor { get; set; }
+
+        }
         [BindProperty]
-        public Store Store { get; set; }
+        public InputModel Store { get; set; }
+        [BindProperty]
+        public Address storeAddress { get; set; }
         //[BindProperty]
         //public Address Address { get; set; }
 
@@ -36,16 +45,18 @@ namespace UHPostalService.Pages.Stores
                 return NotFound();
             }
 
-            Store = await _context.Stores
+            var editStore = await _context.Stores.AsNoTracking()
                 .Include(s => s.Address)
                 .Include(s => s.Supervisor).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Store == null)
+            if (editStore == null)
             {
                 return NotFound();
             }
-           ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "Id");
+            storeAddress = editStore.Address;
             ViewData["SupID"] = new SelectList(_context.Employees.Where(e => ((e.Role == Role.Supervisor || e.Role == Role.Admin) && e.Deleted == false)), "Id", "Name");
+            Store = new InputModel { Id = editStore.Id, PhoneNumber = editStore.PhoneNumber, Supervisor = editStore.SupID };
+
             return Page();
         }
 
@@ -57,8 +68,26 @@ namespace UHPostalService.Pages.Stores
             {
                 return Page();
             }
+            var addr = _context.Addresses.Where(f => (f.StreetAddress == storeAddress.StreetAddress
+            && f.City == storeAddress.City
+            && f.State == storeAddress.State
+            && f.Zipcode == storeAddress.Zipcode)).FirstOrDefault();
 
-            _context.Update(Store).State = EntityState.Modified;
+            if (addr == null)
+            {
+                _context.Addresses.Add(storeAddress);
+                await _context.SaveChangesAsync();
+                addr = storeAddress;
+            }
+
+            var editStore = _context.Stores.FirstOrDefault(s => s.Id == Store.Id);
+            if (editStore == null)
+                return NotFound();
+            editStore.PhoneNumber = Store.PhoneNumber;
+            editStore.SupID = Store.Supervisor;
+            editStore.AddressID = addr.Id;
+
+            _context.Update(editStore).State = EntityState.Modified;
 
             try
             {

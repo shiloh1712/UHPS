@@ -20,18 +20,17 @@
                 <span asp-validation-for="Store.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Store.SupID" class="control-label"></label>
-                <select asp-for="Store.SupID" class="form-control" asp-items="ViewBag.SupID"></select>
-                <span asp-validation-for="Store.SupID" class="text-danger"></span>
-            </div>
-            <!--<div class="form-group">
-                <label asp-for="Store.Address.StreetAddress" class="control-label"></label>
-                <input asp-for="Store.Address.StreetAddress" class="form-control" />
-                <span asp-validation-for="Store.Address.StreetAddress" class="text-danger"></span>
+                <label asp-for="Store.Supervisor" class="control-label"></label>
+                <select asp-for="Store.Supervisor" class ="form-control" asp-items="ViewBag.SupID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Store.Address.State" class="control-label"></label>
-                <select asp-for="Store.Address.State" class ="form-control">
+                <label asp-for="storeAddress.StreetAddress" class="control-label"></label>
+                <input asp-for="storeAddress.StreetAddress" class="form-control" />
+                <span asp-validation-for="storeAddress.StreetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="storeAddress.State" class="control-label"></label>
+                <select asp-for="storeAddress.State" class ="form-control">
 					<option value="AL">Alabama</option>
 					<option value="AK">Alaska</option>
 					<option value="AZ">Arizona</option>
@@ -84,21 +83,19 @@
 					<option value="WI">Wisconsin</option>
 					<option value="WY">Wyoming</option>
 				</select>
-                <span asp-validation-for="Store.Address.State" class="text-danger"></span>
+                <span asp-validation-for="storeAddress.State" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Store.Address.City" class="control-label"></label>
-                <input asp-for="Store.Address.City" class="form-control" />
-                <span asp-validation-for="Store.Address.City" class="text-danger"></span>
+                <label asp-for="storeAddress.City" class="control-label"></label>
+                <input asp-for="storeAddress.City" class="form-control" />
+                <span asp-validation-for="storeAddress.City" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Store.Address.Zipcode" class="control-label"></label>
-                <input asp-for="Store.Address.Zipcode" class="form-control" />
-                <span asp-validation-for="Store.Address.Zipcode" class="text-danger"></span>
-            </div>-->
-			<div>
-                <a asp-page="/Addresses/Edit" asp-route-id="@Model.Store.AddressID">Edit Address</a>
+                <label asp-for="storeAddress.Zipcode" class="control-label"></label>
+                <input asp-for="storeAddress.Zipcode" class="form-control" />
+                <span asp-validation-for="storeAddress.Zipcode" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
