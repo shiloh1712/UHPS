@@ -9,9 +9,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UHPostalService.Data;
 using UHPostalService.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+
+
 
 namespace UHPostalService.Pages.Shipments
 {
+
     public class IndexModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
@@ -142,6 +148,11 @@ namespace UHPostalService.Pages.Shipments
                 default:
                     PackageIdent = PackageIdent.OrderBy(s => s.Status);
                     break;
+            }
+            int ident = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (User.IsInRole("Customer"))
+            {
+                PackageIdent = PackageIdent.Where(s => s.SenderID == ident || s.ReceiverID == ident);
             }
 
             Package = await PackageIdent
