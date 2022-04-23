@@ -42,6 +42,7 @@
         </p>
     </div>
 </form>
+
 <table class="table">
     <thead>
         <tr>
@@ -73,6 +74,7 @@
             <th></th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model.Package) {
             if (!item.Deleted)
@@ -85,8 +87,7 @@
                     @Html.DisplayFor(modelItem => item.Receiver.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Destination.StreetAddress), @Html.DisplayFor(modelItem => item.Destination.City), @Html.DisplayFor(modelItem => item.Destination.State), @Html.DisplayFor(modelItem => item.Destination.Zipcode)
-
+                    @item.Destination.ToString()
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
