@@ -9,7 +9,7 @@
 @if (User.IsInRole("Admin") || (User.IsInRole("Supervisor")) || (User.IsInRole("Employee")))
 {
     <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">New Item</a>
 </p>}
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">

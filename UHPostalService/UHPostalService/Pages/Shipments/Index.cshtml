@@ -1,5 +1,7 @@
 ﻿@page
 @model UHPostalService.Pages.Shipments.IndexModel
+@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
 
 @{
     ViewData["Title"] = "Index";
@@ -81,10 +83,28 @@
             {
                 <tr>
                     <td>
-                    @Html.DisplayFor(modelItem => item.Sender.Name)
+                        @if(User.IsInRole("Customer")) {
+                            @if(item.SenderID == Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                            {
+                                <span>You</span>
+                            }
+                            else{@Html.DisplayFor(modelItem => item.Sender.Name)}
+                        }
+                        else{@Html.DisplayFor(modelItem => item.Sender.Name)}
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Receiver.Name)
+                            @if (User.IsInRole("Customer"))
+                            {
+                                @if (item.ReceiverID == Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                                {
+                                    <span>You</span>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Receiver.Name)
+                                }
+                            }
+                            else{@Html.DisplayFor(modelItem => item.Receiver.Name)}
                 </td>
                 <td>
                     @item.Destination.ToString()
