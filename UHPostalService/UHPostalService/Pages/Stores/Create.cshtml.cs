@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace UHPostalService.Pages.Stores
 {
-    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Admin")]
 
     public class CreateModel : PageModel
     {
@@ -30,8 +30,8 @@ namespace UHPostalService.Pages.Stores
         };
         public IActionResult OnGet()
         {
-        ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "Id");
-        ViewData["SupID"] = new SelectList(_context.Employees.Where(e => (e.Role == Role.Supervisor || e.Role == Role.Admin)), "Id", "Name");
+            //ViewData["AddressID"] = new SelectList(_context.Addresses, "Id", "Id");
+            ViewData["SupID"] = new SelectList(_context.Employees.Where(e => ((e.Role == Role.Supervisor || e.Role == Role.Admin) && e.Deleted == false)), "Id", "Name");
             return Page();
         }
 

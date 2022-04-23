@@ -31,21 +31,21 @@ namespace UHPostalService.Pages.Tracking
             {
                 return NotFound();
             }
-            int CurrentStore = 1;
-            //int CurrentStore = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            //int CurrentStore = 1;
+            int CurrentStore = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
 
-            var TrackingRecord = _context.TrackingRecords.Where(m => m.TrackNum == trnum && m.TimeOut == null && m.StoreId == CurrentStore)
+            var TrackingRecord =  await _context.TrackingRecords.Where(m => m.TrackNum == trnum && m.TimeOut == null && m.StoreId == CurrentStore)
                 .Include(t => t.Address)
                 .Include(t => t.Employee)
                 .Include(t => t.Package)
-                .Include(t => t.Store);
+                .Include(t => t.Store).FirstOrDefaultAsync();
             
             if (TrackingRecord == null)
             {
-                return NotFound();
+                return RedirectToPage("/Account/AccessDenied");
             }
-            int destAddrID = _context.Packages.Select(p=>p.AddressID).FirstOrDefault();
-            SelectListItem destination = new SelectListItem() { Value = destAddrID.ToString(), Text="Destination"};
+            var pkg = _context.Packages.Include(p => p.Destination).FirstOrDefault(p => p.Id == trnum);
+            SelectListItem destination = new SelectListItem() { Value = pkg.AddressID.ToString(), Text="Destination: " + pkg.Destination.ToString()};
 
             var NextStops = new SelectList(_context.Stores.Where(s => s.Id != CurrentStore).Include(s=>s.Address).Select(s => new
             {
@@ -84,6 +84,7 @@ namespace UHPostalService.Pages.Tracking
             if (record == null)
                 return NotFound();
             record.Destination = nextstop;
+            record.TimeOut = DateTime.Now;
 
             _context.Attach(record).State = EntityState.Modified;
 
@@ -103,7 +104,7 @@ namespace UHPostalService.Pages.Tracking
                 }
             }
 
-            return RedirectToPage("/Shipments/Index");
+            return RedirectToPage("/Shipments/Details", new {id = num });
         }
     }
 }

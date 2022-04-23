@@ -28,7 +28,8 @@ namespace UHPostalService.Pages.Employees
             public string Email { get; set; }
             public string Password { get; set; }
             //store working at: initially not assigned a store
-            public int StoreID { get; set; }
+            public int ? StoreID { get; set; }
+            public Role Role { get; set; }
         };
 
         [BindProperty]
@@ -53,10 +54,20 @@ namespace UHPostalService.Pages.Employees
                 return NotFound();
             }
 
-            ViewData["StoreID"] = new SelectList(_context.Stores, "Id", "Id");
+
+            ViewData["StoreID"] = new SelectList(_context.Stores.Include(s => s.Address).Select(s => new
+            {
+                StoreID = s.Id,
+                Text = $"Store #{s.Id}: {s.Address.ToString()}"
+            }), "StoreID", "Text");
+
+            var employeeRoles = from Role r in Enum.GetValues(typeof(Role))
+                             select new { ID = (int)r, Name = r.ToString() };
+            ViewData["Roles"] = new SelectList(employeeRoles, "ID", "Name", 0).Append(new SelectListItem() { Value = "0", Text = "(unchanged)" }); 
+
 
             Address = _context.Addresses.FirstOrDefault(a => a.Id == editEmployee.AddressID);
-            Employee = new InputModel { Id = editEmployee.Id, Email = editEmployee.Email, Name = editEmployee.Name, Password = "", PhoneNumber = editEmployee.PhoneNumber };
+            Employee = new InputModel { Id = editEmployee.Id, Email = editEmployee.Email, Name = editEmployee.Name, Password = "", PhoneNumber = editEmployee.PhoneNumber, StoreID=editEmployee.StoreID };
             return Page();
         }
 
@@ -94,9 +105,12 @@ namespace UHPostalService.Pages.Employees
             editEmployee.Name = Employee.Name;
             editEmployee.PhoneNumber = Employee.PhoneNumber;
             editEmployee.Email = Employee.Email;
-            editEmployee.Password = Employee.Password;
+            if (Employee.Password != null)
+                editEmployee.Password = Employee.Password;
             editEmployee.AddressID = addr.Id;
             editEmployee.StoreID = Employee.StoreID;
+            if (Employee.Role != 0)
+                editEmployee.Role = Employee.Role;
             _context.Attach(editEmployee).State = EntityState.Modified;
 
             try
