@@ -75,3 +75,9 @@
       Andy: Prohibit customers from having access to admin/employee/supervisor pages in Sales, Tracking, Shipment, and Stores. Visual changes.
 
 4/20: Josh: Changed some seeding, made customer create page, changed visibility of shop index buttons, added stock sort to shop, added price range filter to shop
+
+4/21: Josh: Added a button that lets you edit your own account
+      Son: edit customers page
+     
+4/22: Josh: edit employee page, edit sale page (again), fixed up employee index
+      Son: changed the icon, edit employee role, edit store
