@@ -54,6 +54,7 @@ namespace UHPostalService.Pages.Employees
                 return NotFound();
             }
 
+
             ViewData["StoreID"] = new SelectList(_context.Stores.Include(s => s.Address).Select(s => new
             {
                 StoreID = s.Id,
@@ -63,6 +64,7 @@ namespace UHPostalService.Pages.Employees
             var employeeRoles = from Role r in Enum.GetValues(typeof(Role))
                              select new { ID = (int)r, Name = r.ToString() };
             ViewData["Roles"] = new SelectList(employeeRoles, "ID", "Name", 0).Append(new SelectListItem() { Value = "0", Text = "(unchanged)" }); 
+
 
             Address = _context.Addresses.FirstOrDefault(a => a.Id == editEmployee.AddressID);
             Employee = new InputModel { Id = editEmployee.Id, Email = editEmployee.Email, Name = editEmployee.Name, Password = "", PhoneNumber = editEmployee.PhoneNumber, StoreID=editEmployee.StoreID };
