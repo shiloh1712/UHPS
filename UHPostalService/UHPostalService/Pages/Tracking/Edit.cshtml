@@ -54,7 +54,7 @@
                 <span asp-validation-for="TrackingRecord.Destination" class="text-danger"></span>
             </div>-->
             <div>
-                <a asp-page="/Addresses/Edit" asp-route-id="@Model.TrackingRecord">Edit Destination</a>
+                <a asp-page="/Tracking/Checkout" asp-route-trnum="@Model.Package.Id">Edit Destination</a>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

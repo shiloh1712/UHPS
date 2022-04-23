@@ -25,6 +25,7 @@ namespace UHPostalService.Pages.Account.Employees
         }
         public string NameSort { get; set; }
         public string EmailSort { get; set; }
+        public string RoleSort { get; set; }
 
 
 
@@ -40,7 +41,8 @@ namespace UHPostalService.Pages.Account.Employees
             // using System;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             EmailSort = sortOrder == "Date" ? "date_desc" : "Date";
-       
+            RoleSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
             test = filterby;
             CurrentFilter = searchString;
             IQueryable<Employee> EmployeeIdent = from s in _context.Employees
@@ -87,24 +89,7 @@ namespace UHPostalService.Pages.Account.Employees
             //                           /*|| s.FirstMidName.Contains(searchString)*/);
             //}
 
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.Name);
-                    break;
-                case "Date":
-                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Email);
-                    break;
-                case "Store":
-                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Store);
-                    break;
-                case "date_desc":
-                    EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.Email);
-                    break;
-                default:
-                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Name);
-                    break;
-            }
+           
             //int? store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
             //int ident = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Id")).Value);
             //var nme = HttpContext.User.Identity.Name;
@@ -123,6 +108,28 @@ namespace UHPostalService.Pages.Account.Employees
             else if(currstore == null && !User.IsInRole("Admin"))
             {
                 EmployeeIdent = EmployeeIdent.Where(s => s.Id == flop);
+            }
+            
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Email);
+                    break;
+                case "Store":
+                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Store);
+                    break;
+                case "Role":
+                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Role);
+                    break;
+                case "date_desc":
+                    EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.Email);
+                    break;
+                default:
+                    EmployeeIdent = EmployeeIdent.OrderBy(s => s.Name);
+                    break;
             }
 
             Employee = await EmployeeIdent

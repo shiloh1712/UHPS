@@ -23,10 +23,20 @@ namespace UHPostalService.Pages.Tracking
 
         [BindProperty]
         public TrackingRecord TrackingRecord { get; set; }
+        public Package Package { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
+            {
+                return NotFound();
+            }
+            Package = await _context.Packages
+               .Include(p => p.Destination)
+               .Include(p => p.Receiver)
+               .Include(p => p.Sender).FirstOrDefaultAsync(m => m.Id == id);
+
+            if (Package == null)
             {
                 return NotFound();
             }

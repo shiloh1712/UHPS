@@ -78,7 +78,9 @@
                 </a>            </th>
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.RoleSort">
                 @Html.DisplayNameFor(model => model.Employee[0].Role)
+                </a>            
             </th>
             <th></th>
         </tr>
