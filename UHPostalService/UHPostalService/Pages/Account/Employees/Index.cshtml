@@ -1,6 +1,8 @@
-﻿@page
+﻿
+@page
 @model UHPostalService.Pages.Account.Employees.IndexModel
-
+@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
 @{
     ViewData["Title"] = "Index";
 }
@@ -38,9 +40,9 @@
 					<option value="1">Name</option>
                     <option value="2">Email</option>
                     <option value="3">Phone Number</option>
-                    <option value="4">Store</option>
+                    <!--<option value="4">Store</option>
                     <option value="5">Role</option>
-                    <!--<option value="4">Store #</option>/>-->
+                    <option value="4">Store #</option>/>-->
 				</select>
 				<span asp-validation-for="test" class="text-danger"></span>
 
@@ -109,14 +111,15 @@
                                 @Html.DisplayFor(modelItem => item.Role)
                             </td>
                             <td>
-                                @if (User.IsInRole("Admin") || User.IsInRole("Supervisor")) {
+                                @if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || (User.IsInRole("Employee") && item.Id == @Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))) {
                                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
                                     <span>|</span>
                                     
                                             }
-                                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
                                 @if (User.IsInRole("Admin") || User.IsInRole("Supervisor"))
-                                {
+                                {   
+                                    <span>|</span>
                                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                                 }
                             </td>

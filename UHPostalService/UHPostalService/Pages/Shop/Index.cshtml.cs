@@ -52,7 +52,7 @@ namespace UHPostalService.Pages.Shop
 
                                        /*|| s.FirstMidName.Contains(searchString)*/);
             }
-            if(from != def && to != def)
+            if(to != def)
             {
                 ProductIdent = ProductIdent.Where(s => s.UnitCost >= from && s.UnitCost <= to);
             }

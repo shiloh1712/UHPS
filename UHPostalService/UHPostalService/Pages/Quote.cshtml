@@ -1,51 +1,68 @@
 ﻿@page
 @model UHPostalService.Pages.QuoteModel
+
 @{
-
-
-
-
-    <h1>New Package</h1>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">  
-
-    <h2>Package Details</h2>
-           
-            
-            <div class="form-group">
-                <label asp-for="Package.Weight" class="control-label"></label>
-                <input asp-for="Package.Weight" class="form-control" />
-                <span asp-validation-for="Package.Weight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Package.Height" class="control-label"></label>
-                <input asp-for="Package.Height" class="form-control" />
-                <span asp-validation-for="Package.Height" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Package.Width" class="control-label"></label>
-                <input asp-for="Package.Width" class="form-control" />
-                <span asp-validation-for="Package.Width" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Package.Depth" class="control-label"></label>
-                <input asp-for="Package.Depth" class="form-control" />
-                <span asp-validation-for="Package.Depth" class="text-danger"></span>
-            </div>
-           
-            
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Package.Express" /> @Html.DisplayNameFor(model => model.Package.Express)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    ViewData["Title"] = "Quote";
 }
+
+<h1>Get a Quote</h1>
+<hr />
+
+<!--<p>
+    <a asp-page="Create">Create New</a>
+</p>-->
+<h2>Package Details</h2>
+           
+            
+            <form asp-page="./Quote" method="get">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Weight" class="control-label"></label>
+            <input type="number" step="any" name="wei" value="@Model.Weight" class="form-control" />
+            <span asp-validation-for="Weight" class="text-danger"></span>
+
+            <label asp-for="Height" class="control-label"></label>
+            <input type="number" step="any" name="hei" value="@Model.Height" class="form-control" />
+            <span asp-validation-for="Height" class="text-danger"></span>
+
+            <label asp-for="Width" class="control-label"></label>
+            <input type="number"  step="any" name="wid" value="@Model.Width" class="form-control" />
+            <span asp-validation-for="Width" class="text-danger"></span>
+
+            <label asp-for="Length" class="control-label"></label>
+            <input type="number"  step="any" name="len" value="@Model.Length" class="form-control" />
+            <span asp-validation-for="Length" class="text-danger"></span>
+
+            
+            <div>
+                Shippping speed: 
+            <select asp-for="test" name="filterby" value="@Model.test" class ="form-group">
+					<option value="1">Normal Shipping</option>
+					<option value="2">Express Shipping</option>
+                  
+                    <!--<option value="6">Status</option>-->
+				</select>
+				<span asp-validation-for="test" class="text-danger"></span>
+                <!--<div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Express" checked="true"/> Express
+                </label>-->
+            </div>
+
+            
+        </div>
+    </div>
+    <div class="form-actions no-color">
+        <p>
+            
+            <input type="submit" value="Get Your Quote" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+@if(@Model.final != 0)
+{
+    <h2>Price: $@Model.final</h2>
+}
+
+

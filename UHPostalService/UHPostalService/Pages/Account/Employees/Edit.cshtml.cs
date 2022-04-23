@@ -53,7 +53,8 @@ namespace UHPostalService.Pages.Employees
                 return NotFound();
             }
 
-            
+            ViewData["StoreID"] = new SelectList(_context.Stores, "Id", "Id");
+
             Address = _context.Addresses.FirstOrDefault(a => a.Id == editEmployee.AddressID);
             Employee = new InputModel { Id = editEmployee.Id, Email = editEmployee.Email, Name = editEmployee.Name, Password = "", PhoneNumber = editEmployee.PhoneNumber };
             return Page();
