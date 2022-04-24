@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using UHPostalService.Data;
 using UHPostalService.Models;
 
 namespace UHPostalService.Pages.Sales
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
+
     public class DeleteModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
@@ -45,6 +48,11 @@ namespace UHPostalService.Pages.Sales
             if (id == null)
             {
                 return NotFound();
+            }
+            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            if (store == 0)
+            {
+                return RedirectToPage("/Account/AccessDenied");
             }
 
             Sale thisSale = _context.Sales.Where(s=>s.ID ==id).Include(s => s.Product).FirstOrDefault();

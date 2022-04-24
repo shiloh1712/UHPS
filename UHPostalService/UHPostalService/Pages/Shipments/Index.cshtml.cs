@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace UHPostalService.Pages.Shipments
 {
-
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor, Customer")]
     public class IndexModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
@@ -37,8 +37,16 @@ namespace UHPostalService.Pages.Shipments
         public int test { get; set; }
         public bool expr { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string searchString, int filterby, bool exp)
+        public async Task<IActionResult> OnGetAsync(string sortOrder, string searchString, int filterby, bool exp)
         {
+            if (User.IsInRole("Employee"))
+            {
+                int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+                if (store == 0)
+                {
+                    return RedirectToPage("/Account/AccessDenied");
+                }
+            }
             /*StatusOptions = 
             StatusFilterOptions = _context.Packages.Select(p =>
                                   new SelectListItem
@@ -171,6 +179,7 @@ namespace UHPostalService.Pages.Shipments
             /*.Include(p => p.Destination)
             .Include(p => p.Receiver)
             .Include(p => p.Sender).ToListAsync();*/
+            return Page();
         }
     }
 }

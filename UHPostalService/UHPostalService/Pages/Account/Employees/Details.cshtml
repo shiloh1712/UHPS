@@ -43,7 +43,14 @@
         </dt>
 
         <dd class="col-sm-10">
-            <a asp-page="/Stores/Details" asp-route-id="@Model.Employee.StoreID">#@Html.DisplayFor(model => model.Employee.StoreID)</a> 
+            @if (@Model.Employee.StoreID != null)
+            {
+                <a asp-page="/Stores/Details" asp-route-id="@Model.Employee.StoreID">#@Html.DisplayFor(model => model.Employee.StoreID)</a>
+            }
+            else
+            {
+                <span>(Unassigned)</span>
+            }
         </dd>
 
         <dt class="col-sm-2">

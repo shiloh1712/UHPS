@@ -55,7 +55,11 @@ namespace UHPostalService.Pages.Shipments
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-
+            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            if (store == 0)
+            {
+                return RedirectToPage("/Account/AccessDenied");
+            }
             var addr = _context.Addresses.Where(f => (f.StreetAddress == Address.StreetAddress
             && f.City == Address.City
             && f.State == Address.State
@@ -99,7 +103,7 @@ namespace UHPostalService.Pages.Shipments
 
             _context.Packages.Add(newPack);
             int employee = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value);
-            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            
 
             //await _context.SaveChangesAsync();
             TrackingRecord trackingRecord = new TrackingRecord { EmployeeId = employee, StoreId = store, TrackNum = trnum };

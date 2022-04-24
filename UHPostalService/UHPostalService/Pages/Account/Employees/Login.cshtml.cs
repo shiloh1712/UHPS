@@ -60,14 +60,15 @@ namespace UHPostalService.Pages.Account.Employees
                     ModelState.AddModelError(string.Empty, "Invalid Email or Password");
                     return Page();
                 }
-                
+                var store = String.IsNullOrEmpty(user.StoreID.ToString()) ? "0" : user.StoreID.ToString();
+
                 //claim loggin info/roles
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Name.ToString()),
                     new Claim(ClaimTypes.Role, user.Role.ToString()),
-                    new Claim("Store", user.StoreID.ToString())
+                    new Claim("Store", store)
                     //new Claim("UserDefined", "whatever"),
                 };
 

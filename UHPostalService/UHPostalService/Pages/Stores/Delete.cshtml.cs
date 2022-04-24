@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace UHPostalService.Pages.Stores
 {
-    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Admin")]
 
     public class DeleteModel : PageModel
     {

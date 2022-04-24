@@ -31,11 +31,16 @@ namespace UHPostalService.Pages.Account.Customers
         public IList<Customer> Customer { get;set; }
         public int test { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string searchString, int filterby)
+        public async Task<IActionResult> OnGetAsync(string sortOrder, string searchString, int filterby)
         {
+            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            if (store == 0)
+            {
+                return RedirectToPage("/Account/AccessDenied");
+            }
             // using System;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            EmailSort = sortOrder == "Date" ? "date_desc" : "Date";
+            EmailSort = sortOrder == "Email" ? "email_desc" : "Email";
             test = filterby;
             CurrentFilter = searchString;
             IQueryable<Customer> CustomerIdent = from s in _context.Customers
@@ -67,10 +72,10 @@ namespace UHPostalService.Pages.Account.Customers
                 case "name_desc":
                     CustomerIdent = CustomerIdent.OrderByDescending(s => s.Name);
                     break;
-                case "Date":
+                case "Email":
                     CustomerIdent = CustomerIdent.OrderBy(s => s.Email);
                     break;
-                case "date_desc":
+                case "email_desc":
                     CustomerIdent = CustomerIdent.OrderByDescending(s => s.Email);
                     break;
                 default:
@@ -80,6 +85,7 @@ namespace UHPostalService.Pages.Account.Customers
 
             Customer = await CustomerIdent.
                 Include(s=>s.Address).ToListAsync();
+            return Page();
         }
     }
 }

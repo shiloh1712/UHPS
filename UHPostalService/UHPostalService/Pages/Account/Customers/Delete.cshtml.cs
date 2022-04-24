@@ -42,6 +42,11 @@ namespace UHPostalService.Pages.Account.Customers
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
+            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            if (store == 0)
+            {
+                return RedirectToPage("/Account/AccessDenied");
+            }
             if (id == null)
             {
                 return NotFound();

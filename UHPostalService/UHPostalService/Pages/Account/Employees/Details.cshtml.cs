@@ -31,7 +31,8 @@ namespace UHPostalService.Pages.Account.Employees
                 return NotFound();
             }
             int cookieEmployee = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            int cookieStore = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            var store = User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value;
+            int cookieStore = String.IsNullOrEmpty(store)? 0:Int32.Parse(store);
             string cookieRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
             Employee = await _context.Employees
                             .Include(e => e.Address)

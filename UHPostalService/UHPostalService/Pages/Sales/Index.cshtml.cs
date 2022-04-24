@@ -36,8 +36,13 @@ namespace UHPostalService.Pages.Sales
         public DateTime Default;
 
         public decimal? CurrTotal;
-        public async Task OnGetAsync(string sortOrder, string searchString, DateTime start, DateTime end)
+        public async Task<IActionResult> OnGetAsync(string sortOrder, string searchString, DateTime start, DateTime end)
         {
+            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            if (store == 0)
+            {
+                return RedirectToPage("/Account/AccessDenied");
+            }
             // using System;
             DateSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             TotalSort = sortOrder == "Date" ? "date_desc" : "Date";
@@ -88,6 +93,7 @@ namespace UHPostalService.Pages.Sales
             }
             Sale = await SaleIdent
                 .Include(s => s.Product).Include(s=> s.Buyer).ToListAsync();
+            return Page();
         }
     }
 }

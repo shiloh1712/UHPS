@@ -3,27 +3,22 @@ Courier/Post office database: Gather data concerning the packages going in and o
 This is a Database Systems course project to be graded by Professor Ramamurthy at University of Houston. Team members include Son La, Morrison Fowlks, Andy Nguyen, Josh Opie, Bader Salem. 
 
 Contributors:
-
 La, Son : 3467150404 shiloh1712@gmail.com
-complete requirements document
-document team progress/meeting/discussion
-
-Fowlks, Morrison: 8329958009, morrisonfowlks1@gmail.com
-Design UI based on approved layouts
-
-Nguyen, Andy: 8329705903, andynguyen7835@gmail.com
-Design UI
-watch https://frameworkless.js.org/course/1
-
-
 Opie, Josh: 8323535360  blob28895@gmail.com
-draw er diagram from 
-
-
+Fowlks, Morrison: 8329958009, morrisonfowlks1@gmail.com
+Nguyen, Andy: 8329705903, andynguyen7835@gmail.com
 Salem, Bader: 7134473104, badersalem12@gmail.com
-Design UI
-- Implement UI: write HTML/CSS according to designed UI 
 
+This is a web application project to be submitted to Professor Uma Ramamurthy. This web application allows customers to track sent at the store, get a quote before shipping, browse shipping items, view their sent/recived shipments,
+and employees to manage (create, edit, view, delete) shop items, shipments, sales, stores, customers,... Anonymous user with a valid tracking number can track their shipments
+
+Installation/Localhost:
+1. Install Visual Studio Community and SQL server (and set up local database)
+2. Clone/Download the repository/Google Drive
+3. Open UHPS\UHPostalService\UHPostalService.sln
+4. Open Package Manager Console: Tools > Nuget Package Manager > Package Manager Console
+5. run "update-database"
+6. Run: Debug > Start Debugging
 
 Credits:
 .NET Razor Pages Crash Course:
@@ -36,3 +31,10 @@ Authentication:
 https://www.tektutorialshub.com/asp-net-core/user-registration-login-using-cookie-authentication-asp-net-core/
 Using raw sql in .NET Razor Pages:
 https://docs.microsoft.com/en-us/ef/core/querying/raw-sql
+
+To improve:
+1. A new employee (store unassigned) should not have access to pages that an official employee can (e.g. create shop item)
+2. An employee should not be able to edit their own role to supervisor/admin nor edit their workplace (storeid)
+3. An employee should only see shipments that are in their store at the moment and shipments expected to arrive
+4. Should have another table containing sale items for each sale
+5. 

@@ -8,13 +8,10 @@
 <h1>Get a Quote</h1>
 <hr />
 
-<!--<p>
-    <a asp-page="Create">Create New</a>
-</p>-->
-<h2>Package Details</h2>
+<h2>Shipment Details</h2>
            
             
-            <form asp-page="./Quote" method="get">
+<form asp-page="./Quote" method="get">
     <div class="col-md-4">
         <div class="form-group">
             <label asp-for="Weight" class="control-label"></label>
@@ -37,32 +34,23 @@
             <div>
                 Shippping speed: 
             <select asp-for="test" name="filterby" value="@Model.test" class ="form-group">
-					<option value="1">Normal Shipping</option>
-					<option value="2">Express Shipping</option>
+				<option value="1">Ground</option>
+				<option value="2">Express</option>
                   
                     <!--<option value="6">Status</option>-->
-				</select>
-				<span asp-validation-for="test" class="text-danger"></span>
-                <!--<div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Express" checked="true"/> Express
-                </label>-->
-            </div>
-
-            
+			</select>
+            </div>            
         </div>
     </div>
     <div class="form-actions no-color">
         <p>
-            
-            <input type="submit" value="Get Your Quote" class="btn btn-primary" /> |
-            <a asp-page="./Index">Back to full List</a>
+            <input type="submit" value="Get Your Quote" class="btn btn-primary" />
         </p>
     </div>
 </form>
 @if(@Model.final != 0)
 {
-    <h2>Price: $@Model.final</h2>
+    <h2>Cost: $@Model.final</h2>
 }
 
 

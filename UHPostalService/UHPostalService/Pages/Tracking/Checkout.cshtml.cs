@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,6 +14,7 @@ using UHPostalService.Models;
 
 namespace UHPostalService.Pages.Tracking
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
     public class CheckoutModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
@@ -31,7 +33,6 @@ namespace UHPostalService.Pages.Tracking
             {
                 return NotFound();
             }
-            //int CurrentStore = 1;
             int CurrentStore = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
 
             var TrackingRecord =  await _context.TrackingRecords.Where(m => m.TrackNum == trnum && m.TimeOut == null && m.StoreId == CurrentStore)
@@ -58,9 +59,7 @@ namespace UHPostalService.Pages.Tracking
             return Page();
         }
         
-        /*[BindProperty]
-        public TrackingRecord TrackingRecord { get; set; }
-        */
+        
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(int? trnum)
         {

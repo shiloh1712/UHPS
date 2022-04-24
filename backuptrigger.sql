@@ -25,7 +25,7 @@ end
 drop trigger if exists cost
             go
             create trigger cost on packages
-            after insert
+            after insert, update
             as begin
                 declare @total float;
                 declare @W float;

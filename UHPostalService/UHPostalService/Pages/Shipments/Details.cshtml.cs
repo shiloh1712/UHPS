@@ -34,7 +34,8 @@ namespace UHPostalService.Pages.Shipments
             Package = await _context.Packages
                 .Include(p => p.Destination)
                 .Include(p => p.Receiver)
-                .Include(p => p.Sender).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(p => p.Sender)
+                .Include(p=>p.Type).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Package == null)
             {

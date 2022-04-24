@@ -5,59 +5,22 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit Checkout</h1>
 
-<h4>TrackingRecord</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="TrackingRecord.Id" />
-            <!--<div class="form-group">
-                <label asp-for="TrackingRecord.EmployeeId" class="control-label"></label>
-                <select asp-for="TrackingRecord.EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
-                <span asp-validation-for="TrackingRecord.EmployeeId" class="text-danger"></span>
-            </div>-->
             
             <div class="form-group">
-                <label asp-for="TrackingRecord.TrackNum" class="control-label"></label>
-                <select asp-for="TrackingRecord.TrackNum" class="form-control" asp-items="ViewBag.TrackNum"></select>
-                <span asp-validation-for="TrackingRecord.TrackNum" class="text-danger"></span>
-            </div>
-            <!--<div class="form-group">
-                <label asp-for="TrackingRecord.StoreId" class="control-label"></label>
-                <select asp-for="TrackingRecord.StoreId" class="form-control" asp-items="ViewBag.StoreId"></select>
-                <span asp-validation-for="TrackingRecord.StoreId" class="text-danger"></span>
-            </div>-->
-            <div>
-                <a asp-page="/Account/Employees/Edit" asp-route-id="@Model.TrackingRecord.EmployeeId">Edit Employee</a>
-            </div>
-            <div>
-                <a asp-page="/Stores/Edit" asp-route-id="@Model.TrackingRecord.StoreId">Edit Store</a>
-            </div>
-            <!--
-            <div class="form-group">
-                <label asp-for="TrackingRecord.TimeIn" class="control-label"></label>
-                <input asp-for="TrackingRecord.TimeIn" class="form-control" />
-                <span asp-validation-for="TrackingRecord.TimeIn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TrackingRecord.TimeOut" class="control-label"></label>
-                <input asp-for="TrackingRecord.TimeOut" class="form-control" />
-                <span asp-validation-for="TrackingRecord.TimeOut" class="text-danger"></span>
+                 <input type="hidden" asp-for="recordId" />
+                <label asp-for="nextstop" class="control-label">Next Stop</label>
+                <select asp-for="nextstop" class ="form-control" asp-items="ViewBag.NextStops">ab</select>
             </div>
 
             <div class="form-group">
-                <label asp-for="TrackingRecord.Destination" class="control-label"></label>
-                <select asp-for="TrackingRecord.Destination" class="form-control" asp-items="ViewBag.Destination"></select>
-                <span asp-validation-for="TrackingRecord.Destination" class="text-danger"></span>
-            </div>-->
-            <div>
-                <a asp-page="/Addresses/Edit" asp-route-id="@Model.TrackingRecord">Edit Destination</a>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Change Route" class="btn btn-primary" />
             </div>
         </form>
     </div>

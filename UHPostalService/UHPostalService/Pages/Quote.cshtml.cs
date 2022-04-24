@@ -61,11 +61,12 @@ namespace UHPostalService.Pages
             }
             else
             {
-                var shipclass = _context.ShipmentClasses.Where(s => s.MaxWidth > Width && s.MaxHeight > Height && s.MaxLength > Length).FirstOrDefault();
+                var shipclass = _context.ShipmentClasses.Where(s => s.MaxWidth >= Width && s.MaxHeight >= Height && s.MaxLength >= Length).OrderBy(s=>s.GroundCost).FirstOrDefault();
                 if (shipclass == null)
                 {
-                    shipclass = _context.ShipmentClasses.Last();
+                    shipclass = _context.ShipmentClasses.OrderByDescending(s => s.GroundCost).FirstOrDefault();
                 }
+
                 if (/*Express == false*/filterby == 1)
                 {
                     final = shipclass.GroundCost;

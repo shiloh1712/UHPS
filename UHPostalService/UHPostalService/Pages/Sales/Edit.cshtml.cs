@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using UHPostalService.Models;
 
 namespace UHPostalService.Pages.temp
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
     public class EditModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
@@ -35,6 +37,11 @@ namespace UHPostalService.Pages.temp
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            if (store == 0)
+            {
+                return RedirectToPage("/Account/AccessDenied");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -75,7 +82,11 @@ namespace UHPostalService.Pages.temp
             {
                 Buyer = new Customer { Name = Sale.Name, Email = Sale.Email };
             }*/
-
+            int store = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type.Equals("Store")).Value);
+            if (store == 0)
+            {
+                return RedirectToPage("/Account/AccessDenied");
+            }
 
             if ((Sale.Email == null && Sale.Name != null) || (Sale.Email != null && Sale.Name == null))
             {
@@ -122,7 +133,7 @@ namespace UHPostalService.Pages.temp
                 var exist = _context.Customers.Where(s => s.Email == Sale.Email).FirstOrDefault();
                 if(exist != null)
                 {
-                    if(Sale.Name != exist.Name)
+                    if(Sale.Name != null)
                     {
                         exist.Name = Sale.Name;
                     }

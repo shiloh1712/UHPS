@@ -2,13 +2,12 @@
 @model UHPostalService.Pages.Tracking.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Tracking Details";
 }
 
-<h1>Details</h1>
+<h1>Tracking Details</h1>
 
 <div>
-    <h4>TrackingRecord</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -21,13 +20,13 @@
             @Html.DisplayNameFor(model => model.TrackingRecord.Package)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TrackingRecord.Package.Id)
+            <a asp-page="/Shipments/Details" asp-route-id="@Model.TrackingRecord.TrackNum">@Html.DisplayFor(model => model.TrackingRecord.Package.Id)</a>
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TrackingRecord.Store)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TrackingRecord.Store.Id)
+            <a asp-page="/Stores/Details" asp-route-id="@Model.TrackingRecord.StoreId">@Html.DisplayFor(model => model.TrackingRecord.StoreId)</a>
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TrackingRecord.TimeIn)
@@ -42,10 +41,10 @@
             @Html.DisplayFor(model => model.TrackingRecord.TimeOut)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TrackingRecord.Address)
+            Next Stop
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TrackingRecord.Address.Id)
+            @Model.TrackingRecord.Address.ToString()
         </dd>
     </dl>
 </div>

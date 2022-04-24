@@ -28,15 +28,15 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Customer.Email)
         </dd>
-        <dt class="col-sm-2">
+        @if(Model.Customer.AddressID != null)
+        {
+            <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Customer.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Customer.Address.StreetAddress)
-            @Html.DisplayFor(model => model.Customer.Address.City)
-            @Html.DisplayFor(model => model.Customer.Address.State)
-            @Html.DisplayFor(model => model.Customer.Address.Zipcode)
-        </dd>
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Customer.Address.ToString()
+            </dd>
+        }
     </dl>
 </div>
 <div>

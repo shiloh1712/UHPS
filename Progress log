@@ -83,4 +83,5 @@
       Son: changed the icon, edit employee role, edit store, fix checkout
 
 4/23: Josh: changed shipments index for customers, added get a quote page, made some small visual changes
-
+      
+      fix subtle logic errors + data display

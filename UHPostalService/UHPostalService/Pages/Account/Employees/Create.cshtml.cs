@@ -13,19 +13,20 @@ using Microsoft.AspNetCore.Authorization;
 
 
 namespace UHPostalService.Pages.Account.Employees
-{
-    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Admin,Supervisor")]
-    public class CreateModel : PageModel
+{    public class CreateModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
         public class InputModel
         {
+            [Required]
             public string Name { get; set; }
             [DataType(DataType.PhoneNumber)]
+            [Required]
             public string PhoneNumber { get; set; }
             [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
             [DataType(DataType.Password)]
+            [Required]
             public string Password { get; set; }
             //store working at: initially not assigned a store
         };
