@@ -60,6 +60,12 @@ namespace UHPostalService.Pages.Stores
                 await _context.SaveChangesAsync();
                 addr = Address;
             }
+            else if (addr.Deleted == true)
+            {
+                addr.Deleted = false;
+                await _context.SaveChangesAsync();
+
+            }
             Store newstore = new Models.Store { PhoneNumber = Store.PhoneNumber, AddressID = addr.Id, Address = addr, SupID = Store.SupID };
             var check = _context.Stores.Where(f=>(f.PhoneNumber == Store.PhoneNumber
             && f.Address == addr

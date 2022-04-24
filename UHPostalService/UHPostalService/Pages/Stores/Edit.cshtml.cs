@@ -79,6 +79,13 @@ namespace UHPostalService.Pages.Stores
                 await _context.SaveChangesAsync();
                 addr = storeAddress;
             }
+            else if (addr.Deleted == true)
+            {
+                addr.Deleted = false;
+                await _context.SaveChangesAsync();
+
+
+            }
 
             var editStore = _context.Stores.FirstOrDefault(s => s.Id == Store.Id);
             if (editStore == null)

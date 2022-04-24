@@ -71,6 +71,10 @@ namespace UHPostalService.Pages.Shipments
                 await _context.SaveChangesAsync();
                 addr = Address;
             }
+            else if (addr.Deleted == true)
+            {
+                addr.Deleted = false;
+            }
 
             var cust = _context.Customers.Where(f => (f.Name == To.Name
             && f.PhoneNumber == To.PhoneNumber
@@ -81,6 +85,10 @@ namespace UHPostalService.Pages.Shipments
                 _context.Customers.Add(To);
                 await _context.SaveChangesAsync();
                 cust = To;
+            }
+            else if(cust.Deleted == true)
+            {
+                cust.Deleted = false;
             }
 
             var cust2 = _context.Customers.Where(f => (f.Name == From.Name
@@ -93,13 +101,17 @@ namespace UHPostalService.Pages.Shipments
                 await _context.SaveChangesAsync();
                 cust2 = From;
             }
+            else if(cust2.Deleted == true)
+            {
+                cust2.Deleted = false;
+            }
             Package newPack = new Models.Package { SenderID = cust2.Id, ReceiverID = cust.Id, AddressID = addr.Id, Description = Package.Description, Weight = Package.Weight, Express = Package.Express, ShipCost = 0, Height = Package.Height, Width = Package.Width, Depth = Package.Depth, ClassID=1};
             if (!ModelState.IsValid)
             {
                 //return Page();
             }
             int trnum = _context.Packages.Select(p => p.Id).Max();
-            return RedirectToPage("/Tracking/CheckIn", new { urltrnum = trnum });
+            //return RedirectToPage("/Tracking/CheckIn", new { urltrnum = trnum });
 
             _context.Packages.Add(newPack);
             int employee = Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value);
@@ -113,7 +125,7 @@ namespace UHPostalService.Pages.Shipments
 
             return RedirectToPage("/Tracking/CheckIn", new { urltrnum = trnum });
 
-            return RedirectToPage("./Index");
+            //return RedirectToPage("./Index");
         }
     }
 }

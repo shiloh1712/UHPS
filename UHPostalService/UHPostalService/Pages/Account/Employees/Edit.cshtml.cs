@@ -102,6 +102,12 @@ namespace UHPostalService.Pages.Employees
                 addr = Address;
 
             }
+            else if(addr.Deleted == true)
+            {
+                addr.Deleted = false;
+                await _context.SaveChangesAsync();
+
+            }
             editEmployee.Name = Employee.Name;
             editEmployee.PhoneNumber = Employee.PhoneNumber;
             editEmployee.Email = Employee.Email;
