@@ -17,7 +17,7 @@ Basic dir/file descriptions:
 2. DbInitilizer.cs: insert initial data for the database
 3. ApplicationDBContext: specify db and tables structure
 4. /wwwroot: contains css + icon files
-5. /Models/: specify db relations
+5. /Models/: specify db relations, entities, and attributes
 6. /Pages/: contain various pages for the web app
 7. appsettings: contain app secret like sql server connectionstring
 8. Programs.cs: where the application starts, specify services/modules being used
@@ -33,8 +33,15 @@ Installation/Localhost:
 Login credentials (for testing):
 1. Admin: admin@uhps.com - password
 2. Supervisor: josh@uhps.com - josh
-3. Employee: dan@uhps.com - dan
+3. Employee: dan@uhps.com - dan, son@uhps.com - son
 4. Customer: morrison@email.com - morrison
+
+Notes about roles:
+1. Admin - can see everything
+2. Supervisor - can only see employees who have not yet been assigned their store, for the purpose of assigning them one, aswell as their store's employees
+3. Employee - can only see the other employees working at their store, cannot edit or delete employees other than themselves
+4. Customer - Can only see packages sent to or from them, cannot edit, delete, or create most things
+5. Anonymous - can only see store locations, get a quote, and check the shop (our shop is in person, so you cannot buy things online), can see tracking record of a     package with the appropriate tracking number
 
 Credits:
 .NET Razor Pages Crash Course:
