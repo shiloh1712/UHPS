@@ -26,14 +26,6 @@ namespace UHPostalService.Pages.Account.Employees
         public string NameSort { get; set; }
         public string EmailSort { get; set; }
         public string StoreSort { get; set; }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b48b04df07ba3231515de0946425d0cec783685a
-
-
-
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
@@ -46,10 +38,6 @@ namespace UHPostalService.Pages.Account.Employees
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             EmailSort = sortOrder == "Date" ? "date_desc" : "Date";
             StoreSort = sortOrder == "Store" ? "store_desc" : "Store";
-<<<<<<< HEAD
-
-=======
->>>>>>> b48b04df07ba3231515de0946425d0cec783685a
             test = filterby;
             CurrentFilter = searchString;
             IQueryable<Employee> EmployeeIdent = from s in _context.Employees
@@ -108,11 +96,7 @@ namespace UHPostalService.Pages.Account.Employees
                     EmployeeIdent = EmployeeIdent.OrderBy(s => s.StoreID);
                     break;
                 case "store_desc":
-<<<<<<< HEAD
                     EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.StoreID);
-=======
-                    EmployeeIdent = EmployeeIdent.OrderByDescending(s=>s.StoreID);
->>>>>>> b48b04df07ba3231515de0946425d0cec783685a
                     break;
                 case "date_desc":
                     EmployeeIdent = EmployeeIdent.OrderByDescending(s => s.Email);
