@@ -60,4 +60,6 @@ To improve:
 2. An employee should not be able to edit their own role to supervisor/admin nor edit their workplace (storeid)
 3. An employee should only see shipments that are in their store at the moment and shipments expected to arrive
 4. Should have another relation storing sale items for each sale
-5. 
+5. Dropdown for multiple filters at once
+6. Checkin multiple shipments in 1 form
+7. 
