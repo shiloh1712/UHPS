@@ -83,6 +83,12 @@ namespace UHPostalService.Pages.Account.Employees
                 await _context.SaveChangesAsync();
                 addr = Address;
             }
+            else if (addr.Deleted == true)
+            {
+                addr.Deleted = false;
+                await _context.SaveChangesAsync();
+
+            }
             Employee newemp = new Models.Employee { Name = Employee.Name, PhoneNumber = Employee.PhoneNumber, Email = Employee.Email, Password = Employee.Password, AddressID = addr.Id, Role = Role.Employee };
             //Employee.AddressID = Address.Id;
             var check = _context.Employees.Where(f => (f.AddressID == newemp.AddressID

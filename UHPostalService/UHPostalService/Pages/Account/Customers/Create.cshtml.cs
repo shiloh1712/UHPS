@@ -88,6 +88,12 @@ namespace UHPostalService.Pages.Account.Customers
                 addr = Address;
 
             }
+            else if (addr.Deleted == true)
+            {
+                addr.Deleted = false;
+                await _context.SaveChangesAsync();
+
+            }
             Customer newcust = new Models.Customer { Address = addr , AddressID = addr.Id, Email = Customer.Email, Name = Customer.Name, Password = Customer.Password};
             if(Customer.PhoneNumber != null)
             {
