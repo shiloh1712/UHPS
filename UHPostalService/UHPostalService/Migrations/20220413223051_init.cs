@@ -282,7 +282,7 @@ namespace UHPostalService.Migrations
             migrationBuilder.Sql(@"drop trigger if exists cost
             go
             create trigger cost on packages
-            after insert
+            after insert, update
             as begin
                 declare @total float;
                 declare @W float;
@@ -333,7 +333,7 @@ namespace UHPostalService.Migrations
 										update products set products.Stock = (products.Stock-@quant) where products.Id = @pid;
                                     end
 
-");
+            ");
             migrationBuilder.Sql(@"drop trigger if exists UpdateSale
 							go
 							create trigger UpdateSale on sales
@@ -363,8 +363,8 @@ namespace UHPostalService.Migrations
 								update sales set sales.PurchaseDate=getdate() where sales.ID = @ident;
 
 							end
-");*/
-            
+            ");
+            */
             
 
 

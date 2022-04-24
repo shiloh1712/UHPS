@@ -56,12 +56,12 @@ namespace UHPostalService.Pages.Tracking
 
             if (TrackingRecord != null)
             {
-                //_context.TrackingRecords.Remove(TrackingRecord);
-                TrackingRecord.Deleted = true;
+                _context.TrackingRecords.Remove(TrackingRecord);
+                //TrackingRecord.Deleted = true;
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("/Shipments/Index");
+            return RedirectToPage("/Shipments/Details", new {id=id});
         }
     }
 }

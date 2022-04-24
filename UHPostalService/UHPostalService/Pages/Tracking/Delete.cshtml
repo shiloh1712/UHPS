@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.TrackingRecord.Employee)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TrackingRecord.Employee.Id)
+            @Html.DisplayFor(model => model.TrackingRecord.Employee.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TrackingRecord.Package)
@@ -28,7 +28,7 @@
             @Html.DisplayNameFor(model => model.TrackingRecord.Store)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TrackingRecord.Store.Id)
+            #@Html.DisplayFor(model => model.TrackingRecord.Store.Id)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TrackingRecord.TimeIn)
@@ -45,9 +45,12 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TrackingRecord.Address)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TrackingRecord.Address.Id)
-        </dd>
+        @if (@Model.TrackingRecord.Destination != null)
+        {
+            <dd class="col-sm-10">
+                @Model.TrackingRecord.Address.ToString()
+            </dd>
+        }
     </dl>
     
     <form method="post">
