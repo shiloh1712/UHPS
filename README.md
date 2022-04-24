@@ -62,4 +62,4 @@ To improve:
 4. Should have another relation storing sale items for each sale
 5. Dropdown for multiple filters at once
 6. Checkin multiple shipments in 1 form
-7. 
+7. Shopping Cart: https://learningprogramming.net/net/asp-net-core-razor-pages/build-shopping-cart-with-session-in-asp-net-core-razor-pages/ 
