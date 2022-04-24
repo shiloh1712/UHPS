@@ -88,7 +88,13 @@ namespace UHPostalService.Pages.Account.Customers
                 addr = cusAddress;
 
             }
-    
+            else if (addr.Deleted == true)
+            {
+                addr.Deleted = false;
+                await _context.SaveChangesAsync();
+
+            }
+
             editCustomer.Name = Customer.Name;
             editCustomer.PhoneNumber = Customer.PhoneNumber;
             editCustomer.Email = Customer.Email;
