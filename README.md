@@ -9,7 +9,7 @@ Fowlks, Morrison: 8329958009, morrisonfowlks1@gmail.com
 Nguyen, Andy: 8329705903, andynguyen7835@gmail.com
 Salem, Bader: 7134473104, badersalem12@gmail.com
 
-This is a web application project to be submitted to Professor Uma Ramamurthy. This web application allows customers to track sent at the store, get a quote before shipping, browse shipping items, view their sent/recived shipments,
+This is a web application project to be submitted to Professor Uma Ramamurthy. This web application allows customers to track shipments sent at a store, estimate shipping cost, browse products, view their sent/received shipments,
 and employees to manage (create, edit, view, delete) shop items, shipments, sales, stores, customers,... Anonymous users can track their shipments with a valid tracking number 
 
 Basic dir/file descriptions:
@@ -52,5 +52,5 @@ To improve:
 1. A new employee (store unassigned) should not have access to pages that an official employee can (e.g. create shop item)
 2. An employee should not be able to edit their own role to supervisor/admin nor edit their workplace (storeid)
 3. An employee should only see shipments that are in their store at the moment and shipments expected to arrive
-4. Should have another table containing sale items for each sale
+4. Should have another relation storing sale items for each sale
 5. 
