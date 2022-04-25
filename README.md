@@ -21,6 +21,7 @@ Basic dir/file descriptions:
 6. /Pages/: contain various pages for the web app
 7. appsettings: contain app secret like sql server connectionstring
 8. Programs.cs: where the application starts, specify services/modules being used
+9. backuptrigger.sql: sql trigger code
 
 Installation/Localhost:
 1. Install Visual Studio Community and Microsoft SQL server Express (and set up local database)
