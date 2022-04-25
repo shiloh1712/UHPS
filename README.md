@@ -64,3 +64,10 @@ To improve:
 5. Dropdown for multiple filters at once
 6. Checkin multiple shipments in 1 form
 7. Shopping Cart: https://learningprogramming.net/net/asp-net-core-razor-pages/build-shopping-cart-with-session-in-asp-net-core-razor-pages/ 
+8. Stores Index: move phone number, remove zipcode/state from street address
+9. Fix store index sort
+10. shipments: remove newpackage/checkin buttons visibility for customers
+11. default sort shipment index by date sent
+12. shipment details: change link in store#; error clicking sender/receiver name link
+13. anonymous should not edit employee (nor details, delete)
+14. anonymous should not inxdex/edit/detail/delete customers
