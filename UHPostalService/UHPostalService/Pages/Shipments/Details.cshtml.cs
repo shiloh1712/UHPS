@@ -23,7 +23,6 @@ namespace UHPostalService.Pages.Shipments
 
         public Package Package { get; set; }
         public IList<TrackingRecord> TrackingRecord { get; set; }
-        public bool authorization { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -57,10 +56,6 @@ namespace UHPostalService.Pages.Shipments
                     .Include(t => t.Package)
                     .Include(t => t.Store).ToListAsync();
             }
-            authorization = false;
-            if (new String[] { "Admin", "Employee", "Supervisor" }.Contains(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value))
-                authorization = true;
-            //User.IsInRole()
 
             return Page();
         }

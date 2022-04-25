@@ -61,7 +61,7 @@ namespace UHPostalService.Pages.Tracking
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("/Shipments/Details", new {id=id});
+            return RedirectToPage("/Shipments/Details", new {id=TrackingRecord.TrackNum});
         }
     }
 }

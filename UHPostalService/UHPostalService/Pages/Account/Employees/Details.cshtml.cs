@@ -13,6 +13,7 @@ using System.Security.Claims;
 
 namespace UHPostalService.Pages.Account.Employees
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Employee,Admin,Supervisor")]
     public class DetailsModel : PageModel
     {
         private readonly UHPostalService.Data.ApplicationDbContext _context;
