@@ -71,3 +71,5 @@ To improve:
 12. shipment details: change link in store#; error clicking sender/receiver name link
 13. anonymous should not edit employee (nor details, delete)
 14. anonymous should not inxdex/edit/detail/delete customers
+15. show total shipping cost for employees
+16. create shipment/sale: if already customer just enter email
