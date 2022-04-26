@@ -254,7 +254,7 @@ namespace UHPostalService.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-            
+            /*
             //trigger: if package is sent to destination instead of another store, package status is updated to out-for-delivery
             migrationBuilder.Sql(@"drop trigger if exists autostatus
                                     go
@@ -363,7 +363,7 @@ namespace UHPostalService.Migrations
 								update sales set sales.PurchaseDate=getdate() where sales.ID = @ident;
 
 							end
-            ");
+            ");*/
             
             
 
