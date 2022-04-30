@@ -76,7 +76,7 @@ Layout:
   remove create, details, index ✓ - Andy (i hid them not remove)
   only employee can delete ✓ - Andy
   3. remove tracking details ✓ - Josh
-  4. only edit destination - Morrison
+  4. only edit destination - Son ✓
   5. can only checkout if (logged in employee == tracking.storeid) - Son ✓
   6. checkout: datetime.now - Son ✓
   
