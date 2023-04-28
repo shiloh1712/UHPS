@@ -3,11 +3,11 @@ Courier/Post office database: Gather data concerning the packages going in and o
 This is a Database Systems course project to be graded by Professor Ramamurthy at University of Houston. Team members include Son La, Morrison Fowlks, Andy Nguyen, Josh Opie, Bader Salem. 
 
 Contributors (contribution details in Todo and Progress log):
-La, Son : 3467150404 shiloh1712@gmail.com
-Opie, Josh: 8323535360  blob28895@gmail.com
-Fowlks, Morrison: 8329958009, morrisonfowlks1@gmail.com
-Nguyen, Andy: 8329705903, andynguyen7835@gmail.com
-Salem, Bader: 7134473104, badersalem12@gmail.com
+La, Son 
+Opie, Josh
+Fowlks, Morrison
+Nguyen, Andy
+Salem, Bader
 
 This is a web application project to be submitted to Professor Uma Ramamurthy. This web application allows customers to track shipments sent at a store, estimate shipping cost, browse products, view their sent/received shipments,
 and employees to manage (create, edit, view, delete) shop items, shipments, sales, stores, customers,... Anonymous users can track their shipments with a valid tracking number 
